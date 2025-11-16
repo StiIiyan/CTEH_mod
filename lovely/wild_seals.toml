@@ -1,0 +1,57 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.seal == 'Blue' and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and not self.ability.extra_enhancement then
+'''
+position = 'at'
+payload = '''
+if (self.seal == 'Blue' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Blue')) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and not self.ability.extra_enhancement then
+'''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.seal == 'Red' then
+'''
+position = 'at'
+payload = '''
+if self.seal == 'Red' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Red') then
+'''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.seal == 'Purple' and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+'''
+position = 'at'
+payload = '''
+if (self.seal == 'Purple' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Purple')) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+'''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+elseif self.seal == 'Gold' and not self.ability.extra_enhancement then
+'''
+position = 'at'
+payload = '''
+elseif (self.seal == 'Gold' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Gold')) and not self.ability.extra_enhancement then
+'''
+match_indent = true

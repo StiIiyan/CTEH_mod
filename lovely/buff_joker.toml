@@ -1,0 +1,117 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Make so Buff Joker procs before the other jokers with a Blind select effect
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+G.GAME.blind:set_blind(G.GAME.round_resets.blind)
+'''
+position = 'after'
+payload = '''
+for i = 1, #G.jokers.cards do
+    if G.jokers.cards[i].ability.name == 'Buff Joker' then
+        G.jokers.cards[i]:calculate_joker({setting_blind = true, blind = G.GAME.round_resets.blind})
+    end
+end
+'''
+match_indent = true
+
+
+
+# Next 3 patches for multiple copy incompatibility (ankh + invis)
+
+# Make so Ankh doesn't pick the Buff Joker
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+local chosen_joker = pseudorandom_element(G.jokers.cards, pseudoseed('ankh_choice'))
+'''
+position = 'at'
+payload = '''
+local chosen_joker
+repeat
+chosen_joker = pseudorandom_element(G.jokers.cards, pseudoseed('ankh_choice'))
+until chosen_joker.ability.name ~= 'j_CTEH_buff_joker'
+'''
+match_indent = true
+
+
+
+# Make so Ankh unusable when only Buff Joker in Joker roaster
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if v.ability.set == 'Joker' and G.jokers.config.card_limit > 1 then
+'''
+position = 'at'
+payload = '''
+if v.ability.set == 'Joker' and v.ability.name ~= 'j_CTEH_buff_joker' and G.jokers.config.card_limit > 1 then
+'''
+match_indent = true
+
+
+
+# Make Invis Joker not pick the Buff Joker
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if G.jokers.cards[i] ~= self then
+'''
+position = 'at'
+payload = '''
+if G.jokers.cards[i] ~= self and G.jokers.cards[i].ability.name ~= 'j_CTEH_buff_joker' then
+'''
+match_indent = true
+
+
+# Rest patches fix some debuff incompatibilities
+
+# Make certain jokers calling calculate_joker() not work when debuffed 
+# (helps with at least chicot, riff-raff, madness and dagger)
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+function Card:calculate_joker(context)
+'''
+position = 'after'
+payload = '''
+    if self.ability.perma_debuff then return nil end
+'''
+match_indent = true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[[patches]]
+[patches.pattern]
+target = ""
+pattern = '''
+
+'''
+position = 'at'
+payload = '''
+
+'''
+match_indent = true

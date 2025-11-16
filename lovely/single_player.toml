@@ -1,0 +1,17 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+function Game:start_run(args)
+'''
+position = 'after'
+payload = '''
+single_player = player_identity(1)
+'''
+match_indent = true
