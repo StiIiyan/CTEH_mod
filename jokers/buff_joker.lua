@@ -1,34 +1,13 @@
-function Debuff_Joker_Table()
-    local joker_table = {}
-    function joker_table:add_joker(jokerID)
-        if jokerID == 'j_chaos' then
-            local final_free = G.GAME.current_round.free_rerolls > 0
-            G.GAME.current_round.free_rerolls = math.max(G.GAME.current_round.free_rerolls - 1, 0)
-            calculate_reroll_cost(final_free)
-        --elseif G.jokers.cards[i].ability.name == 
-        end
-    end
-    function joker_table:remove_joker(jokerID)
-        if jokerID == 'j_chaos' then
-            G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
-            calculate_reroll_cost(true)
-        end
-    end
-    
-    return joker_table
-end
-
-DEBUFFED_JOKERS = Debuff_Joker_Table()
-
--- remove amount_debuffed_jokers ?
-
-
 SMODS.Atlas{
     key = "j_buffed",
     path = "buff_joker.png",
     px = 71,
     py = 95
 }
+
+--[[
+If I want to achieve compatibility with another mod, can I just toml a toml file with a lower priority (which would result in a higher priority number, and I like patching), or maybe there is a more conventional and practical method?
+]]
 
 SMODS.Joker{
     key = 'buff_joker',
@@ -42,8 +21,8 @@ SMODS.Joker{
         }
     },
     config = {
-        max_charges = 60,
-        current_charges = 60
+        max_charges = 13,
+        current_charges = 13
     },
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.max_charges,card.ability.current_charges}}
@@ -68,14 +47,6 @@ SMODS.Joker{
     end,
     
     calculate = function(self, card, context)
-        if card.ability.max_charges < 15 and next(SMODS.find_card("v_antimatter")) then
-            card.ability.max_charges = card.ability.max_charges + 3
-        end
-
-        if context.ante_end then
-            card.ability.current_charges = card.ability.max_charges
-        end
-
         if context.setting_blind then
             local buff_joker_index = 0
             for i = 1, #G.jokers.cards do
@@ -87,25 +58,26 @@ SMODS.Joker{
 
             local jokers_not_to_debuff = math.min(buff_joker_index - 1, card.ability.current_charges)
             for i = 1, jokers_not_to_debuff do
-                if G.jokers.cards[i].ability.perma_debuff == true then
-                    DEBUFFED_JOKERS:remove_joker(G.jokers.cards[i].ability.name)
-                end
-
                 G.jokers.cards[i].ability.perma_debuff = false
+                G.jokers.cards[i]:add_to_deck(true)
                 G.jokers.cards[i]:juice_up()
                 card.ability.current_charges = card.ability.current_charges - 1
             end
             for i = jokers_not_to_debuff + 1, #G.jokers.cards do
-                if G.jokers.cards[i].ability.perma_debuff == false then
-                    DEBUFFED_JOKERS:add_joker(G.jokers.cards[i].ability.name)
-                end
-
                 if i ~= buff_joker_index then
                     G.jokers.cards[i].ability.perma_debuff = true
+                    G.jokers.cards[i]:remove_from_deck(true)
                     G.jokers.cards[i]:juice_up()
                 end
             end
         end
+        
+        if card.ability.max_charges < 15 and next(SMODS.find_card("v_antimatter")) then
+            card.ability.max_charges = card.ability.max_charges + 3
+        end
+
+        if context.ante_end then
+            card.ability.current_charges = card.ability.max_charges
+        end
     end  
 }
-

@@ -1,0 +1,62 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Makes Magic Trick always have enhanced cards and illusion have 20% seals (as it has 20% editions)
+
+## Always pick 'Enhanced' when any playing_card_rate
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+{type = (G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.6) and 'Enhanced' or 'Base', val = G.GAME.playing_card_rate},
+'''
+position = 'at'
+payload = '''
+{type = 'Enhanced', val = G.GAME.playing_card_rate},
+'''
+match_indent = true
+
+
+
+## Seal RNG (20% of cards)
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+if (v.type == 'Base' or v.type == 'Enhanced') and G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.8 then 
+'''
+position = 'before'
+payload = '''
+if (v.type == 'Base' or v.type == 'Enhanced') and G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.8 then 
+local seal_poll = pseudorandom(pseudoseed('illusion'))
+local result_seal
+if seal_poll >= 0.75 then result_seal = 'Red'
+elseif seal_poll >= 0.5 then result_seal = 'Gold'
+elseif seal_poll >= 0.25 then result_seal = 'Purple'
+else result_seal = 'Blue'
+end
+card:set_seal(result_seal)
+end
+'''
+match_indent = true
+
+
+
+## Seal prices +$3
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+function Card:set_cost()
+'''
+position = 'after'
+payload = '''
+if self.seal then
+    self.extra_cost = self.extra_cost + 3
+end
+'''
+match_indent = true

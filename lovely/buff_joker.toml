@@ -5,6 +5,7 @@ priority = 0
 
 
 
+
 # Make so Buff Joker procs before the other jokers with a Blind select effect
 [[patches]]
 [patches.pattern]
@@ -76,7 +77,6 @@ match_indent = true
 # Rest patches fix some debuff incompatibilities
 
 # Make certain jokers calling calculate_joker() not work when debuffed 
-# (helps with at least chicot, riff-raff, madness and dagger)
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -85,33 +85,51 @@ function Card:calculate_joker(context)
 '''
 position = 'after'
 payload = '''
-    if self.ability.perma_debuff then return nil end
+if self.ability.perma_debuff then return nil end
 '''
 match_indent = true
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Make so end of round doesn't negate certain jokers' debuff
 [[patches]]
 [patches.pattern]
-target = ""
+target = "card.lua"
 pattern = '''
-
+function Card:add_to_deck(from_debuff)
 '''
-position = 'at'
+position = 'after'
 payload = '''
+if self.ability.perma_debuff then return nil end
+'''
+match_indent = true
 
+
+
+# Make so Troubadour isn't special avoiding every debuff mechanics 
+# (otherwise the hand count will be delayed by a single round, eventhough the variable 
+# G.GAME.current_round.hands_left is how it's supposed to be during the round)
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+'''
+position = 'after'
+payload = '''
+G.GAME.current_round.hands_left = (math.max(1, G.GAME.round_resets.hands + G.GAME.round_bonus.next_hands))
+'''
+match_indent = true
+
+# Same but for BMP compat
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+G.deck:shuffle('nr'..MP.order_round_based(true))
+'''
+position = 'after'
+payload = '''
+G.GAME.current_round.hands_left = (math.max(1, G.GAME.round_resets.hands + G.GAME.round_bonus.next_hands))
 '''
 match_indent = true

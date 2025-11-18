@@ -1,0 +1,31 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 2147483601
+# low priority (should happen after all the oracle patches are implemented)
+
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''
+mod = oracle_apply_dollar_cap(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + G.GAME.interest_cap)
+'''
+position = 'at'
+payload = '''
+mod = oracle_apply_dollar_cap(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + G.GAME.interest_cap * G.GAME.interest_rate)
+'''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''
+if oracle_should_show_max(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + G.GAME.interest_cap) then
+'''
+position = 'at'
+payload = '''
+if oracle_should_show_max(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + G.GAME.interest_cap * G.GAME.interest_rate) then
+'''
+match_indent = true

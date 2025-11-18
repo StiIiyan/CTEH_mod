@@ -1,0 +1,22 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Makes Burnt Joker jiggle before first discard
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Trading Card' and not context.blueprint then
+'''
+position = 'before'
+payload = '''
+if self.ability.name == 'Burnt Joker' and not context.blueprint then
+    local eval = function() return G.GAME.current_round.discards_used == 0 and not G.RESET_JIGGLES end
+    juice_card_until(self, eval, true)
+end
+'''
+match_indent = true

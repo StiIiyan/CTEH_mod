@@ -35,6 +35,7 @@ end
 
 function amount_debuffed_jokers(joker_name)
     local result = 0;
+    if not G.jokers then return result end
     for i = 1, #G.jokers.cards do
         if G.jokers.cards[i].ability.name == joker_name and 
         (G.jokers.cards[i].ability.debuff or G.jokers.cards[i].ability.perma_debuff) then
