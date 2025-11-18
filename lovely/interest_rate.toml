@@ -161,6 +161,7 @@ match_indent = true
 
 
 # Editing around joker To the moon
+## Make interest rate be dynamic UI component
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -175,6 +176,7 @@ match_indent = true
 
 
 
+## Rework price to be like interest rate
 [[patches]]
 [patches.pattern]
 target = "game.lua"
@@ -183,7 +185,7 @@ j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprin
 '''
 position = 'at'
 payload = '''
-j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
+j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = (G.GAME and G.GAME.interest_rate) or 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
 '''
 match_indent = true
 

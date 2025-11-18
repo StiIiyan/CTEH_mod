@@ -23,7 +23,7 @@ function get_player_on_game_start(pid) -- preferably pid not related to seed, id
         return single_player
     end
 end
---]]
+]]
 
 -- a multiplayer game will create one SERVER SIDE instance of the table when a game begins 
 -- (that would have to mean players will somehow send requests to the server using these commands)
@@ -80,13 +80,14 @@ function default_probability_parameters()
     return {additive_numerator = 0, multiplicative_numerator = 1, additive_denominator = 0}
 end
 
--- at all times there would be a singleplayer and a multiplayer instance, which would be instantiated when a game begins by get_player_on_game_start
--- pID value redundant in singleplayer
-function player_identity(pID)
+-- at all times there would be a singleplayer and a multiplayer instance, which would be instantiated by get_player_on_game_start when a game begins
+-- pID value and multiplayer_table value redundant in singleplayer
+function player_identity(pID, BMP_table)
     local default_parameters = default_probability_parameters()
 
     local self = {
         pid = pID,
+        multiplayer_probability_table = BMP_table,
 
         additive_numerator = default_parameters.additive_numerator,
         multiplicative_numerator = default_parameters.multiplicative_numerator,
@@ -102,16 +103,16 @@ function player_identity(pID)
     function self:get_multiplicative_numerator_nemesis()    return self.multiplicative_numerator_nemesis    end
     function self:get_additive_denominator_nemesis()        return self.additive_denominator_nemesis        end
 
-    function self:get_numerator(base_object_numerator, multiplayer_table)
-        if playing_multiplayer and multiplayer_table ~= nil then
-            return (base_object_numerator + self.additive_numerator + multiplayer_table.get_additive_numerator(self.pid)) * 
-                    self.multiplicative_numerator * multiplayer_table.get_multiplicative_numerator(self.pid)
+    function self:get_numerator(base_object_numerator)
+        if playing_multiplayer and self.multiplayer_probability_table ~= nil then
+            return (base_object_numerator + self.additive_numerator + self.multiplayer_probability_table.get_additive_numerator(self.pid)) * 
+                    self.multiplicative_numerator * self.multiplayer_probability_table.get_multiplicative_numerator(self.pid)
         end
         return (base_object_numerator + self.additive_numerator) * self.multiplicative_numerator
     end
-    function self:get_denominator(base_denominator, multiplayer_table)
-        if playing_multiplayer and multiplayer_table ~= nil then
-            return (base_denominator + self.additive_denominator + multiplayer_table.get_additive_denominator(self.pid))
+    function self:get_denominator(base_denominator)
+        if playing_multiplayer and self.multiplayer_probability_table ~= nil then
+            return (base_denominator + self.additive_denominator + self.multiplayer_probability_table.get_additive_denominator(self.pid))
         end
         return (base_denominator + self.additive_denominator)
     end
@@ -122,17 +123,23 @@ function player_identity(pID)
     function self:increase_denominator_value(denom)     self.additive_denominator = self.additive_denominator + denom               end
 
     -- all of these 3 update the server side table
-    function self:increase_additive_value_nemesis(value, multiplayer_probability_table)
+    function self:increase_additive_value_nemesis(value)
         self.additive_numerator_nemesis = self.additive_numerator_nemesis + value
-        multiplayer_probability_table:adjust_player_probability(self)
+        if self.multiplayer_probability_table then
+            self.multiplayer_probability_table:adjust_player_probability(self)
+        end
     end
-    function self:increase_multiplicative_value_nemesis(Mvalue, multiplayer_probability_table)
+    function self:increase_multiplicative_value_nemesis(Mvalue)
         self.multiplicative_numerator_nemesis = self.multiplicative_numerator_nemesis * Mvalue
-        multiplayer_probability_table:adjust_player_probability(self)
+        if self.multiplayer_probability_table then
+            self.multiplayer_probability_table:adjust_player_probability(self)
+        end
     end
-    function self:increase_denominator_value_nemesis(denom, multiplayer_probability_table)
+    function self:increase_denominator_value_nemesis(denom)
         self.additive_denominator_nemesis = self.additive_denominator_nemesis + denom
-        multiplayer_probability_table:adjust_player_probability(self)
+        if self.multiplayer_probability_table then
+            self.multiplayer_probability_table:adjust_player_probability(self)
+        end
     end
 
     return self
@@ -146,11 +153,6 @@ function SMODS.get_probability_vars(trigger_obj, base_numerator, base_denominato
     -- base_numerator = 1 since we use the overriden function just for multiplying the (oops all 6s) logic
     -- base_denominator = denominator
     local numerator, denominator = get_probability_varsref(trigger_obj, 1, base_denominator, identifier, from_roll)
-    -- for k, v in pairs(G.jokers.cards) do
-    --     if v.ability.name == 'j_oops' and v.ability.perma_debuff then 
-    --         numerator = numerator / 2
-    --     end
-    -- end
     if type(numerator) == "string" or numerator == nil then numerator = 1 end
     if type(denominator) == "string" or denominator == nil then denominator = 1 end
     
