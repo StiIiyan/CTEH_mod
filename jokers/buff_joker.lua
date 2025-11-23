@@ -72,6 +72,7 @@ SMODS.Joker{
             end
         end
         
+        -- 15 is hard coded, since I want it to be a one-time event
         if card.ability.max_charges < 15 and next(SMODS.find_card("v_antimatter")) then
             card.ability.max_charges = card.ability.max_charges + 3
         end

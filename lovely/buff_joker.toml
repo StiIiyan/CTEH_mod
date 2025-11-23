@@ -76,6 +76,19 @@ match_indent = true
 
 # Rest patches fix some debuff incompatibilities
 
+# Make rental not calc when for debuffed jokers
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+function Card:calculate_rental()
+'''
+position = 'after'
+payload = '''
+if self.ability.perma_debuff then return nil end
+'''
+match_indent = true
+
 # Make certain jokers calling calculate_joker() not work when debuffed 
 [[patches]]
 [patches.pattern]

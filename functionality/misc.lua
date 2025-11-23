@@ -1,7 +1,7 @@
 -- Lazy evaluation for life difference - some implementations about BMP
 -- later somehow should make it BMP compatible without being BMP dependable
 function playing_multiplayer()
-    --return MP.LOBBY.code
+    if MP.LOBBY then return MP.LOBBY.code end
     return false
 end
 

@@ -4,7 +4,7 @@
 multi_player
 
 --some global space when game begins:
-if playing_multiplayer then
+if playing_multiplayer() then
     single_player = get_player_on_game_start(some_id)
 else
     multi_player = get_player_on_game_start(some_id)
@@ -13,7 +13,7 @@ end
 -- TODO rename function
 -- when a game starts, this will return a player data structure, each client will connect to the server with their multi_player variable
 function get_player_on_game_start(pid) -- preferably pid not related to seed, idk yet how players are differentiated in BMP
-    if playing_multiplayer then --can't continue a BMP game so no need to check if a game is created or loaded from a save file
+    if playing_multiplayer() then --can't continue a BMP game so no need to check if a game is created or loaded from a save file
         return player_identity(pid)
     end
 
@@ -104,14 +104,14 @@ function player_identity(pID, BMP_table)
     function self:get_additive_denominator_nemesis()        return self.additive_denominator_nemesis        end
 
     function self:get_numerator(base_object_numerator)
-        if playing_multiplayer and self.multiplayer_probability_table ~= nil then
+        if playing_multiplayer() and self.multiplayer_probability_table ~= nil then
             return (base_object_numerator + self.additive_numerator + self.multiplayer_probability_table.get_additive_numerator(self.pid)) * 
                     self.multiplicative_numerator * self.multiplayer_probability_table.get_multiplicative_numerator(self.pid)
         end
         return (base_object_numerator + self.additive_numerator) * self.multiplicative_numerator
     end
     function self:get_denominator(base_denominator)
-        if playing_multiplayer and self.multiplayer_probability_table ~= nil then
+        if playing_multiplayer() and self.multiplayer_probability_table ~= nil then
             return (base_denominator + self.additive_denominator + self.multiplayer_probability_table.get_additive_denominator(self.pid))
         end
         return (base_denominator + self.additive_denominator)
