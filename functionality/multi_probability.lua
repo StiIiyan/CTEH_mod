@@ -14,21 +14,18 @@ end
 -- when a game starts, this will return a player data structure, each client will connect to the server with their multi_player variable
 function get_player_on_game_start(pid) -- preferably pid not related to seed, idk yet how players are differentiated in BMP
     if playing_multiplayer() then --can't continue a BMP game so no need to check if a game is created or loaded from a save file
-        return player_identity(pid)
+        return player_probability_identity(pid)
     end
 
     if G_SAVED_GAME == nil then -- new singleplayer game
-        return player_identity(pid)
+        return player_probability_identity(pid)
     else                        -- loading singleplayer game (I need to save those files if the game closes or opens :/ )
         return single_player
     end
 end
 ]]
 
--- a multiplayer game will create one SERVER SIDE instance of the table when a game begins 
--- (that would have to mean players will somehow send requests to the server using these commands)
--- it handles any nemesis effects, strictly avoiding your own nemesis-cast probability effects
--- table contents are all nemesis-related: table[pid] -> {additive_numerator,multiplicative_numerator,denominator}
+--[[ This Probability table has barebone for table handling with multiple players, but since the multiplayer mod has a special enemy, I will work around it
 function Multiplayer_Probability_Table()
     local multiplayer_table = {}
     function multiplayer_table:adjust_player_probability(player)
@@ -74,20 +71,37 @@ function Multiplayer_Probability_Table()
     
     return this
 end
+]]
+
+function Multiplayer_Probability_Table()
+    -- WE WILL HAVE A PLAYER INSTANCE FOR US AND FOR ENEMY, which will later be updated through client stuff
+    
+    function multiplayer_table:get_additive_numerator(pid)
+        return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_additive_numerator_nemesis()
+    end
+    function multiplayer_table:get_multiplicative_numerator(pid)
+        return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_multiplicative_numerator_nemesis()
+    end
+    function multiplayer_table:get_additive_denominator(pid)
+        return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_additive_denominator_nemesis()
+    end
+    
+    return this
+end
+
 
 -- miscellaneous function
 function default_probability_parameters()
     return {additive_numerator = 0, multiplicative_numerator = 1, additive_denominator = 0}
 end
 
--- at all times there would be a singleplayer and a multiplayer instance, which would be instantiated by get_player_on_game_start when a game begins
--- pID value and multiplayer_table value redundant in singleplayer
-function player_identity(pID, BMP_table)
+-- at all times there would be a singleplayer and a multiplayer instance, which would be instantiated when a game begins
+-- pID value redundant in singleplayer, even in multiplayer with current implementation of strict 1v1 single-nemesis behaviour
+function player_probability_identity(pID)
     local default_parameters = default_probability_parameters()
 
     local self = {
         pid = pID,
-        multiplayer_probability_table = BMP_table,
 
         additive_numerator = default_parameters.additive_numerator,
         multiplicative_numerator = default_parameters.multiplicative_numerator,
@@ -104,15 +118,15 @@ function player_identity(pID, BMP_table)
     function self:get_additive_denominator_nemesis()        return self.additive_denominator_nemesis        end
 
     function self:get_numerator(base_object_numerator)
-        if playing_multiplayer() and self.multiplayer_probability_table ~= nil then
-            return (base_object_numerator + self.additive_numerator + self.multiplayer_probability_table.get_additive_numerator(self.pid)) * 
-                    self.multiplicative_numerator * self.multiplayer_probability_table.get_multiplicative_numerator(self.pid)
+        if playing_multiplayer() and MP.GAME.NemesisProbabilityTable ~= nil then
+            return (base_object_numerator + self.additive_numerator + MP.GAME.NemesisProbabilityTable:get_additive_numerator(self.pid)) * 
+                    self.multiplicative_numerator * MP.GAME.NemesisProbabilityTable:get_multiplicative_numerator(self.pid)
         end
         return (base_object_numerator + self.additive_numerator) * self.multiplicative_numerator
     end
     function self:get_denominator(base_denominator)
-        if playing_multiplayer() and self.multiplayer_probability_table ~= nil then
-            return (base_denominator + self.additive_denominator + self.multiplayer_probability_table.get_additive_denominator(self.pid))
+        if playing_multiplayer() and MP.GAME.NemesisProbabilityTable ~= nil then
+            return (base_denominator + self.additive_denominator + MP.GAME.NemesisProbabilityTable:get_additive_denominator(self.pid))
         end
         return (base_denominator + self.additive_denominator)
     end
@@ -123,31 +137,33 @@ function player_identity(pID, BMP_table)
     function self:increase_denominator_value(denom)     self.additive_denominator = self.additive_denominator + denom               end
 
     -- all of these 3 update the server side table
+    --TODO update enemy player values
     function self:increase_additive_value_nemesis(value)
         self.additive_numerator_nemesis = self.additive_numerator_nemesis + value
-        if self.multiplayer_probability_table then
-            self.multiplayer_probability_table:adjust_player_probability(self)
-        end
+        -- if MP and MP.GAME and MP.GAME.NemesisProbabilityTable then
+        --     MP.GAME.NemesisProbabilityTable:adjust_player_probability(self)
+        -- end
     end
     function self:increase_multiplicative_value_nemesis(Mvalue)
         self.multiplicative_numerator_nemesis = self.multiplicative_numerator_nemesis * Mvalue
-        if self.multiplayer_probability_table then
-            self.multiplayer_probability_table:adjust_player_probability(self)
-        end
+        -- if MP and MP.GAME and MP.GAME.NemesisProbabilityTable then
+        --     MP.GAME.NemesisProbabilityTable:adjust_player_probability(self)
+        -- end
     end
     function self:increase_denominator_value_nemesis(denom)
         self.additive_denominator_nemesis = self.additive_denominator_nemesis + denom
-        if self.multiplayer_probability_table then
-            self.multiplayer_probability_table:adjust_player_probability(self)
-        end
+        -- if MP and MP.GAME and MP.GAME.NemesisProbabilityTable then
+        --     MP.GAME.NemesisProbabilityTable:adjust_player_probability(self)
+        -- end
     end
 
     return self
 end
 
 -- (load on game launch for saved run!!!!!!!!!!!!!!!!!!!!!)
-single_player = player_identity(1)
+-- single_player = player_probability_identity(1)
 
+-- idk where I got this implementation with string handling and edge-cases, but it works, feel like it tries too hard
 local get_probability_varsref = SMODS.get_probability_vars
 function SMODS.get_probability_vars(trigger_obj, base_numerator, base_denominator, identifier, from_roll)
     -- base_numerator = 1 since we use the overriden function just for multiplying the (oops all 6s) logic

@@ -32,6 +32,14 @@ SMODS.Joker{
             'other held in hand {C:attention}Seals{}'
         }
     },
+    in_pool = function(self, args)
+        for _, v in pairs(G.playing_cards) do
+            if v.seal then
+                return true
+            end
+        end
+        return false
+    end,
     rarity = 1,
     cost = 6,
     blueprint_compat=false,

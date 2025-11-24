@@ -12,6 +12,6 @@ function Game:start_run(args)
 '''
 position = 'after'
 payload = '''
-single_player = player_identity(1)
+single_player = player_probability_identity(1)
 '''
 match_indent = true
