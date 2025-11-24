@@ -1,0 +1,49 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Make probability table instantiate with game beginning
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "core.lua"]'
+pattern = '''
+MP.GAME = {
+'''
+position = 'after'
+payload = '''
+NemesisProbabilityTable = Multiplayer_Probability_Table(),
+'''
+match_indent = true
+
+
+
+# Give yourself probabilities
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "core.lua"]'
+pattern = '''
+enemy = {
+'''
+position = 'before'
+payload = '''
+probability_identity = player_probability_identity(),
+'''
+match_indent = true
+
+
+
+# Give enemy probabilities
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Multiplayer "core.lua"]'
+pattern = '''
+enemy = {
+'''
+position = 'after'
+payload = '''
+probability_identity = player_probability_identity(),
+'''
+match_indent = true

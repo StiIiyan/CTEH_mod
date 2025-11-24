@@ -4,6 +4,8 @@ dump_lua = true
 priority = 0
 
 
+
+# This will make the special logic, without single_player you can't calc the odds
 [[patches]]
 [patches.pattern]
 target = "game.lua"

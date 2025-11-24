@@ -1,14 +1,5 @@
 
 --[[
---some global space: (after all, you can have a saved singleplayer run and be playing multiplayer at the same time)
-multi_player
-
---some global space when game begins:
-if playing_multiplayer() then
-    single_player = get_player_on_game_start(some_id)
-else
-    multi_player = get_player_on_game_start(some_id)
-end
 
 -- TODO rename function
 -- when a game starts, this will return a player data structure, each client will connect to the server with their multi_player variable
@@ -76,13 +67,13 @@ end
 function Multiplayer_Probability_Table()
     -- WE WILL HAVE A PLAYER INSTANCE FOR US AND FOR ENEMY, which will later be updated through client stuff
     
-    function multiplayer_table:get_additive_numerator(pid)
+    function get_additive_numerator(pid)
         return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_additive_numerator_nemesis()
     end
-    function multiplayer_table:get_multiplicative_numerator(pid)
+    function get_multiplicative_numerator(pid)
         return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_multiplicative_numerator_nemesis()
     end
-    function multiplayer_table:get_additive_denominator(pid)
+    function get_additive_denominator(pid)
         return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_additive_denominator_nemesis()
     end
     
@@ -161,7 +152,7 @@ function player_probability_identity(pID)
 end
 
 -- (load on game launch for saved run!!!!!!!!!!!!!!!!!!!!!)
--- single_player = player_probability_identity(1)
+single_player = player_probability_identity(1)
 
 -- idk where I got this implementation with string handling and edge-cases, but it works, feel like it tries too hard
 local get_probability_varsref = SMODS.get_probability_vars
