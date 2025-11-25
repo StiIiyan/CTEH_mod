@@ -10,10 +10,10 @@ SMODS.Joker{
     loc_txt = {
         name = 'Lucky mirror',
         text = {
-            'Adds {C:green}#1#{} odds to all probabilities',
+            'Adds {C:green}#1#{} odds to probabilities',
             'Increase odds upon exiting shop',
-            '{C:green}#2# in {C:attention}#4#{} to increase odds during timer',
-            '{C:green}#2# in #3#{} to break joker at the end of round'
+            '{C:green}#2# in {C:attention}#4#{} to increase odds during {C:attention}timer',
+            '{C:green}#2# in #3#{} to {S:1.1,C:red,E:2}break{} at end of round'
         }
     },
     rarity = 2,
@@ -41,18 +41,11 @@ SMODS.Joker{
         else
             single_player:increase_additive_value(-card.ability.additional_probability)
         end
-        G.E_MANAGER:add_event(Event({
-            blockable = false,
-            func = (function()
-                    play_sound('glass'..math.random(1, 6), math.random()*0.2 + 0.9,0.5)
-                    play_sound('generic1', math.random()*0.2 + 0.9,0.5)
-                return true end)
-        }))
     end,
     calculate = function(self, card, context)
         if context.ending_shop then
             if playing_multiplayer() then
-                --TODO?
+                --TODO link multi_player to actual parameter when I finish with the probability expansion
                 multi_player:increase_additive_value(1)
                 card.ability.additional_probability = card.ability.additional_probability + 1
             else
@@ -62,9 +55,23 @@ SMODS.Joker{
         end
 
         if context.end_of_round and context.main_eval and context.game_over == false then
-            if not SMODS.pseudorandom_probability(card, "lucky_mirror", 1, card.ability.odds) then return end
-
-
+            if SMODS.pseudorandom_probability(card, "lucky_mirror", 1, card.ability.odds) then
+                if playing_multiplayer() then
+                    card:set_ability("j_CTEH_broken_mirror")
+                else
+                    SMODS.destroy_cards(card, nil, nil, true)
+                end
+                G.E_MANAGER:add_event(Event({
+                    blockable = false,
+                    func = (function()
+                            play_sound('glass'..math.random(1, 6), math.random()*0.2 + 0.9,0.5)
+                            play_sound('generic1', math.random()*0.2 + 0.9,0.5)
+                        return true end)
+                }))
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Break!", colour = G.C.FILTER})
+            else
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Intact!", colour = G.C.FILTER})
+            end
         end
     end
 }

@@ -68,13 +68,13 @@ function Multiplayer_Probability_Table()
     -- WE WILL HAVE A PLAYER INSTANCE FOR US AND FOR ENEMY, which will later be updated through client stuff
     
     function get_additive_numerator(pid)
-        return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_additive_numerator_nemesis()
+        return playing_multiplayer() and MP.GAME.enemy.probability_identity:get_additive_numerator_nemesis()
     end
     function get_multiplicative_numerator(pid)
-        return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_multiplicative_numerator_nemesis()
+        return playing_multiplayer() and MP.GAME.enemy.probability_identity:get_multiplicative_numerator_nemesis()
     end
     function get_additive_denominator(pid)
-        return MP and MP.GAME and MP.GAME.enemy.probability_identity:get_additive_denominator_nemesis()
+        return playing_multiplayer() and MP.GAME.enemy.probability_identity:get_additive_denominator_nemesis()
     end
     
     return this
@@ -131,19 +131,19 @@ function player_probability_identity(pID)
     --TODO update enemy player values
     function self:increase_additive_value_nemesis(value)
         self.additive_numerator_nemesis = self.additive_numerator_nemesis + value
-        -- if MP and MP.GAME and MP.GAME.NemesisProbabilityTable then
+        -- if playing_multiplayer() and MP.GAME.NemesisProbabilityTable then
         --     MP.GAME.NemesisProbabilityTable:adjust_player_probability(self)
         -- end
     end
     function self:increase_multiplicative_value_nemesis(Mvalue)
         self.multiplicative_numerator_nemesis = self.multiplicative_numerator_nemesis * Mvalue
-        -- if MP and MP.GAME and MP.GAME.NemesisProbabilityTable then
+        -- if playing_multiplayer() and MP.GAME.NemesisProbabilityTable then
         --     MP.GAME.NemesisProbabilityTable:adjust_player_probability(self)
         -- end
     end
     function self:increase_denominator_value_nemesis(denom)
         self.additive_denominator_nemesis = self.additive_denominator_nemesis + denom
-        -- if MP and MP.GAME and MP.GAME.NemesisProbabilityTable then
+        -- if playing_multiplayer() and MP.GAME.NemesisProbabilityTable then
         --     MP.GAME.NemesisProbabilityTable:adjust_player_probability(self)
         -- end
     end
@@ -178,8 +178,16 @@ end
 
 local probability_ref = SMODS.pseudorandom_probability
 function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_denominator, identifier)
-    local result_numerator = single_player:get_numerator(base_numerator)
-    local result_denominator = single_player:get_denominator(base_denominator)
+    local result_numerator
+    local result_denominator
+    
+    if playing_multiplayer() then
+        result_numerator = multi_player:get_numerator(base_numerator)
+        result_denominator = multi_player:get_denominator(base_denominator)
+    else
+        result_numerator = single_player:get_numerator(base_numerator)
+        result_denominator = single_player:get_denominator(base_denominator)
+    end    
     
     return probability_ref(trigger_obj, seed, result_numerator, result_denominator)
 end
