@@ -1,0 +1,38 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Make so suit changing tarots change enhancement
+
+## Make all selected cards get same enhancement
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+elseif self.ability.consumeable.suit_conv then
+'''
+position = 'after'
+payload = '''
+local random_enhancement = SMODS.poll_enhancement {key = "modprefix_seed", guaranteed = true}
+'''
+match_indent = true
+
+
+
+# Apply enhancement
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.hand.highlighted[i]:change_suit(self.ability.consumeable.suit_conv);return true end }))
+'''
+position = 'after'
+payload = '''
+if G.GAME.selected_back.effect.center.key == "b_CTEH_prism_deck" then
+    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,func = function() G.hand.highlighted[i]:set_ability(random_enhancement);return true end }))
+end
+'''
+match_indent = true
