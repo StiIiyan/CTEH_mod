@@ -1,6 +1,6 @@
 SMODS.Atlas{
     key = "d_buffed",
-    path = "debuffed_deck.png",
+    path = "deck_debuffed.png",
     px = 71,
     py = 95
 }

@@ -33,7 +33,7 @@ SMODS.Joker{
     loc_vars = function(self, info_queue, card)
         local numerator, denominator =
             SMODS.get_probability_vars(card, 1, card.ability.odds, "lucky_mirror")
-        return {vars = {card.ability.additional_probability,numerator, denominator,MP.GAME.timer}}
+        return {vars = {card.ability.additional_probability,numerator, denominator,(MP and MP.GAME and MP.GAME.timer or 150)}}
     end,
     remove_from_deck = function(self, card, from_debuff)
         if playing_multiplayer() then

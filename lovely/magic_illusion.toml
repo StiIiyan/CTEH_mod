@@ -46,7 +46,7 @@ match_indent = true
 
 
 
-## Seal prices +$3
+## (Doesn't work, doesn't break) Seal prices +$3
 [[patches]]
 [patches.pattern]
 target = "card.lua"

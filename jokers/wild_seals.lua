@@ -33,8 +33,8 @@ SMODS.Joker{
         }
     },
     in_pool = function(self, args)
-        for _, v in pairs(G.playing_cards) do
-            if v.seal then
+        for _, card in pairs(G.playing_cards) do
+            if card.seal then
                 return true
             end
         end
