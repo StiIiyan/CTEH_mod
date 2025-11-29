@@ -27,7 +27,7 @@ match_indent = true
 
 # Next 3 patches for multiple copy incompatibility (ankh + invis)
 
-# Make so Ankh doesn't pick the Buff Joker
+## Make so Ankh doesn't pick the Buff Joker
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -45,7 +45,7 @@ match_indent = true
 
 
 
-# Make so Ankh unusable when only Buff Joker in Joker roaster
+## Make so Ankh unusable when only Buff Joker in Joker roaster
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -60,7 +60,7 @@ match_indent = true
 
 
 
-# Make Invis Joker not pick the Buff Joker
+## Make Invis Joker not pick the Buff Joker
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -72,6 +72,7 @@ payload = '''
 if G.jokers.cards[i] ~= self and G.jokers.cards[i].ability.name ~= 'j_CTEH_buff_joker' then
 '''
 match_indent = true
+
 
 
 # Rest patches fix some debuff incompatibilities
@@ -122,27 +123,68 @@ match_indent = true
 # Make so Troubadour isn't special avoiding every debuff mechanics 
 # (otherwise the hand count will be delayed by a single round, eventhough the variable 
 # G.GAME.current_round.hands_left is how it's supposed to be during the round)
+
+# Implementation: make it like Burglar (effect on blind select, not on buy/sell joker, dw it's not bp compatible)
+# Next 3 patches rework Troubadour's hand count effect timings
+
+## Make effect start of round
 [[patches]]
 [patches.pattern]
-target = "functions/state_events.lua"
+target = "card.lua"
 pattern = '''
-G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+if self.ability.name == 'Burglar' and not (context.blueprint_card or self).getting_sliced then
 '''
-position = 'after'
+position = 'before'
 payload = '''
-G.GAME.current_round.hands_left = (math.max(1, G.GAME.round_resets.hands + G.GAME.round_bonus.next_hands))
+if self.ability.name == 'Troubadour' and not (context.blueprint_card or self).getting_sliced then
+    G.E_MANAGER:add_event(Event({func = function()
+        ease_hands_played(self.ability.extra.h_plays)
+    return true end }))
+end
 '''
 match_indent = true
 
-# Same but for BMP compat
+
+
+## Remove effect add-to-deck
 [[patches]]
 [patches.pattern]
-target = "functions/state_events.lua"
+target = "card.lua"
 pattern = '''
-G.deck:shuffle('nr'..MP.order_round_based(true))
+G.GAME.round_resets.hands = G.GAME.round_resets.hands + self.ability.extra.h_plays
 '''
-position = 'after'
+position = 'at'
 payload = '''
-G.GAME.current_round.hands_left = (math.max(1, G.GAME.round_resets.hands + G.GAME.round_bonus.next_hands))
+-- G.GAME.round_resets.hands = G.GAME.round_resets.hands + self.ability.extra.h_plays
+'''
+match_indent = true
+
+
+
+## Remove effect remove-from-deck
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+G.GAME.round_resets.hands = G.GAME.round_resets.hands - self.ability.extra.h_plays
+'''
+position = 'at'
+payload = '''
+-- G.GAME.round_resets.hands = G.GAME.round_resets.hands - self.ability.extra.h_plays
+'''
+match_indent = true
+
+
+
+# Make Needle + Troubadour not leave you empty-handed
+[[patches]]
+[patches.pattern]
+target = "common_events.lua"
+pattern = '''
+G.GAME.current_round.hands_left = G.GAME.current_round.hands_left + mod
+'''
+position = 'at'
+payload = '''
+G.GAME.current_round.hands_left = (math.max(1, G.GAME.current_round.hands_left + mod))
 '''
 match_indent = true
