@@ -14,7 +14,7 @@ SMODS.Joker{
     loc_txt = {
         name = 'Buff Joker',
         text = {
-            'When {C:attention}Ante{} begins, set {C:chips,E:2}charges{} to {C:chips}#1#{}.',
+            'When {C:attention}Ante{} begins, set {C:chips,E:2}charges{} to {C:chips}#1#{}',
             'When {C:attention}Blind{} is selected, use a {C:chips,E:2}charge{} per',
             'joker to the left, {C:attention}debuff{} jokers to the right',
             '{C:inactive}(Currently: {C:chips}#2#{C:inactive}){}'
