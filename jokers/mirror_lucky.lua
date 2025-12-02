@@ -10,9 +10,9 @@ SMODS.Joker{
     loc_txt = {
         name = 'Lucky mirror',
         text = {
-            'Adds {C:green}#1#{} odds to probabilities',
-            'Increase odds upon exiting shop',
-            '{C:green}#2# in {C:attention}#4#{} to increase odds during {C:attention}timer',
+            'Adds {C:green}#1# {C:attention}odds{} to probabilities',
+            'Increase {C:attention}odds{} upon exiting shop',
+            '{C:green}#2# in {C:attention}#4#{} to increase {C:attention}odds{} during {C:attention}timer',
             '{C:green}#2# in #3#{} to {S:1.1,C:red,E:2}break{} at end of round'
         }
     },

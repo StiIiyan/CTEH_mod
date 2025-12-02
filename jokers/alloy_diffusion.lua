@@ -10,8 +10,8 @@ SMODS.Joker{
     loc_txt = {
         name = 'Alloy diffusion',
         text = {
-            'After achieving a {C:attention}flaming score{},',
-            '{C:attention}Gold{} and {C:attention}Steel{} enhancements',
+            'After achieving a {X:chips,E:1,C:white}flaming {X:mult,E:1,C:white}score{},',
+            '{C:gold}Gold{} and {C:inactive}Steel{} cards',
             'liquidate sideways'
         }
     },

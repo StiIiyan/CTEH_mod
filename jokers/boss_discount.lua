@@ -17,6 +17,12 @@ SMODS.Joker{
             '{C:red,E:1}life {C:inactive}less than your {X:purple,C:white}Nemesis{C:inactive})'
         }
     },
+	loc_vars = function(self, info_queue, card)
+		if loaded_BMP() then 
+            MP.UTILS.add_nemesis_info(info_queue) 
+        end
+		return { vars = {} }
+	end,
     rarity = 1,
     cost = 4,
     blueprint_compat=false,

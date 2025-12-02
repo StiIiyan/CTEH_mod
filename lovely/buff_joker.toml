@@ -136,7 +136,7 @@ if self.ability.name == 'Burglar' and not (context.blueprint_card or self).getti
 '''
 position = 'before'
 payload = '''
-if self.ability.name == 'Troubadour' and not (context.blueprint_card or self).getting_sliced then
+if self.ability.name == 'Troubadour' and not (context.blueprint_card or self).getting_sliced and not context.blueprint then
     G.E_MANAGER:add_event(Event({func = function()
         ease_hands_played(self.ability.extra.h_plays)
     return true end }))

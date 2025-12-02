@@ -15,6 +15,12 @@ SMODS.Joker{
             '{C:inactive}(ex: {C:green}1 in 2 {C:inactive}-> {C:green}1 in 3{C:inactive})'
         }
     },
+	loc_vars = function(self, info_queue, card)
+		if loaded_BMP() then 
+            MP.UTILS.add_nemesis_info(info_queue) 
+        end
+		return { vars = {} }
+	end,
     rarity = 2,
     cost = 6,
     blueprint_compat=false,
