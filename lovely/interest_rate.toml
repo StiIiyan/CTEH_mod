@@ -20,6 +20,7 @@ interest_rate = 5,
 match_indent = true
 
 
+
 # Modifying the values for Seed money and Money tree vouchers as multipliers so they're not hard coded $50 and $100
 [[patches]]
 [patches.pattern]
@@ -32,6 +33,7 @@ payload = '''
 v_seed_money=       {order = 21,    discovered = false, unlocked = true , available = true, cost = 10, name = "Seed Money", pos = {x=1,y=2}, set = "Voucher", config = {extra = 2}},
 '''
 match_indent = true
+
 
 
 [[patches]]
@@ -48,13 +50,10 @@ match_indent = true
 
 
 
-
-
 # Editing variables related to the vouchers Seed money and Money tree
 
-## for dynamic UI it would have to check at all time for voucher existance 
-## we don't need these with the updated voucher description, but
-## for dynamic UI it would need to check if any voucher is already acquired to decide whether or not to multiply
+## we don't need these with the updated voucher description (current implementation not fully correct), but
+## for dynamic UI it would need to check at all times if any voucher is already acquired to decide whether or not to multiply
 
 [[patches]]
 [patches.pattern]
@@ -156,10 +155,6 @@ match_indent = true
 
 
 
-
-
-
-
 # Editing around joker To the moon
 ## Make interest rate be dynamic UI component
 [[patches]]
@@ -176,7 +171,7 @@ match_indent = true
 
 
 
-## Rework price to be like interest rate
+## Rework price to be related to interest rate
 [[patches]]
 [patches.pattern]
 target = "game.lua"
@@ -186,29 +181,5 @@ j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprin
 position = 'at'
 payload = '''
 j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = (G.GAME and G.GAME.interest_rate) or 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
-'''
-match_indent = true
-
-
-
-
-
-
-
-
-
-
-
-
-
-[[patches]]
-[patches.pattern]
-target = ""
-pattern = '''
-
-'''
-position = 'at'
-payload = '''
-
 '''
 match_indent = true

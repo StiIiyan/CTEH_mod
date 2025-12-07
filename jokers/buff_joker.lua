@@ -5,10 +5,6 @@ SMODS.Atlas{
     py = 95
 }
 
---[[
-If I want to achieve compatibility with another mod, can I just toml a toml file with a lower priority (which would result in a higher priority number, and I like patching), or maybe there is a more conventional and practical method?
-]]
-
 SMODS.Joker{
     key = 'buff_joker',
     loc_txt = {

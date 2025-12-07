@@ -11,7 +11,7 @@ SMODS.Joker{
         name = 'Bean Juggler',
         text = {
             'When {C:attention}Small{} or {C:attention}Big Blind{} is defeated',
-            'by {C:chips}playing{} or {C:mult}discarding {C:attention}no more than 2 cards{},',
+            'by {C:chips}playing{} or {C:mult}discarding {C:attention}no more than 2 cards{}',
             'sell to create two {C:attention}Juggle Tags{}',
             '{C:inactive}(Currently {C:attention}#1#{C:inactive}/1)'
         }

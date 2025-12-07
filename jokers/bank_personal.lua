@@ -1,0 +1,42 @@
+SMODS.Atlas{
+    key = "j_bank_personal",
+    path = "bank_personal.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Joker{
+    key = 'bank_personal',
+    loc_txt = {
+        name = 'Personal Bank',
+        text = {
+            'At end of round earn {C:attention}double{} your {C:green}interest cap',
+            'with an {C:green}interest rate{} of {C:gold}$1{} lower',
+            '{C:inactive}(Joker\'s interest rate is {C:gold}$#1#{C:inactive}, cap is {C:gold}$#2#{C:inactive})',
+            '{C:inactive}(Joker\'s total interest caps at {C:gold}$#3#{C:inactive})'
+        }
+    },
+    rarity = 3,
+    cost = (G.GAME and 2 * G.GAME.interest_rate) or 10,
+    blueprint_compat=false,
+    eternal_compat=true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = true,
+    atlas = 'j_bank_personal',
+    pos = {x = 0, y = 0},
+    
+    config = {
+        card_interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4,
+        double_interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
+    },
+    loc_vars = function(self, info_queue, card)
+        card.ability.card_interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4
+        card.ability.double_interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
+        local total_cap = card.ability.double_interest_cap * card.ability.card_interest_rate
+        return {vars = {card.ability.card_interest_rate,card.ability.double_interest_cap,total_cap}}
+    end,    
+    calc_dollar_bonus = function(self, card)
+        return  G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/card.ability.card_interest_rate), card.ability.double_interest_cap)
+    end
+}
