@@ -10,8 +10,8 @@ SMODS.Joker{
     loc_txt = {
         name = 'Buried Treasure',
         text = {
-            'Your last {C:attention}#1#{} cards contain',
-            '{C:attention}#2#{} enhancements, {C:attention}#3#{} editions and {C:attention}#4#{} seals',
+            'Your last {C:attention}#1# cards{} contain',
+            '{C:enhanced}#2#{} enhancements, {C:enhanced}#3#{} editions and {C:enhanced}#4#{} seals',
             'Earn {C:gold}$#5#{} upon finishing a blind',
             'without drawing these cards',
             '{C:inactive}(Increase prize with {C:gold}$1{C:inactive} per modifier)',
