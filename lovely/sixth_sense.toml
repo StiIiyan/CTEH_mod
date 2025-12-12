@@ -1,0 +1,22 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Makes Sixth Sense jiggle before first hand
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'DNA' and not context.blueprint then
+'''
+position = 'before'
+payload = '''
+if self.ability.name == 'Sixth Sense' and not context.blueprint then
+    local eval = function() return G.GAME.current_round.hands_played == 0 end
+    juice_card_until(self, eval, true)
+end
+'''
+match_indent = true

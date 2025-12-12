@@ -1,0 +1,58 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Update Diet Cola jiggle param
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+if self.config.type == 'joker' or self.config.type == 'title_2' then
+'''
+position = 'after'
+payload = '''
+
+for k, card in ipairs(self.cards) do
+    if card.states.drag.is and card.ability.name == 'Diet Cola' then
+        card.ability.extra = math.max(card.ability.extra - 1,0)
+        card:calculate_joker({individual = true})
+    end
+end
+'''
+match_indent = true
+
+
+
+# Give Diet Cola jiggle param
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+        j_diet_cola=        {order = 94,   unlocked = true, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = false, rarity = 2, cost = 6, name = "Diet Cola",set = "Joker", config = {}, pos = {x=8,y=14}},
+'''
+position = 'at'
+payload = '''
+        j_diet_cola=        {order = 94,   unlocked = true, discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = false, rarity = 2, cost = 6, name = "Diet Cola",set = "Joker", config = {extra=35}, pos = {x=8,y=14}},
+'''
+match_indent = true
+
+
+
+# Jiggle Diet Cola
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+elseif context.individual then
+'''
+position = 'after'
+payload = '''
+if self.ability.name == 'Diet Cola' and not context.blueprint then
+    local eval = function() return self.ability.extra <=0 end
+    juice_card_until(self, eval, true)
+end
+'''
+match_indent = true

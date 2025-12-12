@@ -8,11 +8,11 @@ SMODS.Back {
     key = "white_deck",
     atlas = 'd_white',
     pos = { x = 0, y = 0 },
-    config = { dollars = -2 },
+    config = { consumables = { 'c_judgement' } },
     loc_txt = {
         name = "White Deck",
         text = {
-            'Start with {C:money}$2{} and a',
+            'Start with a {C:tarot}Judgement{} and a',
             '{C:enhanced}perishable {C:attention}Invisible Joker{}'
         }
     },
