@@ -1,13 +1,13 @@
 SMODS.Atlas{
     key = "d_white",
-    path = "deck_white2.png",
+    path = "decks.png",
     px = 71,
     py = 95
 }
 SMODS.Back {
     key = "white_deck",
     atlas = 'd_white',
-    pos = { x = 0, y = 0 },
+    pos = { x = 2, y = 0 },
     config = { consumables = { 'c_judgement' } },
     loc_txt = {
         name = "White Deck",

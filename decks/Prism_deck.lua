@@ -12,14 +12,14 @@ SMODS.ObjectType({
 
 SMODS.Atlas{
     key = "d_prism",
-    path = "deck_prism.png",
+    path = "decks.png",
     px = 71,
     py = 95
 }
 SMODS.Back {
     key = "prism_deck",
     atlas = 'd_prism',
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
     loc_txt = {
         name = "Prism Deck",
         text = {
