@@ -22,14 +22,14 @@ return {
             v_seed_money = {
                 name="Seed Money",
                 text={
-                    "Double the cap on",
+                    "{C:attention}Double{} the cap on",
                     "interest earned"
                 }
             },
             v_money_tree = {
                 name="Money Tree",
                 text={
-                    "Quadruple the cap on",
+                    "{C:attention}Quadruple{} the cap on",
                     "interest earned"
                 },
                 unlock={
@@ -38,6 +38,14 @@ return {
                     "{C:attention}#1#{} consecutive rounds",
                     "{C:inactive}(#2#)"
                 }
+            },
+            v_planet_tycoon = {
+                name="Planet Tycoon",
+                text={
+                    "Leveling up a hand now gives",
+                    "{C:attention}twice{} as many levels"
+                }
+                -- not sure if I need to reiterate the unlock text
             }
         }
     }
