@@ -1,6 +1,17 @@
 return {
     descriptions = {
         Joker = {
+            j_square={
+                name="Square Joker",
+                text={
+                    "This Joker gains {C:chips}+#2#{} Chips",
+                    "if played hand has",
+                    "exactly {C:attention}4{} cards",
+                    "{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)",
+                    "{C:inactive}(Multiple Square Jokers stack",
+                    "{C:inactive}scaled chips and scaling)",
+                }
+            },
             j_egg = {
                 name="Egg",
                 text={
