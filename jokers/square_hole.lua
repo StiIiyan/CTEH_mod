@@ -12,7 +12,8 @@ SMODS.Joker{
         text = {
             'All hands scale {C:attention}Square Joker{}',
             'When selecting {C:attention}Blind{}, joker to the right',
-            '{E:1}becomes {C:attention}Square Joker'
+            '{E:1}becomes {C:attention}Square Joker',
+            '{C:inactive,s:0.7}That\'s right! It goes in the square hole'
         }
     },
     rarity = 2,

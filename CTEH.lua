@@ -23,6 +23,59 @@ SMODS.Atlas({
     py = 34
 })
 
+-- CURSORS = false
+
+-- -- Load cursor
+-- local prev_load = love.load
+-- local prev_pressed = love.mousepressed
+-- local prev_released = love.mousereleased
+
+-- function love.load()
+--     cursor1 = love.mouse.newCursor("assets/2x/cursor.png", 0, 0)
+--     cursor2 = love.mouse.newCursor("assets/2x/cursor_hold.png", 0, 0)
+
+--     if cursor1 == nil then 
+--         CURSORS = true 
+--     else
+--         CURSORS = true
+--     end
+
+--     love.mouse.setCursor(cursor1)
+
+--     prev_load()
+
+--     love.mouse.setVisible(true)
+-- end
+
+
+-- function love.mousepressed(x, y, button, touch)
+--     if button == 1 then
+--         love.mouse.setCursor(cursor2)
+--     end
+
+--     prev_pressed(x, y, button, touch)
+
+--     love.mouse.setVisible(true)
+-- end
+
+
+-- function love.mousereleased(x, y, button)
+--     if button == 1 then
+--         love.mouse.setCursor(cursor1)
+--     end
+
+--     prev_released(x, y, button)
+
+--     love.mouse.setVisible(true)
+-- end
+
+
+
+
+
+
+
+
 -- Intended BMP compatibilities are not yet compatible
 
 --[[
@@ -107,5 +160,5 @@ return
 
 --[[
 Contributions from
-Balatro Discord: eremel_, _breuhh
+Balatro Discord: eremel_, _breuhh, deathmodereal
 ]]
