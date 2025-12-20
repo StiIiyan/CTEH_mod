@@ -29,7 +29,9 @@ SMODS.Joker{
     calculate = function(self, card, context)
         if context.blind then
             for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i].ability.name == 'j_CTEH_square_hole' and i + 1 <= #G.jokers.cards and not G.jokers.cards[i + 1].ability.eternal then
+                if G.jokers.cards[i].ability.name == 'j_CTEH_square_hole' and i + 1 <= #G.jokers.cards and
+                 not G.jokers.cards[i + 1].ability.eternal and G.jokers.cards[i + 1].ability.name ~= 'Square Joker' then
+                    play_sound('whoosh1', 0.55, 0.62)
                     G.jokers.cards[i + 1]:set_ability("j_square")
                 end
             end

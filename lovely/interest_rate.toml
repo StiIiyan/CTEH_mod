@@ -168,18 +168,3 @@ payload = '''
 elseif self.ability.name == 'To the Moon' then loc_vars = {self.ability.extra,G.GAME.interest_rate}
 '''
 match_indent = true
-
-
-
-## Rework price to be related to interest rate
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = '''
-j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
-'''
-position = 'at'
-payload = '''
-j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = (G.GAME and G.GAME.interest_rate) or 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
-'''
-match_indent = true

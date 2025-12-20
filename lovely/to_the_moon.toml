@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Rework price of To the Moon to be related to interest rate
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
+'''
+position = 'at'
+payload = '''
+j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = (G.GAME and G.GAME.interest_rate) or 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
+'''
+match_indent = true
