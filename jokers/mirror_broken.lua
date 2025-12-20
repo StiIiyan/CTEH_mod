@@ -5,6 +5,9 @@ SMODS.Atlas{
     py = 95
 }
 
+-- broken mirror currently don't work
+BROKEN_BROKEN_MIRROR = true
+
 SMODS.Joker{
     key = 'broken_mirror',
     loc_txt = {

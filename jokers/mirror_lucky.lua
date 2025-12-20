@@ -56,7 +56,7 @@ SMODS.Joker{
 
         if context.end_of_round and context.main_eval and context.game_over == false then
             if SMODS.pseudorandom_probability(card, "lucky_mirror", 1, card.ability.odds) then
-                if playing_multiplayer() then
+                if playing_multiplayer() and not BROKEN_BROKEN_MIRROR then
                     card:set_ability("j_CTEH_broken_mirror")
                 else
                     SMODS.destroy_cards(card, nil, nil, true)
