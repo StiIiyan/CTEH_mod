@@ -51,7 +51,6 @@ SMODS.Joker:take_ownership('square',
     rarity = 1,
     cost = 4,
     pos = { x = 9, y = 11 },
-    pixel_size = { h = 71 },
     config = { extra = { chips = 0, chip_mod = 4 } },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.chip_mod } }
