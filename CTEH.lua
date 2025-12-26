@@ -23,6 +23,9 @@ SMODS.Atlas({
     py = 34
 })
 
+-- generate_ui ...
+-- blue_eyes_white_joker -> perma gives playing cards retriggerss
+
 -- CURSORS = false
 
 -- -- Load cursor
