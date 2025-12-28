@@ -11,16 +11,13 @@ SMODS.Sticker{
     pos = {x = 1, y = 0},
     atlas = 'stickers',
     discovered = true,
-    sets = { Joker = true },
-    rate = 0.3,
     
     should_apply = function(self, card, center, area, bypass_roll)
-        --return G.GAME.modifiers.enable_beaned_sticker_in_shop (default check)
-        local voucher_check = true -- next(SMODS.find_card("v_CTEH_food_coupons"))
-        
         local sticker_rate = pseudorandom(pseudoseed('CTEH_bean_sticker'))
-        local sticker_apply = sticker_rate >= 0.7
+        local sticker_apply = sticker_rate >= 0.75
+
+        local is_joker = center.set == 'Joker'
         
-        return voucher_check and sticker_apply
+        return G.GAME.modifiers.enable_beaned_sticker and sticker_apply and is_joker
     end
 }

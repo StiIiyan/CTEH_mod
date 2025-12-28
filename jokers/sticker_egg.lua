@@ -14,9 +14,11 @@ SMODS.Sticker{
     
     should_apply = function(self, card, center, area, bypass_roll)
         local sticker_rate = pseudorandom(pseudoseed('CTEH_egg_sticker'))
-        local sticker_apply = sticker_rate >= 0.7
+        local sticker_apply = sticker_rate >= 0.75
+
+        local is_joker = center.set == 'Joker'
         
-        return G.GAME.modifiers.enable_yolky_sticker and sticker_apply
+        return G.GAME.modifiers.enable_yolky_sticker and sticker_apply and is_joker
     end,
     calculate = function(self, card, context)
         if context.end_of_round and not context.repetition and not context.individual then

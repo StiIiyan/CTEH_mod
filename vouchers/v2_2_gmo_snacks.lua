@@ -19,6 +19,7 @@ SMODS.Voucher {
     },
     requires = { 'v_CTEH_food_stamps' },
     redeem = function(self, card)
-        -- TODO
+        G.GAME.modifiers.hybrid_perishable_beaned = true
+        G.GAME.modifiers.hybrid_rental_yolky = true
     end
 }

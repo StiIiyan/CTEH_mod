@@ -19,5 +19,6 @@ SMODS.Voucher {
     },
     redeem = function(self, card)
         G.GAME.modifiers.enable_yolky_sticker = true
+        G.GAME.modifiers.enable_beaned_sticker = true
     end
 }
