@@ -163,5 +163,5 @@ return
 
 --[[
 Contributions from
-Balatro Discord: eremel_, _breuhh, deathmodereal
+Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64
 ]]

@@ -1,12 +1,12 @@
 SMODS.Atlas{
     key = "v_bank_pass",
-    path = "bank_pass.png",
+    path = "vouchers.png",
     px = 71,
     py = 95
 }
 SMODS.Voucher {
     key = 'bank_pass',
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
     unlocked = true,
     discovered = true,
     atlas = 'v_bank_pass',

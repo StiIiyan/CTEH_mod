@@ -1,6 +1,6 @@
 SMODS.Atlas{
     key = "v_dividends",
-    path = "dividends.png",
+    path = "vouchers.png",
     px = 71,
     py = 95
 }
