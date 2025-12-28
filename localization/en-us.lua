@@ -61,18 +61,24 @@ return {
         },
         Other = {
             CTEH_egg = {
-                ['name'] = 'Yolky',
-                ['text'] = {
+                name = 'Yolky',
+                text = {
                     'Gain {C:gold}$2{} of sell value',
                     'at end of round'
                 }
             },
             CTEH_bean = {
-                ['name'] = 'Beaned',
-                ['text'] = {
+                name = 'Beaned',
+                text = {
                     'Gain {C:attention}1 handsize{}'
                 }
             }
+        }
+    },
+    misc = {
+        labels = {
+            CTEH_egg = 'Yolky',
+            CTEH_bean = 'Beaned'
         }
     }
 }

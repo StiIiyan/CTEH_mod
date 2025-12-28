@@ -11,10 +11,10 @@ SMODS.Voucher {
     discovered = true,
     atlas = 'v_bank_pass',
     loc_txt = {
-        name = 'Bank pass',
+        name = 'Bank Pass',
         text = {
-            'Lower the interest',
-            'rate by {C:money}$1{}'
+            'Lower the {C:green}interest',
+            '{C:green}rate{} by {C:money}$1{}'
         }
     },
     requires = { 'v_CTEH_dividends' },
