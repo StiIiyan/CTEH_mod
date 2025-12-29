@@ -1,0 +1,26 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Makes Rental sticker behave like Yolky sticker when requirements met
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+ease_dollars(-G.GAME.rental_rate)
+'''
+position = 'before'
+payload = '''
+if G.GAME.modifiers.hybrid_rental_yolky then
+    self.ability.extra_value = self.ability.extra_value + 2
+    self:set_cost()
+    return {
+        message = localize('k_val_up'),
+        colour = G.C.MONEY
+    }
+end
+'''
+match_indent = true

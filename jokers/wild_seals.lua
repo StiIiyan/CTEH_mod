@@ -23,13 +23,32 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Gradient {
+    key = "wild_seals",
+    colours = {
+        HEX("E8463D"),
+        HEX("F7AF38"),
+        HEX("009CFD"),
+        HEX("A267E4"),
+    }
+}
+SMODS.Gradient {
+    key = "wild_seals2",
+    colours = {
+        HEX("009CFD"),
+        HEX("A267E4"),
+        HEX("E8463D"),
+        HEX("F7AF38"),
+    }
+}
+
 SMODS.Joker{
     key = 'wild_seals',
     loc_txt = {
-        name = 'Wild seals',
+        name = '{C:cteh_wild_seals}Wild seals',
         text = {
-            'Each {C:attention}Seal{} behaves like',
-            'other held in hand {C:attention}Seals{}'
+            'Each {C:cteh_wild_seals2}Seal{} behaves like',
+            'other held in hand {C:cteh_wild_seals2}Seals{}'
         }
     },
     in_pool = function(self, args)

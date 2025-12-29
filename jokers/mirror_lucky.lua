@@ -5,10 +5,18 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Gradient {
+    key = "lucky_mirror",
+    colours = {
+        HEX("fefefe"),
+        HEX("C7E2FF"),
+    }
+}
+
 SMODS.Joker{
     key = 'lucky_mirror',
     loc_txt = {
-        name = 'Lucky mirror',
+        name = '{C:cteh_lucky_mirror}Lucky mirror',
         text = {
             'Adds {C:green}#1# {C:attention}odds{} to probabilities',
             'Increase {C:attention}odds{} upon exiting shop',

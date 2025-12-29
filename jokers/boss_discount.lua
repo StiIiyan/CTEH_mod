@@ -5,10 +5,19 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Gradient {
+    key = "boss_discount",
+    colours = {
+        HEX("CEE5F4"),
+        HEX("668CA6"),
+        HEX("83CE49"),
+    }
+}
+
 SMODS.Joker{
     key = 'boss_discount',
     loc_txt = {
-        name = 'Boss\' discount',
+        name = '{C:cteh_boss_discount}Boss\' discount',
         text = {
             'When {C:attention}Big Blind{} is defeated',
             '{C:green}(#1# + {C:white,X:green}#3#{C:green}) in #2#{} to create',

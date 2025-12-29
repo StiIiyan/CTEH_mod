@@ -5,10 +5,19 @@ SMODS.Atlas{
     py = 95
 }
 
+SMODS.Gradient {
+    key = "buried_treasure",
+    colours = {
+        HEX("f1f9ff"),
+        HEX("9ed1f2"),
+        HEX("b6ab95")
+    }
+}
+
 SMODS.Joker{
     key = 'buried_treasure',
     loc_txt = {
-        name = 'Buried Treasure',
+        name = '{C:cteh_buried_treasure}Buried Treasure',
         text = {
             'Your last {C:attention}#1# cards{} contain',
             '{C:enhanced}#2#{} enhancements, {C:enhanced}#3#{} editions and {C:enhanced}#4#{} seals',
