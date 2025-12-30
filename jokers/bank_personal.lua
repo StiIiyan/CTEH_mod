@@ -27,16 +27,16 @@ SMODS.Joker{
     pos = {x = 0, y = 0},
     
     config = {
-        card_interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4,
-        double_interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
+        interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4,
+        interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
     },
     loc_vars = function(self, info_queue, card)
-        card.ability.card_interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4
-        card.ability.double_interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
-        local total_cap = card.ability.double_interest_cap * card.ability.card_interest_rate
-        return {vars = {card.ability.card_interest_rate,card.ability.double_interest_cap,total_cap}}
+        card.ability.interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4
+        card.ability.interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
+        local total_cap = card.ability.interest_cap * card.ability.interest_rate
+        return {vars = {card.ability.interest_rate,card.ability.interest_cap,total_cap}}
     end,    
     calc_dollar_bonus = function(self, card)
-        return  G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/card.ability.card_interest_rate), card.ability.double_interest_cap)
+        return  G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/card.ability.interest_rate), card.ability.interest_cap)
     end
 }

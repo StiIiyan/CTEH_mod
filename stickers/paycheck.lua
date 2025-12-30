@@ -19,6 +19,7 @@ SMODS.Sticker{
     end,
     apply = function(self, card, val)
         card.ability[self.key] = true
+        if card.ability[self.key] then card.ability.paycheck = true end
     end,
     should_apply = function(self, card, center, area, bypass_roll)
         local sticker_rate = pseudorandom(pseudoseed('CTEH_paycheck_sticker'))
@@ -28,5 +29,4 @@ SMODS.Sticker{
         
         return G.GAME.modifiers.enable_paycheck_sticker and sticker_apply and is_tarot_or_planet
     end
-    -- button_callbacks -> if card.ability.consumeable then
 }
