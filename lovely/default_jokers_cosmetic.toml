@@ -5,6 +5,32 @@ priority = 0
 
 
 
+# Cosmetic changes to Burnt Joker, Diet Cola and Sixth Sense:
+
+####################################################################################
+# Burnt Joker
+
+# Makes Burnt Joker jiggle before first discard
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'Trading Card' and not context.blueprint then
+'''
+position = 'before'
+payload = '''
+if self.ability.name == 'Burnt Joker' and not context.blueprint then
+    local eval = function() return G.GAME.current_round.discards_used == 0 and not G.RESET_JIGGLES end
+    juice_card_until(self, eval, true)
+end
+'''
+match_indent = true
+
+
+
+####################################################################################
+# Diet Cola
+
 # Update Diet Cola jiggle param
 [[patches]]
 [patches.pattern]
@@ -52,6 +78,27 @@ position = 'after'
 payload = '''
 if self.ability.name == 'Diet Cola' and not context.blueprint then
     local eval = function() return self.ability.extra <=0 end
+    juice_card_until(self, eval, true)
+end
+'''
+match_indent = true
+
+
+
+####################################################################################
+# Sixth Sense
+
+# Makes Sixth Sense jiggle before first hand
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.name == 'DNA' and not context.blueprint then
+'''
+position = 'before'
+payload = '''
+if self.ability.name == 'Sixth Sense' and not context.blueprint then
+    local eval = function() return G.GAME.current_round.hands_played == 0 end
     juice_card_until(self, eval, true)
 end
 '''
