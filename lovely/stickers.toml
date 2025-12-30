@@ -1,0 +1,39 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Makes Beaned sticker give handsize
+## When acquired
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.added_to_deck = true
+'''
+position = 'after'
+payload = '''
+if self.ability.beaned then
+    G.hand:change_size(1)
+end
+'''
+match_indent = true
+
+
+
+## When removed
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.added_to_deck = false
+'''
+position = 'after'
+payload = '''
+if self.ability.beaned or self.ability['bean'] then
+    G.hand:change_size(-1)
+end
+'''
+match_indent = true
