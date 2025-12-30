@@ -10,11 +10,14 @@ SMODS.Sticker{
     badge_colour = HEX('360202'),
     pos = {x = 1, y = 0},
     atlas = 'stickers',
-    discovered = true,
-    
+    discovered = true,    
+    apply = function(self, card, val)
+        card.ability[self.key] = true
+        if card.ability[self.key] then card.ability.beaned = true end        
+    end,
     should_apply = function(self, card, center, area, bypass_roll)
         local sticker_rate = pseudorandom(pseudoseed('CTEH_bean_sticker'))
-        local sticker_apply = sticker_rate >= 0.75
+        local sticker_apply = sticker_rate >= 0.85
 
         local is_joker = center.set == 'Joker'
         

@@ -14,7 +14,7 @@ SMODS.Sticker{
     
     should_apply = function(self, card, center, area, bypass_roll)
         local sticker_rate = pseudorandom(pseudoseed('CTEH_egg_sticker'))
-        local sticker_apply = sticker_rate >= 0.75
+        local sticker_apply = sticker_rate >= 0.85
 
         local is_joker = center.set == 'Joker'
         

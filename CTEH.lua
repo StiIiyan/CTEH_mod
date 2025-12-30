@@ -14,6 +14,10 @@ local vouchers_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "vouchers")
 for _, file in ipairs(vouchers_src) do
     assert(SMODS.load_file("vouchers/" .. file))()
 end
+local stickers_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "stickers")
+for _, file in ipairs(stickers_src) do
+    assert(SMODS.load_file("stickers/" .. file))()
+end
 
 -- Loading mod icon
 SMODS.Atlas({
@@ -163,5 +167,5 @@ return
 
 --[[
 Contributions from
-Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64
+Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574
 ]]

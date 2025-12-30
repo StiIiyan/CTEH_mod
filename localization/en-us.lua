@@ -72,13 +72,20 @@ return {
                 text = {
                     'Gain {C:attention}1 handsize{}'
                 }
+            },
+            CTEH_paycheck = {
+                name = 'Paycheck',
+                text = {
+                    '{C:green}#1# in #2#{} to gain {C:green}interest{} when consumed'
+                }
             }
         }
     },
     misc = {
         labels = {
             CTEH_egg = 'Yolky',
-            CTEH_bean = 'Beaned'
+            CTEH_bean = 'Beaned',
+            CTEH_paycheck = 'Paycheck',
         }
     }
 }
