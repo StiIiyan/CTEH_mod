@@ -1,8 +1,10 @@
+INTEREST_HEX_VAL = HEX("5F897B")
+
 SMODS.Gradient {
     key = "interest",
     colours = {
-        HEX("5F897B"),
-        HEX("5F897B"),
+        INTEREST_HEX_VAL,
+        INTEREST_HEX_VAL,
     }
 }
 
@@ -35,4 +37,19 @@ end
 
 function generate_interest()
     ease_dollars(get_total_interest(), true)
+end
+
+function is_interest_full()
+    local interest_is_full = true
+
+    interest_is_full = interest_is_full and (math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), G.GAME.interest_cap) == G.GAME.interest_cap)
+
+    for i = 1, #G.jokers.cards do
+        local current_joker = G.jokers.cards[i]
+        if current_joker.ability.interest_rate and G.jokers.cards[i].ability.interest_cap then
+            interest_is_full = interest_is_full and (math.min(math.floor(G.GAME.dollars/current_joker.ability.interest_rate), current_joker.ability.interest_cap) == current_joker.ability.interest_cap)
+        end
+    end
+
+    return interest_is_full
 end
