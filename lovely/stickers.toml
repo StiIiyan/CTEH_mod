@@ -59,3 +59,33 @@ if self.ability.paycheck then
 end
 '''
 match_indent = true
+
+
+
+# Makes Wheel of Fortune usable if it has the Paycheck sticker with no jokers to apply edition to
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if next(self.eligible_strength_jokers) then return true end
+'''
+position = 'at'
+payload = '''
+if next(self.eligible_strength_jokers) or self.ability.paycheck then return true end
+'''
+match_indent = true
+
+
+
+# Makes Wheel of Fortune not search for eligible cards when there aren't any
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+local eligible_card = pseudorandom_element(temp_pool, pseudoseed(
+'''
+position = 'before'
+payload = '''
+if not next(self.eligible_strength_jokers) and self.ability.name == 'The Wheel of Fortune' then return true end
+'''
+match_indent = true
