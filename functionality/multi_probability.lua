@@ -2,7 +2,7 @@
 --[[
 
 -- TODO rename function
--- when a game starts, this will return a player data structure, each client will connect to the server with their multi_player variable
+-- when a game starts, this will return a player data structure, each client will connect to the server with their MP.GAME.multi_player variable
 function get_player_on_game_start(pid) -- preferably pid not related to seed, idk yet how players are differentiated in BMP
     if playing_multiplayer() then --can't continue a BMP game so no need to check if a game is created or loaded from a save file
         return player_probability_identity(pid)
@@ -164,8 +164,8 @@ function SMODS.get_probability_vars(trigger_obj, base_numerator, base_denominato
     if type(denominator) == "string" or denominator == nil then denominator = 1 end
     
     if playing_multiplayer() then
-        numerator = numerator * multi_player:get_numerator(base_numerator)
-        denominator = multi_player:get_denominator(base_denominator)
+        numerator = numerator * MP.GAME.multi_player:get_numerator(base_numerator)
+        denominator = MP.GAME.multi_player:get_denominator(base_denominator)
     else
         numerator = numerator * single_player:get_numerator(base_numerator)
         denominator = single_player:get_denominator(base_denominator)
@@ -182,8 +182,8 @@ function SMODS.pseudorandom_probability(trigger_obj, seed, base_numerator, base_
     local result_denominator
     
     if playing_multiplayer() then
-        result_numerator = multi_player:get_numerator(base_numerator)
-        result_denominator = multi_player:get_denominator(base_denominator)
+        result_numerator = MP.GAME.multi_player:get_numerator(base_numerator)
+        result_denominator = MP.GAME.multi_player:get_denominator(base_denominator)
     else
         result_numerator = single_player:get_numerator(base_numerator)
         result_denominator = single_player:get_denominator(base_denominator)

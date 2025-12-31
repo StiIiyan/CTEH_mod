@@ -29,7 +29,7 @@ enemy = {
 '''
 position = 'before'
 payload = '''
-probability_identity = player_probability_identity(),
+multi_player = player_probability_identity(),
 '''
 match_indent = true
 
@@ -44,6 +44,6 @@ enemy = {
 '''
 position = 'after'
 payload = '''
-probability_identity = player_probability_identity(),
+multi_player = player_probability_identity(),
 '''
 match_indent = true
