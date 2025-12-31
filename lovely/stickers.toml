@@ -88,10 +88,10 @@ match_indent = true
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-local eligible_card = pseudorandom_element(temp_pool, pseudoseed(
+local temp_pool =   (self.ability.name == 'The Wheel of Fortune' and self.eligible_strength_jokers) or 
 '''
 position = 'before'
 payload = '''
-if not next(self.eligible_strength_jokers) and self.ability.name == 'The Wheel of Fortune' then return true end
+if self.ability.name == 'The Wheel of Fortune' and not next(self.eligible_strength_jokers) then return true end
 '''
 match_indent = true
