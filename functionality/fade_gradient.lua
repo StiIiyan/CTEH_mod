@@ -24,20 +24,23 @@ function get_inner_color_table(start_color,end_color,median_point_amount)
 end
 
 function table_first_to_last(current_table) -- fade right to left
-    if current_table == nil or #current_table < 1 then return end
-    local element = current_table[1]
-    table.remove(current_table,1)
-    table.insert(current_table,element)
-    return current_table
+    local N = #current_table
+    local rotated = {}
+    for i = 1, N do
+        local index = (i % N) + 1
+        rotated[i] = current_table[index]
+    end
+    return rotated
 end
 
 function table_last_to_first(current_table) -- fade left to right
-    if current_table == nil or #current_table < 1 then return end
-    local last = #current_table
-    local element = current_table[last]
-    table.remove(current_table,last)
-    table.insert(current_table,1,element)
-    return current_table
+    local N = #current_table
+    local rotated = {}
+    for i = 1, N do
+        local index = ((i - 2) % N) + 1
+        rotated[i] = current_table[index]
+    end
+    return rotated
 end
 
 function looping_variation(current_table,steps,right_to_left)
@@ -51,7 +54,8 @@ function looping_variation(current_table,steps,right_to_left)
     return current_table
 end
 
-function Fade_Gradient(color_table,key,message,right_to_left,median_point_amount)
+-- median points is amount of points between each two colors (you need at least 1 to have any fade effect)
+function Fade_Gradient(color_table,key,message,median_point_amount,right_to_left)
     -- make all the inbetween colors (from color table to bigger color table)
 
     if key == nil then return end
