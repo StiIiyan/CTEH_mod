@@ -24,3 +24,7 @@ function get_total_interest()
 
     return total_interest
 end
+
+function generate_interest()
+    ease_dollars(get_total_interest(), true)
+end

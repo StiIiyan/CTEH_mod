@@ -1,0 +1,67 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+####################################################################################
+# GMO Snacks
+
+# Makes Rental sticker behave like Yolky sticker when requirements met
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+ease_dollars(-G.GAME.rental_rate)
+'''
+position = 'before'
+payload = '''
+if G.GAME.modifiers.hybrid_rental_yolky then
+    self.ability.extra_value = self.ability.extra_value + 2
+    self:set_cost()
+    return {
+        message = localize('k_val_up'),
+        colour = G.C.MONEY
+    }
+end
+'''
+match_indent = true
+
+# TODO Perishable into Beaned
+
+####################################################################################
+# Paycheck Collector
+
+# Gain interest when voucher acquired
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self:apply_to_run()
+'''
+position = 'after'
+payload = '''
+if G.GAME.modifiers.vouchers_give_interest then
+    generate_interest()
+end
+'''
+match_indent = true
+
+
+
+# Gain interest when booster pack skipped
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''
+G.FUNCS.skip_booster = function(e)
+'''
+position = 'after'
+payload = '''
+-- denominator hard coded cuz config don't work here, just like the loc_vars for the #odds#
+if G.GAME.modifiers.boosters_give_interest and SMODS.pseudorandom_probability(self, "booster_paycheck", 1, 2) then
+    generate_interest()
+end
+'''
+match_indent = true

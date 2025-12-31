@@ -26,6 +26,9 @@ SMODS.Sticker{
         local sticker_apply = sticker_rate >= 0.75
 
         local is_tarot_or_planet = center.set == 'Tarot' or center.set == 'Planet'
+        if center.name == 'The Wheel of Fortune' then
+            sticker_apply = true
+        end
         
         return G.GAME.modifiers.enable_paycheck_sticker and sticker_apply and is_tarot_or_planet
     end

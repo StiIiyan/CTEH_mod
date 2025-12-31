@@ -55,10 +55,7 @@ local used_tarot = copier or self
 position = 'after'
 payload = '''
 if self.ability.paycheck then
-    local dollars_to_gain = get_total_interest()
-    play_sound('timpani')
-    used_tarot:juice_up(0.3, 0.5)
-    ease_dollars(dollars_to_gain, true)
+    generate_interest()
 end
 '''
 match_indent = true
