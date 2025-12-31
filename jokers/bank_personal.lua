@@ -8,7 +8,7 @@ SMODS.Atlas{
 SMODS.Joker{
     key = 'bank_personal',
     loc_txt = {
-        name = 'Personal Bank',
+        name = Fade_Gradient({HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFEF87")},'bank_personal','Personal Bank',3,false),
         text = {
             'At end of round earn {C:attention}double{} your {C:green}interest cap',
             'with an {C:green}interest rate{} of {C:gold}$1{} lower',

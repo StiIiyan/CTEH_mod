@@ -5,19 +5,10 @@ SMODS.Atlas{
     py = 95
 }
 
-SMODS.Gradient {
-    key = "bean_juggler",
-    colours = {
-        HEX("fefefe"),
-        HEX("6E8965"),
-        HEX("FD5F55"),
-    }
-}
-
 SMODS.Joker{
     key = 'bean_juggler',
     loc_txt = {
-        name = '{C:cteh_bean_juggler}Bean Juggler',
+        name = Fade_Gradient({HEX("fefefe"),HEX("6E8965"),HEX("FDA200")},'bean_jiggler','Bean Juggler',5,false),
         text = {
             'When {C:attention}Small{} or {C:attention}Big Blind{} is defeated',
             'by {C:chips}playing{} or {C:mult}discarding {C:attention}no more than 2 cards{}',
