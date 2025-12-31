@@ -13,8 +13,8 @@ SMODS.Voucher {
     loc_txt = {
         name = 'Bank Pass',
         text = {
-            'Lower the {C:green}interest',
-            '{C:green}rate{} by {C:money}$1{}'
+            'Lower the {C:cteh_interest}interest',
+            '{C:cteh_interest}rate{} by {C:money}$1{}'
         }
     },
     requires = { 'v_CTEH_dividends' },

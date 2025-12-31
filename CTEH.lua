@@ -27,7 +27,16 @@ SMODS.Atlas({
     py = 34
 })
 
--- generate_ui ...
+--[[
+Notes not in the Additions section: 
+Planet Tycoon changed (read description), Magick Trick has all enhanced cards, Illusion has 20% for seals
+Added Jiggle physics to Burnt Joker, Sixth Sense and Diet Cola (shake it)
+Square Jokers now merge into one
+Some prices go down with interest rate
+Interest rate works with Oracle Deck as of Multiplayer 0.2.20
+Not tested if Lucky mirror works when timer
+]]
+
 -- blue_eyes_white_joker -> perma gives playing cards retriggerss
 
 -- CURSORS = false

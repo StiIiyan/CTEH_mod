@@ -10,8 +10,8 @@ SMODS.Joker{
     loc_txt = {
         name = Fade_Gradient({HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFFFFF"),HEX("FFEF87")},'bank_personal','Personal Bank',3,false),
         text = {
-            'At end of round earn {C:attention}double{} your {C:green}interest cap',
-            'with an {C:green}interest rate{} of {C:gold}$1{} lower',
+            'At end of round earn {C:attention}double{} your {C:cteh_interest}interest cap',
+            'with an {C:cteh_interest}interest rate{} of {C:gold}$1{} lower',
             '{C:inactive}(Joker\'s interest rate is {C:gold}$#1#{C:inactive}, cap is {C:gold}$#2#{C:inactive})',
             '{C:inactive}(Joker\'s total interest caps at {C:gold}$#3#{C:inactive})'
         }

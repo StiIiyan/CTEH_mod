@@ -24,7 +24,7 @@ return {
                 name="To the Moon",
                 text={
                     "Earn an extra {C:money}$#1#{} of",
-                    "{C:attention}interest{} for every {C:money}$#2#{} you",
+                    "{C:cteh_interest}interest{} for every {C:money}$#2#{} you",
                     "have at end of round"
                 }
             }
@@ -56,7 +56,6 @@ return {
                     "Leveling up a hand now gives",
                     "{C:attention}twice{} as many levels"
                 }
-                -- not sure if I need to reiterate the unlock text
             }
         },
         Other = {
@@ -76,7 +75,7 @@ return {
             CTEH_paycheck = {
                 name = 'Paycheck',
                 text = {
-                    '{C:green}#1# in #2#{} to gain {C:green}interest{} when consumed'
+                    '{C:green}#1# in #2#{} to gain {C:cteh_interest}interest{} when consumed'
                 }
             }
         }

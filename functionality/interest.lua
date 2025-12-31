@@ -1,3 +1,11 @@
+SMODS.Gradient {
+    key = "interest",
+    colours = {
+        HEX("5F897B"),
+        HEX("5F897B"),
+    }
+}
+
 SMODS.ObjectType({
     key = "Interest_Jokers",
     default = "j_to_the_moon",

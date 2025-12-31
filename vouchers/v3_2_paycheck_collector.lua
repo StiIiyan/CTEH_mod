@@ -13,8 +13,8 @@ SMODS.Voucher {
     loc_txt = {
         name = 'Paycheck Collector',
         text = {
-            '{C:attention}Vouchers{} generate {C:green}interest',
-            '{C:green}#1# in #2#{} to generate {C:green}interest',
+            '{C:attention}Vouchers{} generate {C:cteh_interest}interest',
+            '{C:green}#1# in #2#{} to generate {C:cteh_interest}interest',
             'when any {C:attention}Booster Pack{} is skipped'
         }
     },

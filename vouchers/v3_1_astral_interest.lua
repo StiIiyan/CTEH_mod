@@ -14,7 +14,7 @@ SMODS.Voucher {
         name = 'Astral Interest',
         text = {
             '{C:tarot}Tarot{} and {C:planet}Planet{} cards',
-            'may appear with a {C:green}Paycheck{} sticker'
+            'may appear with a {C:cteh_interest}Paycheck{} sticker'
         }
     },
     redeem = function(self, card)

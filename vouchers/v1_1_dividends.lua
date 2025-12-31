@@ -13,8 +13,8 @@ SMODS.Voucher {
     loc_txt = {
         name = 'Dividends',
         text = {
-            'Lower the {C:green}interest',
-            '{C:green}rate{} by {C:money}$1{}'
+            'Lower the {C:cteh_interest}interest',
+            '{C:cteh_interest}rate{} by {C:money}$1{}'
         }
     },
     redeem = function(self, card)
