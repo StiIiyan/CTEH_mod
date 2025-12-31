@@ -151,7 +151,7 @@ function player_probability_identity(pID)
     return self
 end
 
--- (load on game launch for saved run!!!!!!!!!!!!!!!!!!!!!)
+-- (load on game launch for saved run!!!!!!!!!!!!!!)
 single_player = player_probability_identity(1)
 
 -- idk where I got this implementation with string handling and edge-cases, but it works, feel like it tries too hard

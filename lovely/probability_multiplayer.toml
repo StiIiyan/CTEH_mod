@@ -5,7 +5,7 @@ priority = 0
 
 
 
-# Make probability table instantiate with game beginning
+# Make probability table instantiate with game beginning (not currently working ofc)
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Multiplayer "core.lua"]'
