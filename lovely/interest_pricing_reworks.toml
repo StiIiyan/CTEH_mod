@@ -1,0 +1,48 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+
+
+# Rework price of To the Moon to be related to interest rate
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
+'''
+position = 'at'
+payload = '''
+j_to_the_moon=      {order = 84,  unlocked = true,  discovered = false, blueprint_compat = false, perishable_compat = true, eternal_compat = true, rarity = 2, cost = (G.GAME and G.GAME.interest_rate) or 5, name = "To the Moon",set = "Joker", config = {extra = 1}, pos = {x=8,y=13}},
+'''
+match_indent = true
+
+
+
+# Rework price of vouchers Seed Money and Money Tree
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+v_seed_money=       {order = 21,    discovered = false, unlocked = true , available = true, cost = 10, name = "Seed Money", pos = {x=1,y=2}, set = "Voucher", config = {extra = 2}},
+'''
+position = 'at'
+payload = '''
+v_seed_money=       {order = 21,    discovered = false, unlocked = true , available = true, cost = (G.GAME and 2 * G.GAME.interest_rate) or 10, name = "Seed Money", pos = {x=1,y=2}, set = "Voucher", config = {extra = 2}},
+'''
+match_indent = true
+
+
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+v_money_tree=       {order = 22,    discovered = false, unlocked = false, available = true, cost = 10, name = "Money Tree", pos = {x=1,y=3}, set = "Voucher", config = {extra = 2}, requires = {'v_seed_money'},unlock_condition = {type = 'interest_streak', extra = 10}},
+'''
+position = 'at'
+payload = '''
+v_money_tree=       {order = 22,    discovered = false, unlocked = false, available = true, cost = (G.GAME and 2 * G.GAME.interest_rate) or 10, name = "Money Tree", pos = {x=1,y=3}, set = "Voucher", config = {extra = 2}, requires = {'v_seed_money'},unlock_condition = {type = 'interest_streak', extra = 10}},
+'''
+match_indent = true

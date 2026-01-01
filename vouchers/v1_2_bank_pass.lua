@@ -7,6 +7,7 @@ SMODS.Atlas{
 SMODS.Voucher {
     key = 'bank_pass',
     pos = { x = 1, y = 0 },
+    cost = (G.GAME and 2 * G.GAME.interest_rate) or 10,
     unlocked = true,
     discovered = true,
     atlas = 'v_bank_pass',

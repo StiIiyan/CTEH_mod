@@ -7,6 +7,7 @@ SMODS.Atlas{
 SMODS.Voucher {
     key = 'dividends',
     pos = { x = 0, y = 0 },
+    cost = (G.GAME and 2 * G.GAME.interest_rate) or 10,
     unlocked = true,
     discovered = true,
     atlas = 'v_dividends',

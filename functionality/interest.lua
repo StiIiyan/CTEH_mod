@@ -16,6 +16,18 @@ SMODS.ObjectType({
         j_CTEH_bank_personal = true,
     }
 })
+SMODS.ObjectType({
+    key = "Interest_Vouchers",
+    default = "v_seed_money",
+    cards = {
+        v_seed_money = true,
+        v_money_tree = true,
+        v_CTEH_dividends = true,
+        v_CTEH_bank_pass = true,
+        v_CTEH_astral_interest = true,
+        v_CTEH_paycheck_collector = true,
+    }
+})
 
 function get_total_interest()
     local total_interest = 0
