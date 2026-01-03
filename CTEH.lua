@@ -27,68 +27,7 @@ SMODS.Atlas({
     py = 34
 })
 
---[[
-Notes not in the Additions section: 
-Planet Tycoon changed (read voucher description), Magick Trick has all cards enhanced, Illusion has 20% for seals
-Added Jiggle physics to Burnt Joker, Sixth Sense and Diet Cola (shake it)
-Multiple copies of vanilla Square Joker now merge into one, stacking its stats
-Some prices of interest-related jokers go down with interest rate
-Interest rate works with Oracle Deck as of Multiplayer 0.2.20
-Not tested if Lucky mirror works when timer
-You need Square Joker for Squarer Joker to show up
-You need Squarer Joker for Squarer Jokest to show up
-You need any seal for joker Wild Seals to show up
-You need any Steel or Gold for joker Alloy Diffusion to show up
-Jokers not in pool: Broken Mirror (Not working) and Buff Joker (Deck tailored)
-]]
 
--- blue_eyes_white_joker -> perma gives playing cards retriggerss
-
--- CURSORS = false
-
--- -- Load cursor
--- local prev_load = love.load
--- local prev_pressed = love.mousepressed
--- local prev_released = love.mousereleased
-
--- function love.load()
---     cursor1 = love.mouse.newCursor("assets/2x/cursor.png", 0, 0)
---     cursor2 = love.mouse.newCursor("assets/2x/cursor_hold.png", 0, 0)
-
---     if cursor1 == nil then 
---         CURSORS = true 
---     else
---         CURSORS = true
---     end
-
---     love.mouse.setCursor(cursor1)
-
---     prev_load()
-
---     love.mouse.setVisible(true)
--- end
-
-
--- function love.mousepressed(x, y, button, touch)
---     if button == 1 then
---         love.mouse.setCursor(cursor2)
---     end
-
---     prev_pressed(x, y, button, touch)
-
---     love.mouse.setVisible(true)
--- end
-
-
--- function love.mousereleased(x, y, button)
---     if button == 1 then
---         love.mouse.setCursor(cursor1)
---     end
-
---     prev_released(x, y, button)
-
---     love.mouse.setVisible(true)
--- end
 
 
 
