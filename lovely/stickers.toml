@@ -60,7 +60,7 @@ local used_tarot = copier or self
 '''
 position = 'after'
 payload = '''
-if self.ability.paycheck then
+if self.ability.paycheck and SMODS.pseudorandom_probability(card, "paycheck", 1, 4) then
     generate_interest()
 end
 '''

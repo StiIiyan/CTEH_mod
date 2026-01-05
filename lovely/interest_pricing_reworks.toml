@@ -2,6 +2,7 @@
 version = "1.0.0"
 dump_lua = true
 priority = 1
+# Needs interest_rate.toml since I already change the voucher definitions 
 
 
 
