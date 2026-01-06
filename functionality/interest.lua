@@ -29,6 +29,29 @@ SMODS.ObjectType({
     }
 })
 
+local Interest_Vouchers = {}
+Interest_Vouchers[1] = {[1] = "v_seed_money", [2] = "v_CTEH_dividends", [3] = "v_CTEH_astral_interest"}
+Interest_Vouchers[2] = {[1] = "v_money_tree", [2] = "v_CTEH_bank_pass", [3] = "v_CTEH_paycheck_collector"}
+
+function get_next_interest_voucher_key()
+    local Selected_Vouchers = {}
+    local index = 1
+    for i=1, #Interest_Vouchers[2] do
+        if not next(SMODS.find_card(Interest_Vouchers[1][i])) then
+            Selected_Vouchers[index] = Interest_Vouchers[1][i]
+            index = index + 1
+        elseif not next(SMODS.find_card(Interest_Vouchers[2][i])) then
+            Selected_Vouchers[index] = Interest_Vouchers[2][i]
+            index = index + 1
+        end
+    end
+
+    if #Selected_Vouchers == 0 then return "" end
+    
+    index = math.random(1, #Selected_Vouchers)
+    return Selected_Vouchers[index]
+end
+
 function get_total_interest()
     local total_interest = 0
 
@@ -58,7 +81,7 @@ function is_interest_full()
 
     for i = 1, #G.jokers.cards do
         local current_joker = G.jokers.cards[i]
-        if current_joker.ability.interest_rate and G.jokers.cards[i].ability.interest_cap then
+        if current_joker.ability.interest_rate and current_joker.ability.interest_cap then
             interest_is_full = interest_is_full and (math.min(math.floor(G.GAME.dollars/current_joker.ability.interest_rate), current_joker.ability.interest_cap) == current_joker.ability.interest_cap)
         end
     end

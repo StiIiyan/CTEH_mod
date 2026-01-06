@@ -60,37 +60,9 @@ SMODS.Joker{
             end
             card.ability.numerator_odds = 1
             
-            local voucher_key = ""
-            local voucher = math.random(1, 3)
-            if voucher == 3 then
-                if next(SMODS.find_card("v_money_tree")) then
-                    voucher = math.random(1, 2) 
-                elseif next(SMODS.find_card("v_seed_money")) then
-                    voucher_key = "v_money_tree"
-                else
-                    voucher_key = "v_seed_money"
-                end
-            end
-            if voucher == 2 then
-                if next(SMODS.find_card("v_CTEH_bank_pass")) then
-                    voucher = math.random(1, 1)
-                elseif next(SMODS.find_card("v_CTEH_dividends")) then
-                    voucher_key = "v_CTEH_bank_pass"
-                else
-                    voucher_key = "v_CTEH_dividends"
-                end
-            end
-            if voucher == 1 then
-                if next(SMODS.find_card("v_CTEH_paycheck_collector")) then
-                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = "No more!", colour = INTEREST_HEX_VAL})
-                    play_sound('cancel', 0.7, 0.7)
-                    return
-                elseif next(SMODS.find_card("v_CTEH_astral_interest")) then
-                    voucher_key = "v_CTEH_paycheck_collector"
-                else
-                    voucher_key = "v_CTEH_astral_interest"
-                end
-            end
+            local voucher_key = get_next_interest_voucher_key()
+
+            if voucher_key == "" then return end
 
             local voucher_card = SMODS.create_card({ area = G.play, key = voucher_key })
             voucher_card:start_materialize()
