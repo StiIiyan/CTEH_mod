@@ -16,8 +16,9 @@ position = 'after'
 payload = '''
 for i = 1, #G.jokers.cards do
     if G.jokers.cards[i].ability.name == 'j_CTEH_lucky_mirror' and SMODS.pseudorandom_probability(card, "lucky_mirror_timer", 1, MP.GAME.timer) then
-        G.jokers.cards[i].ability.additional_probability = G.jokers.cards[i].ability.additional_probability + 1
         MP.GAME.multi_player:increase_additive_value(1)
+        G.jokers.cards[i].ability.additional_probability = G.jokers.cards[i].ability.additional_probability + 1
+        card_eval_status_text(G.jokers.cards[i], 'extra', nil, nil, nil, {message = "+Odds!", colour = G.C.GREEN})
     end
 end
 '''

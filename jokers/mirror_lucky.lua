@@ -53,13 +53,13 @@ SMODS.Joker{
     calculate = function(self, card, context)
         if context.ending_shop then
             if playing_multiplayer() then
-                --TODO link multi_player to actual parameter when I finish with the probability expansion
                 MP.GAME.multi_player:increase_additive_value(1)
                 card.ability.additional_probability = card.ability.additional_probability + 1
             else
                 single_player:increase_additive_value(1)
                 card.ability.additional_probability = card.ability.additional_probability + 1
             end
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+Odds!", colour = G.C.GREEN})
         end
 
         if context.end_of_round and context.main_eval and context.game_over == false then
@@ -76,9 +76,9 @@ SMODS.Joker{
                             play_sound('generic1', math.random()*0.2 + 0.9,0.5)
                         return true end)
                 }))
-                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Break!", colour = G.C.FILTER})
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Break!", colour = G.C.FILTER})
             else
-                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Intact!", colour = G.C.FILTER})
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Intact!", colour = G.C.FILTER})
             end
         end
     end

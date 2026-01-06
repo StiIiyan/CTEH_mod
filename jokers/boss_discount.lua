@@ -48,7 +48,7 @@ SMODS.Joker{
             local base_numerator = 1 + life_difference_nonnegative()
             if not SMODS.pseudorandom_probability(card, "boss_discount", base_numerator, card.ability.odds) then return end
 
-            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+1 D6 Tag!", colour = G.C.FILTER})
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+1 D6 Tag!", colour = G.C.FILTER})
             G.E_MANAGER:add_event(Event({
                 func = (function()
                     add_tag(Tag('tag_d_six'))
@@ -58,7 +58,7 @@ SMODS.Joker{
                 end)
             }))
             delay(0.3)
-            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+1 Coupon Tag!", colour = G.C.FILTER})
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+1 Coupon Tag!", colour = G.C.FILTER})
             G.E_MANAGER:add_event(Event({
                 func = (function()
                     add_tag(Tag('tag_coupon'))
