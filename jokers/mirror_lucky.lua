@@ -45,7 +45,7 @@ SMODS.Joker{
     end,
     remove_from_deck = function(self, card, from_debuff)
         if playing_multiplayer() then
-            multi_player:increase_additive_value(-card.ability.additional_probability)
+            MP.GAME.multi_player:increase_additive_value(-card.ability.additional_probability)
         else
             single_player:increase_additive_value(-card.ability.additional_probability)
         end
@@ -54,7 +54,7 @@ SMODS.Joker{
         if context.ending_shop then
             if playing_multiplayer() then
                 --TODO link multi_player to actual parameter when I finish with the probability expansion
-                multi_player:increase_additive_value(1)
+                MP.GAME.multi_player:increase_additive_value(1)
                 card.ability.additional_probability = card.ability.additional_probability + 1
             else
                 single_player:increase_additive_value(1)

@@ -15,10 +15,9 @@ MP.GAME.timer = MP.GAME.timer - 1
 position = 'after'
 payload = '''
 for i = 1, #G.jokers.cards do
-    -- I hope it's 'Lucky mirror' and not 'j_CTEH_lucky_mirror', it's so inconsistent at times...
-    if G.jokers.cards[i].ability.name == 'Lucky mirror' then
+    if G.jokers.cards[i].ability.name == 'j_CTEH_lucky_mirror' and SMODS.pseudorandom_probability(card, "lucky_mirror_timer", 1, MP.GAME.timer) then
         G.jokers.cards[i].ability.additional_probability = G.jokers.cards[i].ability.additional_probability + 1
-        multi_player:increase_additive_value(1)
+        MP.GAME.multi_player:increase_additive_value(1)
     end
 end
 '''

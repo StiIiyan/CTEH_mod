@@ -40,13 +40,13 @@ SMODS.Joker{
     add_to_deck = function(self, card, from_debuff)
         --TODO link multi_player to actual parameter when I finish with the probability expansion
 		if playing_multiplayer() and not from_debuffed and (not card.edition or card.edition.type ~= "mp_phantom") then
-            multi_player:increase_denominator_value_nemesis(1)
+            MP.GAME.multi_player:increase_denominator_value_nemesis(1)
 			MP.ACTIONS.send_phantom("j_CTEH_broken_mirror")
 		end
     end,
     remove_from_deck = function(self, card, from_debuff)
 		if playing_multiplayer() and not from_debuff and (not card.edition or card.edition.type ~= "mp_phantom") then
-            multi_player:increase_denominator_value_nemesis(-1)
+            MP.GAME.multi_player:increase_denominator_value_nemesis(-1)
 			MP.ACTIONS.remove_phantom("j_CTEH_broken_mirror")
 		end
     end
