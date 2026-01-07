@@ -1,0 +1,46 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Return played cards instead of discarding them
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''
+draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
+'''
+position = 'at'
+payload = '''
+local last_joker = G.jokers.cards[#G.jokers.cards]
+if last_joker.ability.name == 'j_CTEH_edzy' and not last_joker.ability.used then 
+    draw_card(G.play,G.hand, it*100/play_count,'up', false, v)
+else
+    draw_card(G.play,G.discard, it*100/play_count,'down', false, v)
+end
+'''
+match_indent = true
+
+
+
+# Activate Edzy joker
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''
+if G.GAME.chips - G.GAME.blind.chips >= 0 or G.GAME.current_round.hands_left < 1 then
+'''
+position = 'before'
+payload = '''
+local last_joker = G.jokers.cards[#G.jokers.cards]
+if last_joker.ability.name == 'j_CTEH_edzy' and not last_joker.ability.used then
+    last_joker.ability.used = true
+    card_eval_status_text(last_joker, 'extra', nil, nil, nil, {message = "Undo", colour = G.C.RED})
+
+    G.GAME.current_round.hands_left = G.GAME.current_round.hands_left + 1
+    G.GAME.chips = LAST_SAVED_SCORE
+end
+'''
+match_indent = true
