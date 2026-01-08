@@ -27,6 +27,18 @@ return {
                     "{C:cteh_interest}interest{} for every {C:money}$#2#{} you",
                     "have at end of round"
                 }
+            },
+            j_oops = {
+                name = "Oops! All 6s",
+                text = {
+                    "Doubles the {C:green,E:1,S:1.1}probability {C:attention}base",
+                    "{C:inactive}(ex: {C:green}1 in 3{C:inactive} -> {C:green}2 in 3{C:inactive})",
+                },
+                unlock = {
+                    "In one hand,",
+                    "earn at least",
+                    "{E:1,C:attention}#1#{} chips",
+                }
             }
         },
         Voucher = {

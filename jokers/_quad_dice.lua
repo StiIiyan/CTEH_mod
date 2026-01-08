@@ -10,7 +10,7 @@ SMODS.Joker{
     loc_txt = {
         name = Fade_Gradient({HEX("80F1C3"),HEX("469575"),HEX("CBE9F6")},'quad_dice','Quad Dice',3,false),
         text = {
-            '{C:green}x16 probabilities',
+            '{C:green,E:1,S:1.1}x16 probability {C:attention}base',
             '{C:attention}5000{} free rerolls',
             '{C:attention}+2{} slots in Shop',
         }
