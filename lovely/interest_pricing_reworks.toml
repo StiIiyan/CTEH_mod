@@ -1,8 +1,7 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = 1
-# Needs interest_rate.toml since I already change the voucher definitions 
+priority = 0
 
 
 
@@ -21,29 +20,19 @@ match_indent = true
 
 
 
-# Rework price of vouchers Seed Money and Money Tree
+# Rework voucher prices
 [[patches]]
 [patches.pattern]
-target = "game.lua"
+target = "card.lua"
 pattern = '''
-v_seed_money=       {order = 21,    discovered = false, unlocked = true , available = true, cost = 10, name = "Seed Money", pos = {x=1,y=2}, set = "Voucher", config = {extra = 2}},
+    self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
 '''
-position = 'at'
+position = 'after'
 payload = '''
-v_seed_money=       {order = 21,    discovered = false, unlocked = true , available = true, cost = (G.GAME and 2 * G.GAME.interest_rate) or 10, name = "Seed Money", pos = {x=1,y=2}, set = "Voucher", config = {extra = 2}},
-'''
-match_indent = true
-
-
-
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = '''
-v_money_tree=       {order = 22,    discovered = false, unlocked = false, available = true, cost = 10, name = "Money Tree", pos = {x=1,y=3}, set = "Voucher", config = {extra = 2}, requires = {'v_seed_money'},unlock_condition = {type = 'interest_streak', extra = 10}},
-'''
-position = 'at'
-payload = '''
-v_money_tree=       {order = 22,    discovered = false, unlocked = false, available = true, cost = (G.GAME and 2 * G.GAME.interest_rate) or 10, name = "Money Tree", pos = {x=1,y=3}, set = "Voucher", config = {extra = 2}, requires = {'v_seed_money'},unlock_condition = {type = 'interest_streak', extra = 10}},
+if (self.config.center.pools or {}).Interest_Vouchers then
+    self.base_cost = 2 * G.GAME.interest_rate or 10
+    self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-G.GAME.discount_percent)/100))
+    self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
+end
 '''
 match_indent = true

@@ -7,7 +7,6 @@ SMODS.Atlas{
 SMODS.Voucher {
     key = 'astral_interest',
     pos = { x = 4, y = 0 },
-    cost = (G.GAME and 2 * G.GAME.interest_rate) or 10,
     unlocked = true,
     discovered = true,
     atlas = 'v_astral_interest',
