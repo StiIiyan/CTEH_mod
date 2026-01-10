@@ -1,5 +1,3 @@
-DESTROY_BOOSTER = false
-
 SMODS.Atlas{
     key = "j_tungsten",
     path = "tungsten_joker.png",
@@ -64,7 +62,12 @@ SMODS.Joker{
                 card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "No space?", colour = G.C.SECONDARY_SET.Spectral})
             end
 
-            DESTROY_BOOSTER = true
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.FUNCS.end_consumeable()
+                    return true
+                end
+            }))
         end
     end  
 }
