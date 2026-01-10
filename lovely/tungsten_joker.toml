@@ -1,0 +1,26 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Destroy cards in booster when conditions met
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+                    for k, v in ipairs(pack_cards) do
+                        G.pack_cards:emplace(v)
+                    end
+'''
+position = 'after'
+payload = '''
+                    if DESTROY_BOOSTER then 
+                        for k, v in ipairs(pack_cards) do
+                            v:start_dissolve({HEX("4D5563")},false,8)
+                        end
+                        DESTROY_BOOSTER = false
+                    end
+'''
+match_indent = true

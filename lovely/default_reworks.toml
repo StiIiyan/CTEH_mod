@@ -102,3 +102,21 @@ if self.seal then
 end
 '''
 match_indent = true
+
+
+
+####################################################################################
+# Square Joker
+
+# Make so Ankh and Invis Joker combine both Square Jokers
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+G.jokers:emplace(card)
+'''
+position = 'after'
+payload = '''
+SQUARE_UP()
+'''
+match_indent = true
