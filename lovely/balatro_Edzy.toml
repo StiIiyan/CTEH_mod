@@ -44,24 +44,11 @@ if last_joker and last_joker.ability.name == 'j_CTEH_edzy' and not last_joker.ab
     G.GAME.chips = LAST_SAVED_SCORE
 
     local first_hand = G.GAME.current_round.hands_played == 0
-    if first_hand and G.GAME.blind.name == 'The Eye' then
-        G.GAME.blind.hands = {
-            ["Flush Five"] = false,
-            ["Flush House"] = false,
-            ["Five of a Kind"] = false,
-            ["Straight Flush"] = false,
-            ["Four of a Kind"] = false,
-            ["Full House"] = false,
-            ["Flush"] = false,
-            ["Straight"] = false,
-            ["Three of a Kind"] = false,
-            ["Two Pair"] = false,
-            ["Pair"] = false,
-            ["High Card"] = false,
-        }
-    end
     if first_hand and G.GAME.blind.name == 'The Mouth' then
         G.GAME.blind.only_hand = false
+    end
+    if G.GAME.blind.name == 'The Eye' then
+        G.GAME.blind.hands[LAST_PLAYED_HAND] = false
     end
 end
 '''

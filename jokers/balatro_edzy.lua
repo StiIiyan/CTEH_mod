@@ -1,6 +1,7 @@
 -- https://www.youtube.com/watch?v=7kGUYo6V9K8&t=4h8m24s
 
 LAST_SAVED_SCORE = 0
+LAST_PLAYED_HAND = ""
 
 local prev_play_to_discard = G.FUNCS.draw_from_play_to_discard
 function G.FUNCS.draw_from_play_to_discard(e)
@@ -58,6 +59,7 @@ SMODS.Joker{
 
         if context.after then
             LAST_SAVED_SCORE = G.GAME.chips
+            LAST_PLAYED_HAND = context.scoring_name
         end
     end
 }

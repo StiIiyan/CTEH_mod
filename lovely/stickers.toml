@@ -83,7 +83,7 @@ match_indent = true
 
 
 
-# Makes Wheel of Fortune not search for eligible cards when there aren't any
+# Makes Wheel of Fortune not search for eligible cards when there aren't any (we know it has a paycheck sticker)
 [[patches]]
 [patches.pattern]
 target = "card.lua"
