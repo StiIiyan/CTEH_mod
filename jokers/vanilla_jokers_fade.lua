@@ -133,5 +133,18 @@ SMODS.Joker:take_ownership('invisible',
             "ever having more",
             "than {E:1,C:attention}4 Jokers{}",
         },
-    }
+    },
+    loc_vars = function(self, info_queue, card)
+        local main_end
+        if G.jokers and G.jokers.cards then
+            for _, joker in ipairs(G.jokers.cards) do
+                if joker.edition and joker.edition.negative then
+                    main_end = {}
+                    localize { type = 'other', key = 'remove_negative', nodes = main_end, vars = {} }
+                    break
+                end
+            end
+        end
+        return { vars = { card.ability.total_rounds or 2, card.ability.invis_rounds or 0 }, main_end = main_end }
+    end
 })

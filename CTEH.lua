@@ -120,5 +120,5 @@ return
 
 --[[
 Contributions from
-Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574
+Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574, borb43
 ]]

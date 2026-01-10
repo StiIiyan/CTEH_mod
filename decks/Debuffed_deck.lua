@@ -15,7 +15,7 @@ SMODS.Back {
             "{C:attention}+#1#{} Joker slots",
             "",
             "Begin with an eternal",
-            "negative {C:dark_edition}Buff Joker{}"
+            "negative {C:dark_edition,T:j_CTEH_buff_joker}Buff Joker{}"
         }
     },
     loc_vars = function(self, info_queue, back)

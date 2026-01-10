@@ -13,12 +13,7 @@ SMODS.Back {
         name = "Interesting Deck",
         text = {
             'Start with the',
-            '{C:cteh_interest}Dividends{} voucher'
+            '{C:cteh_interest,T:v_CTEH_dividends}Dividends{} voucher'
         }
-    },
-    loc_vars = function(self, info_queue, back)
-        return {
-            vars = { localize { type = 'name_text', key = self.config.voucher, set = 'Voucher' }}
-        }
-    end,
+    }
 }

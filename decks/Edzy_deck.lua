@@ -11,7 +11,7 @@ SMODS.Back {
     loc_txt = {
         name = "Edzy's Wrath",
         text = {
-            'Start with {C:attention}Edzy\'s Special{}'
+            'Start with {C:attention,T:j_CTEH_edzy}Edzy\'s Special{}'
         }
     },
     

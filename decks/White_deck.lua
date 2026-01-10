@@ -12,8 +12,8 @@ SMODS.Back {
     loc_txt = {
         name = "White Deck",
         text = {
-            'Start with a {C:tarot}Judgement{} and a',
-            '{C:enhanced}perishable {C:attention}Invisible Joker{}'
+            'Start with a {C:tarot,T:c_judgement}Judgement{} and a',
+            '{C:enhanced}perishable {C:attention,T:j_invisible}Invisible Joker{}'
         }
     },
     
