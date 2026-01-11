@@ -8,7 +8,7 @@ SMODS.Atlas{
 SMODS.Sticker{
     key = 'paycheck',
     badge_colour = HEX('4D8276'),
-    pos = {x = 2, y = 0},
+    pos = {x = 3, y = 0},
     atlas = 'stickers',
     discovered = true,
     loc_vars = function(self, info_queue, card)

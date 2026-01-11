@@ -15,6 +15,9 @@ SMODS.Joker{
             '{C:attention}+2{} slots in Shop',
         }
     },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = {key = 'CTEH_unobtainable', set = 'Other'}
+    end,
     rarity = 1,
     cost = 6,
     blueprint_compat=false,

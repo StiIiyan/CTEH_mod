@@ -89,6 +89,19 @@ return {
                 text = {
                     '{C:green}#1# in #2#{} to gain {C:cteh_interest}interest{} when consumed'
                 }
+            },
+            dwarven_planets = {
+                name = 'Dwarven Planets',
+                text = {
+                    '{C:planet}Pluto{}, {C:planet}Ceres{} and {C:planet}Eris{}'
+                }
+            },
+            CTEH_unobtainable = {
+                name = 'Unobtainable',
+                text = {
+                    'Cannot be obtained',
+                    'by any means'
+                }
             }
         }
     },
@@ -97,6 +110,17 @@ return {
             CTEH_egg = 'Yolky',
             CTEH_bean = 'Beaned',
             CTEH_paycheck = 'Paycheck',
+        },
+        challenge_names = {
+            c_CTEH_turtle = "Magic Bean"
+        },
+        v_text={
+            ch_c_empty_deck_lose_condition={
+                "If you draw your entire deck, you lose",
+            },
+            ch_c_all_magic_beaned={
+                "All Jokers have a {C:attention}Magic Beaned{} sticker",
+            },
         }
     }
 }
