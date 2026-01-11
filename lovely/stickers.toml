@@ -49,6 +49,63 @@ match_indent = true
 
 
 ####################################################################################
+# Magic Beaned
+
+# Makes Magic Beaned sticker give handsize
+## When acquired
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.added_to_deck = true
+'''
+position = 'after'
+payload = '''
+if self.ability.magic_beaned then
+    G.hand:change_size(self.ability.magic_beaned)
+end
+'''
+match_indent = true
+
+
+
+## When removed
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.added_to_deck = false
+'''
+position = 'after'
+payload = '''
+if self.ability.magic_beaned then
+    G.hand:change_size(-self.ability.magic_beaned)
+end
+'''
+match_indent = true
+
+
+
+# Increase hand size when end of round
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+elseif context.end_of_round then
+'''
+position = 'after'
+payload = '''
+if self.ability.magic_beaned and context.main_eval then
+    self.ability.magic_beaned = self.ability.magic_beaned + 1
+    G.hand:change_size(1)
+    card_eval_status_text(self, 'extra', nil, nil, nil, {message = "+1 Hand Size", colour = G.C.FILTER})
+end
+'''
+match_indent = true
+
+
+
+####################################################################################
 # Paycheck
 
 # Makes paycheck sticker give interest

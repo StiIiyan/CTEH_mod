@@ -81,7 +81,14 @@ return {
             CTEH_bean = {
                 name = 'Beaned',
                 text = {
-                    'Gain {C:attention}1 handsize{}'
+                    'Gain {C:attention}1{} handsize'
+                }
+            },
+            CTEH_magic_bean = {
+                name = 'Magic Beaned',
+                text = {
+                    'Gain {C:attention}#1#{} handsize',
+                    '{C:attention}+1{} handsize at end of round{}'
                 }
             },
             CTEH_paycheck = {
@@ -109,6 +116,7 @@ return {
         labels = {
             CTEH_egg = 'Yolky',
             CTEH_bean = 'Beaned',
+            CTEH_magic_bean = 'Magic Beaned',
             CTEH_paycheck = 'Paycheck',
         },
         challenge_names = {
