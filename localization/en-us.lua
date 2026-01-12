@@ -81,14 +81,14 @@ return {
             CTEH_bean = {
                 name = 'Beaned',
                 text = {
-                    'Gain {C:attention}1{} handsize'
+                    'Gain {C:attention}1{} hand size'
                 }
             },
             CTEH_magic_bean = {
                 name = 'Magic Beaned',
                 text = {
-                    'Gain {C:attention}#1#{} handsize',
-                    '{C:attention}+1{} handsize at end of round{}'
+                    'Gain {C:attention}#1#{} hand size',
+                    '{C:attention}+1{} hand size at end of round{}'
                 }
             },
             CTEH_paycheck = {

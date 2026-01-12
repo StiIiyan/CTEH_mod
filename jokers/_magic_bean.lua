@@ -13,11 +13,12 @@ SMODS.Joker{
             '{C:attention}+#1#{} hand size,',
             'increases by',
             '{C:attention}#2#{} each round',
+            '{C:inactive}(Current hand size: {C:attention}#3#{C:inactive})'
         }
     },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = {key = 'CTEH_unobtainable', set = 'Other'}
-        return { vars = { card.ability.handsize, card.ability.handsize_increment } }
+        return { vars = { card.ability.handsize, card.ability.handsize_increment, G.GAME.starting_params.hand_size } }
     end,
     config = {
         handsize = 5,

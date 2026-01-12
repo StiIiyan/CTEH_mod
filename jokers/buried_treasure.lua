@@ -15,7 +15,7 @@ SMODS.Joker{
             'Earn {C:gold}$#5#{} upon finishing a blind',
             'without drawing these cards',
             '{C:inactive}(Increase prize with {C:gold}$1{C:inactive} per modifier)',
-            '{C:inactive}(Card amount equals {C:attention}double{C:inactive} your {C:attention}handsize{C:inactive})',
+            '{C:inactive}(Card amount equals {C:attention}double{C:inactive} your {C:attention}hand size{C:inactive})',
         }
     },
     rarity = 2,
@@ -35,14 +35,14 @@ SMODS.Joker{
         trigger = true
     },
     loc_vars = function(self, info_queue, card)
-        local double_handsize = G and G.hand and 2 * #G.hand.cards or 16
         local prize = card.ability.enh_cards + card.ability.ed_cards + card.ability.seal_cards
 
-        return {vars = {double_handsize,card.ability.enh_cards,
+        return {vars = {2*G.GAME.starting_params.hand_size,card.ability.enh_cards,
                         card.ability.ed_cards,card.ability.seal_cards,prize}}
     end,
     calculate = function(self, card, context)
         -- no reshuffling mechanics so only does math when round beginning
+        -- if reshuffle, just cehck the context for it
         if context.first_hand_drawn then
             card.ability.trigger = true
 
