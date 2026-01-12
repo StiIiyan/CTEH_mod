@@ -97,6 +97,13 @@ return {
                     '{C:green}#1# in #2#{} to gain {C:cteh_interest}interest{} when consumed'
                 }
             },
+            CTEH_shopping = {
+                name = 'Shopping',
+                text = {
+                    'Gain a {C:gold}$1',
+                    'when found in Shop'
+                }
+            },
             dwarven_planets = {
                 name = 'Dwarven Planets',
                 text = {
@@ -118,6 +125,7 @@ return {
             CTEH_bean = 'Beaned',
             CTEH_magic_bean = 'Magic Beaned',
             CTEH_paycheck = 'Paycheck',
+            CTEH_shopping = 'Shopping',
         },
         challenge_names = {
             c_CTEH_turtle = "Magic Bean"

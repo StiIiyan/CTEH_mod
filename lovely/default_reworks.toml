@@ -106,6 +106,21 @@ match_indent = true
 
 
 
+## Apply 20% shopping stickers on playing cards when Magic Trick or Illusion
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if center_table.name == 'Magic Trick' or center_table.name == 'Illusion' then
+'''
+position = 'after'
+payload = '''
+        G.GAME.modifiers.enable_shopping_sticker = true
+'''
+match_indent = true
+
+
+
 ####################################################################################
 # Square Joker
 
