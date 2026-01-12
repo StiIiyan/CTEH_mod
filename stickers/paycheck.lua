@@ -19,7 +19,7 @@ SMODS.Sticker{
     end,
     apply = function(self, card, val)
         card.ability[self.key] = true
-        if card.ability[self.key] then card.ability.paycheck = true end
+        if card.ability[self.key] then card.ability.sticker_paycheck = true end
     end,
     should_apply = function(self, card, center, area, bypass_roll)
         local sticker_rate = pseudorandom(pseudoseed('CTEH_paycheck_sticker'))

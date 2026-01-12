@@ -17,7 +17,7 @@ self.added_to_deck = true
 '''
 position = 'after'
 payload = '''
-if self.ability.beaned then
+if self.ability.sticker_beaned then
     G.hand:change_size(1)
 end
 if self.ability.perishable and G.GAME.modifiers.hybrid_perishable_beaned then
@@ -37,7 +37,7 @@ self.added_to_deck = false
 '''
 position = 'after'
 payload = '''
-if self.ability.beaned then
+if self.ability.sticker_beaned then
     G.hand:change_size(-1)
 end
 if self.ability.perishable and G.GAME.modifiers.hybrid_perishable_beaned then
@@ -61,8 +61,8 @@ self.added_to_deck = true
 '''
 position = 'after'
 payload = '''
-if self.ability.magic_beaned then
-    G.hand:change_size(self.ability.magic_beaned)
+if self.ability.sticker_magic_beaned then
+    G.hand:change_size(self.ability.sticker_magic_beaned)
 end
 '''
 match_indent = true
@@ -78,27 +78,8 @@ self.added_to_deck = false
 '''
 position = 'after'
 payload = '''
-if self.ability.magic_beaned then
-    G.hand:change_size(-self.ability.magic_beaned)
-end
-'''
-match_indent = true
-
-
-
-# Increase hand size when end of round
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''
-elseif context.end_of_round then
-'''
-position = 'after'
-payload = '''
-if self.ability.magic_beaned and context.main_eval then
-    self.ability.magic_beaned = self.ability.magic_beaned + 1
-    G.hand:change_size(1)
-    card_eval_status_text(self, 'extra', nil, nil, nil, {message = "+1 Hand Size", colour = G.C.FILTER})
+if self.ability.sticker_magic_beaned then
+    G.hand:change_size(-self.ability.sticker_magic_beaned)
 end
 '''
 match_indent = true
@@ -117,7 +98,7 @@ local used_tarot = copier or self
 '''
 position = 'after'
 payload = '''
-if self.ability.paycheck and SMODS.pseudorandom_probability(card, "paycheck", 1, 4) then
+if self.ability.sticker_paycheck and SMODS.pseudorandom_probability(card, "paycheck", 1, 4) then
     generate_interest()
 end
 '''
@@ -134,7 +115,7 @@ if next(self.eligible_strength_jokers) then return true end
 '''
 position = 'at'
 payload = '''
-if next(self.eligible_strength_jokers) or self.ability.paycheck then return true end
+if next(self.eligible_strength_jokers) or self.ability.sticker_paycheck then return true end
 '''
 match_indent = true
 
