@@ -32,7 +32,6 @@ payload = '''
 if (self.config.center.pools or {}).Interest_Vouchers then
     self.base_cost = 2 * G.GAME.interest_rate or 10
     self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-G.GAME.discount_percent)/100))
-    self.sell_cost_label = self.facing == 'back' and '?' or self.sell_cost
 end
 '''
 match_indent = true

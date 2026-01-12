@@ -88,18 +88,19 @@ match_indent = true
 
 
 
-## (Doesn't work, doesn't break) Seal prices +$3
+## Seal prices +$3
 [[patches]]
 [patches.pattern]
 target = "card.lua"
 pattern = '''
-function Card:set_cost()
+    end
+    self:set_cost()
 '''
-position = 'after'
+position = 'at'
 payload = '''
-if self.seal then
-    self.extra_cost = self.extra_cost + 3
-end
+    end
+    self.base_cost = self.base_cost + 3
+    self:set_cost()
 '''
 match_indent = true
 

@@ -87,7 +87,7 @@ return {
             CTEH_magic_bean = {
                 name = 'Magic Beaned',
                 text = {
-                    'Gain {C:attention}#1#{} hand size',
+                    '{C:attention}+#1#{} hand size',
                     '{C:attention}+1{} hand size at end of round{}'
                 }
             },
