@@ -25,7 +25,7 @@ SMODS.Joker{
     discovered = true,
     atlas = 'j_square_hole',
     pos = {x = 0, y = 0},
-    
+    pixel_size = { h = 71 },    
     calculate = function(self, card, context)
         if context.blind then
             for i = 1, #G.jokers.cards do

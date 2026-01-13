@@ -35,9 +35,10 @@ SMODS.Joker{
         trigger = true
     },
     loc_vars = function(self, info_queue, card)
+        local hand_size = G.hand and 2*#G.hand.cards or 16
         local prize = card.ability.enh_cards + card.ability.ed_cards + card.ability.seal_cards
 
-        return {vars = {2*#G.hand.cards,card.ability.enh_cards,
+        return {vars = {hand_size,card.ability.enh_cards,
                         card.ability.ed_cards,card.ability.seal_cards,prize}}
     end,
     calculate = function(self, card, context)
