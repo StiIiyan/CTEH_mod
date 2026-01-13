@@ -37,7 +37,7 @@ SMODS.Joker{
     loc_vars = function(self, info_queue, card)
         local prize = card.ability.enh_cards + card.ability.ed_cards + card.ability.seal_cards
 
-        return {vars = {2*G.GAME.starting_params.hand_size,card.ability.enh_cards,
+        return {vars = {2*#G.hand.cards,card.ability.enh_cards,
                         card.ability.ed_cards,card.ability.seal_cards,prize}}
     end,
     calculate = function(self, card, context)
