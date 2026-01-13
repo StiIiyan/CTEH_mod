@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Override mouse coordinates
+[[patches]]
+[patches.pattern]
+target = "engine/controller.lua"
+pattern = '''
+self.cursor_position.x, self.cursor_position.y = love.mouse.getPosition()
+'''
+position = 'at'
+payload = '''
+self.cursor_position.x, self.cursor_position.y = getCursorPosition()
+'''
+match_indent = true
