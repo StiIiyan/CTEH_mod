@@ -21,7 +21,9 @@ SMODS.Joker{
 
         local other_jokers_handsize = 0
         for i = 1, #G.jokers.cards do
-            other_jokers_handsize = other_jokers_handsize + G.jokers.cards[i].ability.sticker_magic_beaned
+            if G.jokers.cards[i].ability.sticker_magic_beaned then
+                other_jokers_handsize = other_jokers_handsize + G.jokers.cards[i].ability.sticker_magic_beaned
+            end
         end
         local total_handsize = G.GAME.starting_params.hand_size + card.ability.handsize + other_jokers_handsize
         return { vars = { card.ability.handsize, card.ability.handsize_increment, total_handsize } }
