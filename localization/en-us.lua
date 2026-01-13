@@ -101,7 +101,8 @@ return {
                 name = 'Shopping',
                 text = {
                     'Gain a {C:gold}$1',
-                    'when found in Shop'
+                    'when found in Shop',
+                    '{C:inactive,s:0.9}Under maintenance for not crashing',
                 }
             },
             dwarven_planets = {
