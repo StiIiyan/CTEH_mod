@@ -22,6 +22,7 @@ SMODS.Joker{
             '{C:green}#1# in #2#{} to create any {C:cteh_interest}Interest voucher',
             'Add {C:green}1/3{} when {C:attention}Shop{} from {C:attention}Small{} or {C:attention}Big Blind',
             'is {C:attention}exited{} with full {C:cteh_interest}interest',
+            '{C:inactive}(Current threshold: {C:gold}$#3#{C:inactive})',
         }
     },
     rarity = 2,
@@ -42,7 +43,8 @@ SMODS.Joker{
     loc_vars = function(self, info_queue, card)
         local numerator, denominator =
             SMODS.get_probability_vars(card, card.ability.numerator_odds, card.ability.odds, "boss_payout")
-        return {vars = {numerator, denominator}}
+        local dollar_threshold = G.jokers and get_interest_threshold() or 25
+        return {vars = {numerator, denominator, dollar_threshold}}
     end,
     calculate = function(self, card, context)     
         if context.blind then

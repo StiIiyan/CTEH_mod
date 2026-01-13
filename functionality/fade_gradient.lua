@@ -80,8 +80,6 @@ function Fade_Gradient(color_table,key,message,median_point_amount,right_to_left
         end
     end
 
-    -- return bigger_color_table
-
     -- create all the gradients
 
     for i=1,#bigger_color_table do
@@ -94,18 +92,6 @@ function Fade_Gradient(color_table,key,message,median_point_amount,right_to_left
     
     -- return the specialized message
 
-
-    -- local new_message = ""
-    -- for i = 1,#message do
-    --     local gradient_to_use = i % #color_table
-    --     if gradient_to_use == 0 then gradient_to_use = #color_table end
-    --     local gradient_key = key .. '_' .. gradient_to_use
-
-    --     local modified_character = '{C:cteh_' .. gradient_key .. '}' .. string.sub(message,i,i)
-    --     new_message = new_message .. modified_character
-    -- end
-
-    
     local new_message = ""
     for i = 1,#message do
         local gradient_to_use = i % #bigger_color_table

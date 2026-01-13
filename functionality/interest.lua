@@ -74,17 +74,31 @@ function generate_interest()
     ease_dollars(get_total_interest(), true)
 end
 
-function is_interest_full()
-    local interest_is_full = true
-
-    interest_is_full = interest_is_full and (math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), G.GAME.interest_cap) == G.GAME.interest_cap)
+function get_interest_threshold()
+    local threshold = G.GAME.interest_cap * G.GAME.interest_rate
 
     for i = 1, #G.jokers.cards do
         local current_joker = G.jokers.cards[i]
         if current_joker.ability.interest_rate and current_joker.ability.interest_cap then
-            interest_is_full = interest_is_full and (math.min(math.floor(G.GAME.dollars/current_joker.ability.interest_rate), current_joker.ability.interest_cap) == current_joker.ability.interest_cap)
+            threshold = math.max(threshold,current_joker.ability.interest_rate*current_joker.ability.interest_cap)
         end
     end
 
-    return interest_is_full
+    return threshold
+end
+
+function is_interest_full()
+    return G.GAME.dollars >= get_interest_threshold()
+    -- local interest_is_full = true
+
+    -- interest_is_full = interest_is_full and (math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), G.GAME.interest_cap) == G.GAME.interest_cap)
+
+    -- for i = 1, #G.jokers.cards do
+    --     local current_joker = G.jokers.cards[i]
+    --     if current_joker.ability.interest_rate and current_joker.ability.interest_cap then
+    --         interest_is_full = interest_is_full and (math.min(math.floor(G.GAME.dollars/current_joker.ability.interest_rate), current_joker.ability.interest_cap) == current_joker.ability.interest_cap)
+    --     end
+    -- end
+
+    -- return interest_is_full
 end
