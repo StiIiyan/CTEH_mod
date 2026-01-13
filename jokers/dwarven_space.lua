@@ -28,7 +28,7 @@ SMODS.Joker{
         info_queue[#info_queue + 1] = {key = 'dwarven_planets', set = 'Other'}
     end,
     rarity = 1,
-    cost = 6,
+    cost = 3,
     blueprint_compat=false,
     eternal_compat=true,
     perishable_compat = true,

@@ -12,7 +12,7 @@ SMODS.Sticker{
     atlas = 'stickers',
     discovered = true,
     loc_vars = function(self, info_queue, card)
-        local odds = 4
+        local odds = 5
         local numerator, denominator =
             SMODS.get_probability_vars(card, 1, odds, "paycheck")
         return {vars = {numerator, denominator}}

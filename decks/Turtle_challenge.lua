@@ -15,6 +15,8 @@ SMODS.Challenge {
             { id = 'j_troubadour' },
             { id = 'j_turtle_bean' },
             { id = 'j_CTEH_bean_juggler' },
+            { id = 'v_paint_brush' },
+            { id = 'v_palette' },
         },
         banned_tags = {
             { id = 'tag_juggle' },

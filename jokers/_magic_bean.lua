@@ -34,7 +34,7 @@ SMODS.Joker{
         handsize = 5,
         handsize_increment = 1
     },
-    rarity = 1,
+    rarity = 2,
     cost = 6,
     blueprint_compat=false,
     eternal_compat=true,
