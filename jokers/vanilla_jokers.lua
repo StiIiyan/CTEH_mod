@@ -153,34 +153,22 @@ SMODS.Joker:take_ownership('invisible',
 
 -- OTHER EFFECTS #########################################
 
-SMODS.Atlas{
-    key = "j_chads",
-    path = "chads.png",
-    px = 71,
-    py = 95
-}
+-- SMODS.Atlas{
+--     key = "j_chads",
+--     path = "chads.png",
+--     px = 71,
+--     py = 95
+-- }
 
-SMODS.Joker:take_ownership('hanging_chad',
-{
-    key = "hanging_chad",
-    atlas = 'j_chads',
-    loc_txt = {
-        name = "Hanging Chad",
-        text = {
-            "Retrigger {C:attention}first{} played",
-            "card used in scoring",
-            "{C:attention}#1#{} additional times",
-        },
-        unlock = {
-            "Beat a Boss Blind",
-            "with a {E:1,C:attention}#1#",
-        },
-    },
-    pos = {x = 0, y = 0},
-    config = { extra = { repetitions = 2 }, sprite_pos = 0 },
-    loc_vars = function(self, info_queue, card)
-        card.ability.sprite_pos = (card.ability.sprite_pos + 1) % 3
-        card.children.center:set_sprite_pos({x = card.ability.sprite_pos, y = 0})
-        return { vars = { card.ability.extra.repetitions } }
-    end,
-})
+-- SMODS.Joker:take_ownership('hanging_chad',
+-- {
+--     key = "hanging_chad",
+--     atlas = 'j_chads',
+--     pos = {x = 0, y = 0},
+--     config = { extra = { repetitions = 2 }, sprite_pos = 0 },
+--     loc_vars = function(self, info_queue, card)
+--         card.ability.sprite_pos = (card.ability.sprite_pos + 1) % 3
+--         card.children.center:set_sprite_pos({x = card.ability.sprite_pos, y = 0})
+--         return { vars = { card.ability.extra.repetitions } }
+--     end,
+-- })

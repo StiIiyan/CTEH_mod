@@ -1,3 +1,5 @@
+MISPRINT_LAST_TRIGGER = 0
+
 SMODS.Atlas{
     key = "j_blue_printer",
     path = "blue_printer.png",
@@ -31,9 +33,6 @@ SMODS.Joker{
         numerator_value = 0,
         odds = 1000
     },
-    in_pool = function(self, args)
-        return false
-    end,
     loc_vars = function(self, info_queue, card)
         local in_game = G.jokers
         local in_joker_slots = false
@@ -100,6 +99,30 @@ SMODS.Joker{
     end,
     
     calculate = function(self, card, context)
+        if context.blind then
+            if SMODS.pseudorandom_probability(card, "blue_printer", card.ability.numerator_value, card.ability.odds) then
+                play_sound('polychrome1', 1.2, 0.7)
+                card:set_ability("j_blueprint")
+            elseif #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Oops", colour = G.C.SECONDARY_SET.Joker})
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    delay = 0.0,
+                    func = (function()
+                        if jokers_to_create then
+                            local card = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_misprint')
+                            card:add_to_deck()
+                            G.jokers:emplace(card)
+                            G.GAME.joker_buffer = 0
+                        end
+                        return true
+                    end)}))
+            end            
+        end
 
+        if context.end_of_round and context.main_eval and context.game_over == false then
+            card.ability.numerator_value = MISPRINT_LAST_TRIGGER
+        end
     end
 }
