@@ -10,14 +10,14 @@ SMODS.Atlas{
 SMODS.Joker{
     key = 'blue_printer',
     loc_txt = {
-        name = '#12#',
+        name = '#1#',
         text = {
-            "#1#{C:attention}#2#{}#3#",
-            "#4#{C:attention}#5#",
-            "{C:green}#13##6##14#{}#7#",
-            "#8#{C:attention}#9#",
-            "#10#",
-            "{C:warning_text}#11#",
+            "#2#{C:attention}#3#{}#4#",
+            "#5#{C:attention}#6#",
+            "{C:green}#13##7##14#{}#8#",
+            "#9#{C:attention}#10#",
+            "#11#",
+            "{C:warning_text}#12#",
         },
     },
     rarity = 1,
@@ -55,7 +55,7 @@ SMODS.Joker{
         if not in_game then
             card.children.center:set_sprite_pos({x = 0, y = 0})
             name = "Blue Printer"
-                return { vars = {rows[1],rows[2],rows[3],rows[4],rows[5],rows[6],rows[7],rows[8],rows[9],rows[10],rows[11],name,numerator,denominator} }
+                return { vars = {name,rows[1],rows[2],rows[3],rows[4],rows[5],rows[6],rows[7],rows[8],rows[9],rows[10],rows[11],numerator,denominator} }
         else
             if not in_joker_slots then
                 card.children.center:set_sprite_pos({x = 1, y = 0})
@@ -89,11 +89,11 @@ SMODS.Joker{
                     },
                 }                
                 -- ends logic misprint from vanilla remade
-                return { main_start = main_start, vars = {name} }
+                return { main_start = main_start, vars = {name,"","","","","","","","","","","","",""} }
             else
                 card.children.center:set_sprite_pos({x = 0, y = 0})
                 name = "Blue Printer"
-                return { vars = {rows[1],rows[2],rows[3],rows[4],rows[5],rows[6],rows[7],rows[8],rows[9],rows[10],"",name,numerator,denominator} }
+                return { vars = {name,rows[1],rows[2],rows[3],rows[4],rows[5],rows[6],rows[7],rows[8],rows[9],rows[10],"",numerator,denominator} }
             end
         end
     end,
