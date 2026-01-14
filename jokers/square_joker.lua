@@ -16,6 +16,7 @@ function SQUARE_UP()
             if square_count >= 1 then
                 add_rental = add_rental or squareJ.ability.rental
                 add_eternal = add_eternal or squareJ.ability.eternal
+                squareJ:set_eternal(false)
                 SMODS.destroy_cards(squareJ, nil, nil, true)
             end
             
@@ -24,7 +25,7 @@ function SQUARE_UP()
     end
 
     for i = 1, #G.jokers.cards do
-        if G.jokers.cards[i].ability.name == 'Square Joker' and square_count > 1 then
+        if G.jokers.cards[i].ability.name == 'Square Joker' then
             local squareJ = G.jokers.cards[i]
             squareJ.ability.extra.chips = scaled_chips
             squareJ.ability.extra.chip_mod = scaling
@@ -35,13 +36,15 @@ function SQUARE_UP()
                 squareJ:set_rental(true)
             end
             card_eval_status_text(squareJ, 'extra', nil, nil, nil, {message = "Square up!", colour = G.C.CHIPS})
-
-            break
         end
     end
 end
 
-
+local showman_ref = SMODS.showman
+function SMODS.showman(card_key)
+	if card_key == 'j_square' and G.GAME.selected_back.effect.center.key == "b_CTEH_square_deck" then return true end
+	return showman_ref(card_key)
+end
 
 SMODS.Joker:take_ownership('square',
 {
