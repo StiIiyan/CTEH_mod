@@ -38,9 +38,9 @@ SMODS.Joker{
     },
     loc_vars = function(self, info_queue, card)      
         local numerator, denominator =
-            SMODS.get_probability_vars(card, 1, card.ability.odds, "boss_discount")
+            SMODS.get_probability_vars(card, 1, card.ability.odds)
         local life_numerator, denominator =
-            SMODS.get_probability_vars(card, life_difference_nonnegative(), card.ability.odds, "boss_discount")
+            SMODS.get_probability_vars(card, life_difference_nonnegative(), card.ability.odds)
         return {vars = {numerator, denominator, life_numerator}}
     end,
     calculate = function(self, card, context)

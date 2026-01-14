@@ -11,9 +11,23 @@ SMODS.Joker{
         name = 'Squarest Joker',
         text = {
             'Sell to {C:attention,S:1.4}SQUARE{C:chips} chips',
-            'of all {C:attention}Square Jokers{}'
+            'of all {C:attention}Square Jokers{}',
+            '{C:inactive}#1#'
         }
     },
+    loc_vars = function(self, info_queue, card)
+        local in_joker_slots = false
+        if G.jokers then
+            for i=1,#G.jokers.cards do
+                in_joker_slots = in_joker_slots or G.jokers.cards[i] == card
+            end
+        end
+        if not in_joker_slots then
+            return {vars = {"(Requires Squarer Joker)"}}
+        else
+            return {vars = {""}}
+        end
+    end,
     rarity = 3,
     cost = 8,
     blueprint_compat=true,

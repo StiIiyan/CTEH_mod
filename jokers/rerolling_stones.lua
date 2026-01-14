@@ -20,7 +20,7 @@ SMODS.Joker{
     },
     loc_vars = function(self, info_queue, card)      
         local numerator, denominator =
-            SMODS.get_probability_vars(card, 1, card.ability.odds, "rerolling_stones")
+            SMODS.get_probability_vars(card, 1, card.ability.odds)
         return {vars = {numerator, denominator}}
     end,
     rarity = 2,

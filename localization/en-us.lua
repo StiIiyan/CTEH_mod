@@ -68,6 +68,15 @@ return {
                     "Leveling up a hand now gives",
                     "{C:attention}twice{} as many levels"
                 }
+            },
+            v_magic_trick = {
+                name = "Magic Trick",
+                text = {
+                    "{C:enhanced}Enhanced {C:attention}playing cards{} can",
+                    "be purchased from the {C:attention}shop",
+                    "They may also appear",
+                    "with a {C:gold}Shopping{} sticker"
+                },
             }
         },
         Other = {
@@ -102,7 +111,6 @@ return {
                 text = {
                     'Gain a {C:gold}$1',
                     'when found in Shop',
-                    '{C:inactive,s:0.9}Under maintenance for not crashing',
                 }
             },
             dwarven_planets = {

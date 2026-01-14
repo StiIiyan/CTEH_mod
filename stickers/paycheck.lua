@@ -14,7 +14,7 @@ SMODS.Sticker{
     loc_vars = function(self, info_queue, card)
         local odds = 5
         local numerator, denominator =
-            SMODS.get_probability_vars(card, 1, odds, "paycheck")
+            SMODS.get_probability_vars(card, 1, odds)
         return {vars = {numerator, denominator}}
     end,
     apply = function(self, card, val)

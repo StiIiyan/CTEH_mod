@@ -21,7 +21,7 @@ SMODS.Voucher {
     loc_vars = function(self, info_queue, card)
         local odds = 2
         local numerator, denominator =
-            SMODS.get_probability_vars(card, 1, odds, "paycheck")
+            SMODS.get_probability_vars(card, 1, odds)
         return {vars = {numerator, denominator}}
     end,
     requires = { 'v_astral_interest' },
