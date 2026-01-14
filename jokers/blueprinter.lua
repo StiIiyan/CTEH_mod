@@ -31,6 +31,9 @@ SMODS.Joker{
         numerator_value = 0,
         odds = 1000
     },
+    in_pool = function(self, args)
+        return false
+    end,
     loc_vars = function(self, info_queue, card)
         local in_game = G.jokers
         local in_joker_slots = false
