@@ -52,7 +52,6 @@ SMODS.Joker{
             end
 
             card.ability.sprite_pos = (card.ability.sprite_pos + 1) % 4
-            
             card.children.center:set_sprite_pos({x = card.ability.sprite_pos, y = 0})
         end
     end  

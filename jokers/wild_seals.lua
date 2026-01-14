@@ -48,7 +48,7 @@ SMODS.Joker{
         name = '{C:cteh_wild_seals}Wild seals',
         text = {
             'Each {C:cteh_wild_seals2}Seal{} behaves like',
-            'other held in hand {C:cteh_wild_seals2}Seals{}'
+            'other {C:attention}held in hand {C:cteh_wild_seals2}Seals{}'
         }
     },
     in_pool = function(self, args)
