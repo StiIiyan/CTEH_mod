@@ -12,7 +12,9 @@ SMODS.Back {
         name = "Square Deck",
         text = {
             'Start with an {C:attention}eternal{}',
-            '{C:chips,T:j_square}Square Joker{}'
+            '{C:chips,T:j_square}Square Joker{}',
+            '{C:chips}Square Joker{} may',
+            'reapper in {C:attention}Shop'
         }
     },
     

@@ -54,14 +54,16 @@ SMODS.Joker:take_ownership('square',
     rarity = 1,
     cost = 4,
     pos = { x = 9, y = 11 },
-    config = { extra = { chips = 0, chip_mod = 4 } },
+    config = { extra = { chips = 0, chip_mod = 4 }, check_for_squaring_up = false },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.chip_mod } }
     end,
-    add_to_deck = function(self, card, from_debuff)
-        SQUARE_UP()
-    end,
     calculate = function(self, card, context)
+        if not card.ability.check_for_squaring_up then
+            card.ability.check_for_squaring_up = true
+            SQUARE_UP()
+        end
+
         if context.before and not context.blueprint and (#context.full_hand == 4 or next(SMODS.find_card("j_CTEH_square_hole"))) then
             card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
             return {
