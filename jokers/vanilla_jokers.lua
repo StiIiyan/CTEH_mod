@@ -153,6 +153,11 @@ SMODS.Joker:take_ownership('invisible',
 
 -- OTHER EFFECTS #########################################
 
+-- Make Misprint and Blue Printer indestinguishable (both will have the mod ID)
+SMODS.Joker:take_ownership('misprint',
+{
+    key = "misprint",
+})
 -- SMODS.Atlas{
 --     key = "j_chads",
 --     path = "chads.png",

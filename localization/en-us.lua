@@ -39,7 +39,24 @@ return {
                     "earn at least",
                     "{E:1,C:attention}#1#{} chips",
                 }
-            }
+            },
+            j_CTEH_blueprinter_1 = {
+                name = "Blue Printer",
+                text = {
+                    "Create a {C:attention}Misprint{} when {C:attention}Blind{} is selected",
+                    "{C:green}#1# in #2#{} to instead turn into a {C:attention}Blueprint",
+                    "Set {C:green}odds{} to previous round's last Misprint trigger",
+                    "{C:warning_text}Joker will appear as Misprint in Shop",
+                },
+            },
+            j_CTEH_blueprinter_2 = {
+                name = "Blue Printer",
+                text = {
+                    "Create a {C:attention}Misprint{} when {C:attention}Blind{} is selected",
+                    "{C:green}#1# in #2#{} to instead turn into a {C:attention}Blueprint",
+                    "Set {C:green}odds{} to previous round's last Misprint trigger"
+                },
+            },
         },
         Voucher = {
             v_seed_money = {
