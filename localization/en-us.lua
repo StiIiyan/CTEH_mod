@@ -139,8 +139,15 @@ return {
             CTEH_unobtainable = {
                 name = 'Unobtainable',
                 text = {
-                    'Cannot be obtained',
+                    '{C:red}Cannot{} be obtained',
                     'by any means'
+                }
+            },
+            CTEH_uncopyable = {
+                name = 'Uncopyable',
+                text = {
+                    '{C:red}Cannot{} be copied',
+                    'by Ankh or Invis Joker'
                 }
             }
         }

@@ -47,3 +47,12 @@ function amount_debuffed_jokers(joker_name)
     end
     return result
 end
+
+SMODS.ObjectType({
+    key = "Uncopyable_Jokers",
+    default = "j_CTEH_buff_joker",
+    cards = {
+        j_CTEH_buff_joker = true,
+        j_CTEH_magic_bean = true,
+    }
+})

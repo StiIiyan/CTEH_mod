@@ -25,56 +25,6 @@ match_indent = true
 
 
 
-# Next 3 patches for multiple copy incompatibility (ankh + invis)
-
-## Make so Ankh doesn't pick the Buff Joker
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''
-local chosen_joker = pseudorandom_element(G.jokers.cards, pseudoseed('ankh_choice'))
-'''
-position = 'at'
-payload = '''
-local chosen_joker
-repeat
-chosen_joker = pseudorandom_element(G.jokers.cards, pseudoseed('ankh_choice'))
-until chosen_joker.ability.name ~= 'j_CTEH_buff_joker'
-'''
-match_indent = true
-
-
-
-## Make so Ankh unusable when only Buff Joker in Joker roaster
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''
-if v.ability.set == 'Joker' and G.jokers.config.card_limit > 1 then
-'''
-position = 'at'
-payload = '''
-if v.ability.set == 'Joker' and v.ability.name ~= 'j_CTEH_buff_joker' and G.jokers.config.card_limit > 1 then
-'''
-match_indent = true
-
-
-
-## Make Invis Joker not pick the Buff Joker
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''
-if G.jokers.cards[i] ~= self then
-'''
-position = 'at'
-payload = '''
-if G.jokers.cards[i] ~= self and G.jokers.cards[i].ability.name ~= 'j_CTEH_buff_joker' then
-'''
-match_indent = true
-
-
-
 # Rest patches fix some debuff incompatibilities
 
 # Make rental not calc when for debuffed jokers

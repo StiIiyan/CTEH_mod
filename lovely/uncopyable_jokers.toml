@@ -1,0 +1,52 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+## Make so Ankh doesn't pick an Uncopyable joker
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+local chosen_joker = pseudorandom_element(G.jokers.cards, pseudoseed('ankh_choice'))
+'''
+position = 'at'
+payload = '''
+local chosen_joker
+repeat
+chosen_joker = pseudorandom_element(G.jokers.cards, pseudoseed('ankh_choice'))
+until not (chosen_joker.config.center.pools or {}).Uncopyable_Jokers
+'''
+match_indent = true
+
+
+
+## Make so Ankh unusable when only Uncopyable jokers in Joker roaster
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if v.ability.set == 'Joker' and G.jokers.config.card_limit > 1 then
+'''
+position = 'at'
+payload = '''
+if v.ability.set == 'Joker' and not (v.config.center.pools or {}).Uncopyable_Jokers and G.jokers.config.card_limit > 1 then
+'''
+match_indent = true
+
+
+
+## Make Invis Joker not pick Uncopyable jokers
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if G.jokers.cards[i] ~= self then
+'''
+position = 'at'
+payload = '''
+if G.jokers.cards[i] ~= self and not (G.jokers.cards[i].config.center.pools or {}).Uncopyable_Jokers then
+'''
+match_indent = true

@@ -22,6 +22,7 @@ SMODS.Joker{
     },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = {key = 'CTEH_unobtainable', set = 'Other'}
+        info_queue[#info_queue + 1] = {key = 'CTEH_uncopyable', set = 'Other'}
         return {vars = {card.ability.max_charges,card.ability.current_charges}}
     end,
     rarity = 4,
