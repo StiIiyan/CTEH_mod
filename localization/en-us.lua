@@ -40,6 +40,14 @@ return {
                     "{E:1,C:attention}#1#{} chips",
                 }
             },
+            j_hack = {
+                name = "Hack",
+                text = {
+                    "Retrigger each played",
+                    "and held in hand",
+                    "{C:attention}2{}, {C:attention}3{}, {C:attention}4{}, or {C:attention}5{}",
+                },
+            },
             j_CTEH_blueprinter_1 = {
                 name = "Blue Printer",
                 text = {

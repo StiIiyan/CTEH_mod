@@ -158,6 +158,26 @@ SMODS.Joker:take_ownership('misprint',
 {
     key = "misprint",
 })
+
+-- Make Hack retrigger cards in hand too
+SMODS.Joker:take_ownership('hack',
+{
+    key = "hack",
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.hand and (next(context.card_effects[1]) or #context.card_effects > 1) or
+        context.repetition and context.cardarea == G.play then
+            if context.other_card:get_id() == 2 or
+            context.other_card:get_id() == 3 or
+            context.other_card:get_id() == 4 or
+            context.other_card:get_id() == 5 then
+                return { repetitions = card.ability.extra }
+            end
+        end
+    end
+})
+
+
+
 -- SMODS.Atlas{
 --     key = "j_chads",
 --     path = "chads.png",
