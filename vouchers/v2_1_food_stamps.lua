@@ -17,6 +17,10 @@ SMODS.Voucher {
             '{C:attention}Yolky{} and {C:attention}Beaned{} stickers'
         }
     },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = {key = 'CTEH_egg', set = 'Other'}
+        info_queue[#info_queue + 1] = {key = 'CTEH_bean', set = 'Other'}
+    end,
     redeem = function(self, card)
         G.GAME.modifiers.enable_yolky_sticker = true
         G.GAME.modifiers.enable_beaned_sticker = true

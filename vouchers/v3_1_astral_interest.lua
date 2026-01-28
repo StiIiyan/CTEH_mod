@@ -17,6 +17,9 @@ SMODS.Voucher {
             'may appear with a {C:cteh_interest}Paycheck{} sticker'
         }
     },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = {key = 'CTEH_static_paycheck', set = 'Other'}
+    end,
     redeem = function(self, card)
         G.GAME.modifiers.enable_paycheck_sticker = true
     end

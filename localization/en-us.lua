@@ -128,14 +128,22 @@ return {
             CTEH_paycheck = {
                 name = 'Paycheck',
                 text = {
-                    '{C:green}#1# in #2#{} to gain {C:cteh_interest}interest{} when consumed'
+                    '{C:green}#1# in #2#{} to gain ',
+                    '{C:cteh_interest}interest{} when consumed'
+                }
+            },
+            CTEH_static_paycheck = {
+                name = 'Paycheck',
+                text = {
+                    '{C:green}1 in 4{} to gain ',
+                    '{C:cteh_interest}interest{} when consumed'
                 }
             },
             CTEH_shopping = {
                 name = 'Shopping',
                 text = {
-                    'Gain a {C:gold}$1',
-                    'when found in Shop',
+                    'Gain {C:gold}$1{} when',
+                    'found in Shop',
                 }
             },
             dwarven_planets = {
