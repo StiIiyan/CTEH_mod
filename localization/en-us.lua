@@ -135,7 +135,7 @@ return {
             CTEH_static_paycheck = {
                 name = 'Paycheck',
                 text = {
-                    '{C:green}1 in 6{} to gain ',
+                    '{C:green}1 in 4{} to gain ',
                     '{C:cteh_interest}interest{} when consumed'
                 }
             },
