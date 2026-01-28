@@ -5,6 +5,7 @@ SMODS.Atlas{
     py = 95
 }
 
+-- Odds are currently hard-coded, so they gotta be manually changed in the probability check and CTEH_static_paycheck
 SMODS.Sticker{
     key = 'paycheck',
     badge_colour = HEX('4D8276'),
@@ -12,7 +13,7 @@ SMODS.Sticker{
     atlas = 'stickers',
     discovered = true,
     loc_vars = function(self, info_queue, card)
-        local odds = 5
+        local odds = 6
         local numerator, denominator =
             SMODS.get_probability_vars(card, 1, odds)
         return {vars = {numerator, denominator}}
@@ -23,7 +24,7 @@ SMODS.Sticker{
     end,
     should_apply = function(self, card, center, area, bypass_roll)
         local sticker_rate = pseudorandom(pseudoseed('CTEH_paycheck_sticker'))
-        local sticker_apply = sticker_rate >= 0.8
+        local sticker_apply = sticker_rate >= 0.75
 
         local is_tarot_or_planet = center.set == 'Tarot' or center.set == 'Planet'
         if center.name == 'The Wheel of Fortune' then
