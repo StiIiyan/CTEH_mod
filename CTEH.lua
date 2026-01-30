@@ -6,6 +6,10 @@ local jokers_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "jokers")
 for _, file in ipairs(jokers_src) do
     assert(SMODS.load_file("jokers/" .. file))()
 end
+local consumables_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "consumables")
+for _, file in ipairs(consumables_src) do
+    assert(SMODS.load_file("consumables/" .. file))()
+end
 local decks_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "decks")
 for _, file in ipairs(decks_src) do
     assert(SMODS.load_file("decks/" .. file))()
@@ -27,11 +31,11 @@ SMODS.Atlas({
     py = 34
 })
 
-
-
-
-
-
+--[[
+enhancement: 
+always scores, always breaks, constant:
+bypasses all the tarots and spectrals changing suit, rank, enhancement, destroying cards, Midas n Vampire, Trading Card
+]]
 
 
 
@@ -120,5 +124,5 @@ return
 
 --[[
 Contributions from
-Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574, borb43
+Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574, borb43, evgast
 ]]

@@ -5,6 +5,45 @@ priority = 0
 
 
 
+####################################################################################
+# Stone Seal
+
+# Perma bonus behaviour
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability and old_center and old_center.config.bonus then
+'''
+position = 'before'
+payload = '''
+if self.seal == 'CTEH_stone' then
+    self.ability.perma_bonus = self.ability.perma_bonus + 40
+end
+'''
+match_indent = true
+
+
+# Discard behaviour
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.seal == 'Purple' and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+'''
+position = 'before'
+payload = '''
+if self.seal == 'CTEH_stone' then
+    self:set_ability('m_stone', nil, true)
+end
+'''
+match_indent = true
+
+
+####################################################################################
+# Wild Seals joker
+
+## Blue
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -18,6 +57,7 @@ if (self.seal == 'Blue' or passive_joker_wild_seals() and self.seal ~= nil and m
 match_indent = true
 
 
+## Red
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -31,6 +71,7 @@ if self.seal == 'Red' or passive_joker_wild_seals() and self.seal ~= nil and mem
 match_indent = true
 
 
+## Purple
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -44,6 +85,7 @@ if (self.seal == 'Purple' or passive_joker_wild_seals() and self.seal ~= nil and
 match_indent = true
 
 
+## Gold
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -55,3 +97,4 @@ payload = '''
 elseif (self.seal == 'Gold' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Gold')) and not self.ability.extra_enhancement then
 '''
 match_indent = true
+

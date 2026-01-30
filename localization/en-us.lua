@@ -146,6 +146,14 @@ return {
                     'found in Shop',
                 }
             },
+            cteh_stone_seal = {
+                name = 'Stone Seal',
+                text = {
+                    'Permanently gain {C:chips}+40{} chips',
+                    'when {C:attention}changing Enhancement',
+                    'Discard to turn into {C:attention}Stone'
+                }
+            },
             dwarven_planets = {
                 name = 'Dwarven Planets',
                 text = {
@@ -175,6 +183,7 @@ return {
             CTEH_magic_bean = 'Magic Beaned',
             CTEH_paycheck = 'Paycheck',
             CTEH_shopping = 'Shopping',
+            cteh_stone_seal = 'Stone Seal',
         },
         challenge_names = {
             c_CTEH_turtle = "Magic Bean"
