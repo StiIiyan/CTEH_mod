@@ -1,5 +1,4 @@
 function behaveLikeSeal(card,desiredSeal,recursive)
-    -- TODO add recursive nil check
     if card.seal == desiredSeal then
         return true
     end
