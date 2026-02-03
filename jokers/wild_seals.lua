@@ -1,15 +1,11 @@
-function passive_joker_wild_seals()
-    return next(SMODS.find_card("j_CTEH_wild_seals"))
-end
-
 WILD_SEAL_TABLE = {}
 
-local function set_wild_seals(context)
+local function set_wild_seal_table()
     WILD_SEAL_TABLE = {}
     
     for i = 1, #G.hand.cards do
         local seal = G.hand.cards[i].seal
-        if (seal ~= nil and not member(WILD_SEAL_TABLE, seal)) then 
+        if (seal and not member(WILD_SEAL_TABLE, seal)) then 
             table.insert(WILD_SEAL_TABLE, seal)
         end 
         i = i + 1
@@ -70,7 +66,7 @@ SMODS.Joker{
     pos = {x = 0, y = 0},
     calculate = function(self, card, context)
         if context.press_play or context.after or context.discard then
-            set_wild_seals(context)
+            set_wild_seal_table()
         end
     end  
 }

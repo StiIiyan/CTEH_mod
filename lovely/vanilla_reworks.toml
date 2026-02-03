@@ -74,14 +74,7 @@ if (v.type == 'Base' or v.type == 'Enhanced') and G.GAME.used_vouchers["v_illusi
 position = 'before'
 payload = '''
 if (v.type == 'Base' or v.type == 'Enhanced') and G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.8 then 
-local seal_poll = pseudorandom(pseudoseed('illusion'))
-local result_seal
-if seal_poll >= 0.75 then result_seal = 'Red'
-elseif seal_poll >= 0.5 then result_seal = 'Gold'
-elseif seal_poll >= 0.25 then result_seal = 'Purple'
-else result_seal = 'Blue'
-end
-card:set_seal(result_seal)
+card:set_seal(SMODS.poll_seal({type_key = 'illusionsl', guaranteed = true}), nil, true)
 end
 '''
 match_indent = true

@@ -109,14 +109,14 @@ function player_probability_identity(pID)
     function self:get_additive_denominator_nemesis()        return self.additive_denominator_nemesis        end
 
     function self:get_numerator(base_object_numerator)
-        if playing_multiplayer() and MP.GAME.NemesisProbabilityTable ~= nil then
+        if playing_multiplayer() and MP.GAME.NemesisProbabilityTable then
             return (base_object_numerator + self.additive_numerator + MP.GAME.NemesisProbabilityTable:get_additive_numerator(self.pid)) * 
                     self.multiplicative_numerator * MP.GAME.NemesisProbabilityTable:get_multiplicative_numerator(self.pid)
         end
         return (base_object_numerator + self.additive_numerator) * self.multiplicative_numerator
     end
     function self:get_denominator(base_denominator)
-        if playing_multiplayer() and MP.GAME.NemesisProbabilityTable ~= nil then
+        if playing_multiplayer() and MP.GAME.NemesisProbabilityTable then
             return (base_denominator + self.additive_denominator + MP.GAME.NemesisProbabilityTable:get_additive_denominator(self.pid))
         end
         return (base_denominator + self.additive_denominator)

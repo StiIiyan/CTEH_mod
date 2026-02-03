@@ -17,7 +17,7 @@ if self.ability and old_center and old_center.config.bonus then
 '''
 position = 'before'
 payload = '''
-if self.seal == 'CTEH_stone' then
+if self.seal == 'CTEH_stone' or behaveLikeSeal(self,'CTEH_stone',false) then
     self.ability.perma_bonus = self.ability.perma_bonus + 40
 end
 '''
@@ -33,7 +33,7 @@ if self.seal == 'Purple' and #G.consumeables.cards + G.GAME.consumeable_buffer <
 '''
 position = 'before'
 payload = '''
-if self.seal == 'CTEH_stone' then
+if self.seal == 'CTEH_stone' or behaveLikeSeal(self,'CTEH_stone',false) then
     self:set_ability('m_stone', nil, true)
 end
 '''
@@ -52,7 +52,7 @@ if self.seal == 'Blue' and #G.consumeables.cards + G.GAME.consumeable_buffer < G
 '''
 position = 'at'
 payload = '''
-if (self.seal == 'Blue' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Blue')) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and not self.ability.extra_enhancement then
+if (self.seal == 'Blue' or behaveLikeSeal(self,'Blue',false)) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit and not self.ability.extra_enhancement then
 '''
 match_indent = true
 
@@ -66,7 +66,7 @@ if self.seal == 'Red' then
 '''
 position = 'at'
 payload = '''
-if self.seal == 'Red' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Red') then
+if self.seal == 'Red' or behaveLikeSeal(self,'Red',false) then
 '''
 match_indent = true
 
@@ -80,7 +80,7 @@ if self.seal == 'Purple' and #G.consumeables.cards + G.GAME.consumeable_buffer <
 '''
 position = 'at'
 payload = '''
-if (self.seal == 'Purple' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Purple')) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+if (self.seal == 'Purple' or behaveLikeSeal(self,'Purple',false)) and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 '''
 match_indent = true
 
@@ -94,7 +94,7 @@ elseif self.seal == 'Gold' and not self.ability.extra_enhancement then
 '''
 position = 'at'
 payload = '''
-elseif (self.seal == 'Gold' or passive_joker_wild_seals() and self.seal ~= nil and member(WILD_SEAL_TABLE,'Gold')) and not self.ability.extra_enhancement then
+elseif (self.seal == 'Gold' or behaveLikeSeal(self,'Gold',false)) and not self.ability.extra_enhancement then
 '''
 match_indent = true
 
