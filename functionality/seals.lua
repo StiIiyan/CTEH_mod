@@ -4,10 +4,9 @@ function behaveLikeSeal(card,desiredSeal,recursive)
     end
 
     if next(SMODS.find_card("j_CTEH_wild_seals")) and isConsideredSealed(card) and not recursive then
-        local return_value = false
         for i = 1, #G.hand.cards do
             local card_in_hand = G.hand.cards[i]
-            return_value = return_value or behaveLikeSeal(card_in_hand,desiredSeal,true) or
+            local return_value = behaveLikeSeal(card_in_hand,desiredSeal,true) or
                            isConsideredSealed(card_in_hand) and member(WILD_SEAL_TABLE,desiredSeal)
             if return_value then return return_value end
         end
@@ -18,6 +17,7 @@ function behaveLikeSeal(card,desiredSeal,recursive)
         elseif card.is_suit('Hearts', false, false) and desiredSeal == 'Red' then return true 
         elseif card.is_suit('Diamonds', false, false) and desiredSeal == 'Gold' then return true 
         elseif card.is_suit('Clubs', false, false) and desiredSeal == 'Blue' then return true
+        elseif SMODS.has_enhancement(card, 'm_stone') and desiredSeal == 'CTEH_stone' then return true
         end
     end
 
