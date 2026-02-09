@@ -48,6 +48,23 @@ return {
                     "{C:attention}2{}, {C:attention}3{}, {C:attention}4{}, or {C:attention}5{}",
                 },
             },
+            j_marble = {
+                name = "Marble Joker",
+                text = {
+                    "Adds one {C:attention}Stone{} card",
+                    "with a {C:attention}Stone{} seal",
+                    "when {C:attention}Blind{} is selected",
+                },
+            },
+            j_stone = {
+                name = "Stone Joker",
+                text = {
+                    "Gives {C:chips}+#1#{} Chips for each card",
+                    "with {C:inactive}Stone{C:attention} Enhancement{}",
+                    "or {C:attention}Seal{} in your {C:attention}full deck",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                },
+            },
             j_CTEH_blueprinter_1 = {
                 name = "Blue Printer",
                 text = {
@@ -63,6 +80,15 @@ return {
                     "Create a {C:attention}Misprint{} when {C:attention}Blind{} is selected",
                     "{C:green}#1# in #2#{} to instead turn into a {C:attention}Blueprint",
                     "Set {C:green}odds{} to previous round's last Misprint trigger"
+                },
+            },
+        },
+        Enhanced = {
+            m_CTEH_sizaak_enh = {
+                name = "Sizaak",
+                text = {
+                    "{C:attention}Always{} scores",
+                    "{C:red}Break{} when scored"
                 },
             },
         },
@@ -164,7 +190,8 @@ return {
                 name = 'Unobtainable',
                 text = {
                     '{C:red}Cannot{} be obtained',
-                    'by any means'
+                    'by any means',
+                    '{s:0.7,C:inactive}Except maybe challenges'
                 }
             },
             CTEH_uncopyable = {

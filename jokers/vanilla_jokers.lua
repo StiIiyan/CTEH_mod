@@ -176,6 +176,84 @@ SMODS.Joker:take_ownership('hack',
     end
 })
 
+-- Marble Joker now gives Stone seal to the Stone cards
+SMODS.Joker:take_ownership('marble',
+{
+    key = "marble",
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
+        info_queue[#info_queue + 1] = {key = 'cteh_stone_seal', set = 'Other'}
+    end,
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            local stone_card = SMODS.create_card { set = "Base", enhancement = "m_stone", area = G.discard }
+            stone_card:set_seal('CTEH_stone', nil, true)
+            G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+            stone_card.playing_card = G.playing_card
+            table.insert(G.playing_cards, stone_card)
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    stone_card:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                    G.play:emplace(stone_card)
+                    return true
+                end
+            }))
+            return {
+                message = localize('k_plus_stone'),
+                colour = G.C.SECONDARY_SET.Enhanced,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.deck.config.card_limit = G.deck.config.card_limit + 1
+                            return true
+                        end
+                    }))
+                    draw_card(G.play, G.deck, 90, 'up')
+                    SMODS.calculate_context({ playing_card_added = true, cards = { stone_card } })
+                end
+            }
+        end
+    end
+})
+
+
+-- Stone Joker now gives chips for Stone sealed cards too
+SMODS.Joker:take_ownership('stone',
+{
+    key = "stone",
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
+        info_queue[#info_queue + 1] = {key = 'cteh_stone_seal', set = 'Other'}
+
+        local stone_tally = 0
+        if G.playing_cards then
+            for _, playing_card in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(playing_card, 'm_stone') or playing_card.seal == 'CTEH_stone' then stone_tally = stone_tally + 1 end
+            end
+        end
+        return { vars = { card.ability.extra, card.ability.extra * stone_tally } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local stone_tally = 0
+            for _, playing_card in ipairs(G.playing_cards) do
+                if SMODS.has_enhancement(playing_card, 'm_stone') or playing_card.seal == 'CTEH_stone' then stone_tally = stone_tally + 1 end
+            end
+            return {
+                chips = card.ability.extra * stone_tally
+            }
+        end
+    end,
+    in_pool = function(self, args) --equivalent to `enhancement_gate = 'm_stone'`
+        for _, playing_card in ipairs(G.playing_cards or {}) do
+            if SMODS.has_enhancement(playing_card, 'm_stone') or playing_card.seal == 'CTEH_stone' then
+                return true
+            end
+        end
+        return false
+    end
+})
 
 
 -- SMODS.Atlas{
