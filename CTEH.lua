@@ -18,9 +18,9 @@ local vouchers_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "vouchers")
 for _, file in ipairs(vouchers_src) do
     assert(SMODS.load_file("vouchers/" .. file))()
 end
-local stickers_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "stickers")
-for _, file in ipairs(stickers_src) do
-    assert(SMODS.load_file("stickers/" .. file))()
+local modifiers_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "card_modifiers")
+for _, file in ipairs(modifiers_src) do
+    assert(SMODS.load_file("card_modifiers/" .. file))()
 end
 
 -- Loading mod icon
