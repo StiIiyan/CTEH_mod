@@ -87,8 +87,9 @@ return {
             m_CTEH_sizaak_enh = {
                 name = "Sizaak",
                 text = {
-                    "{C:attention}Always{} scores",
-                    "{C:red}Break{} when scored"
+                    "{C:attention}Always{} scores, {C:red}Break{} when scored",
+                    "{C:red}Cannot{} change or remove enhancement",
+                    "or be {C:attention}selected by force{}"
                 },
             },
         },
@@ -213,7 +214,8 @@ return {
             cteh_stone_seal = 'Stone Seal',
         },
         challenge_names = {
-            c_CTEH_turtle = "Magic Bean"
+            c_CTEH_turtle = "Magic Bean",
+            c_CTEH_sizaak_bus = "Sizaak's Bus",
         },
         v_text={
             ch_c_empty_deck_lose_condition={
@@ -221,6 +223,21 @@ return {
             },
             ch_c_all_magic_beaned={
                 "All Jokers have a {C:attention}Magic Beaned{} sticker",
+            },
+            ch_c_bus_debuff_license={
+                "Crashing {C:attention}The Bus{} revokes {C:inactive}(debuffs){} your {C:attention}License",
+            },
+            ch_c_bus16={
+                "Renew {C:inactive}(de-debuff){} your {C:attention}License{} by reaching {C:mult}+16{} on {C:attention}The Bus{}",
+            },
+            ch_c_sizaak_bus_wincon={
+                "Have your {C:attention}License{} revoked by playing {C:attention}Sizaak{} to win the game",
+            },
+            ch_c_sizaak_bus_losecon={
+                "Playing {C:attention}Sizaak{} too early {C:red}loses{} the game",
+            },
+            ch_c_all_cbell={
+                "All {C:attention}Bosses{} have {C:chips}Cerulean Bell{} effect",
             },
         }
     }
