@@ -256,6 +256,37 @@ SMODS.Joker:take_ownership('stone',
 })
 
 
+-- Mail-in Rebate now reduces payout with each played hand
+SMODS.Joker:take_ownership('mail',
+{
+    key = "mail",
+    calculate = function(self, card, context)
+        if context.discard and not context.other_card.debuff and
+            context.other_card:get_id() == G.GAME.current_round.mail_card.id then
+            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra
+            return {
+                dollars = card.ability.extra,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            G.GAME.dollar_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+            }
+        end
+
+        if context.press_play then
+            card.ability.extra = math.max(card.ability.extra - 1,1)
+        end
+
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+            card.ability.extra = 5
+        end
+    end
+})
+
 -- SMODS.Atlas{
 --     key = "j_chads",
 --     path = "chads.png",

@@ -65,6 +65,14 @@ return {
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                 },
             },
+            j_mail = {
+                name = "Mail-In Rebate",
+                text = {
+                    "Earn {C:money}$#1#{} for each discarded {C:attention}#2#{}",
+                    "{C:attention}Lower{} by {C:money}$1{} after playing hand",
+                    "rank changes every round",
+                },
+            },
             j_CTEH_blueprinter_1 = {
                 name = "Blue Printer",
                 text = {
