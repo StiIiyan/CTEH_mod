@@ -5,6 +5,8 @@ priority = 0
 
 
 
+# Uncopyable jokers defined in functionality/misc.lua
+
 ## Make so Ankh doesn't pick an Uncopyable joker
 [[patches]]
 [patches.pattern]

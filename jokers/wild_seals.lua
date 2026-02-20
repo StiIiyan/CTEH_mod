@@ -4,7 +4,7 @@ local function set_wild_seal_table()
     WILD_SEAL_TABLE = {}
     
     for i = 1, #G.hand.cards do
-        local seal = G.hand.cards[i].seal
+        local seal = isConsideredSealed(G.hand.cards[i])
         if (seal and not member(WILD_SEAL_TABLE, seal)) then 
             table.insert(WILD_SEAL_TABLE, seal)
         end 
