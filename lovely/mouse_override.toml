@@ -50,11 +50,13 @@ position = 'before'
 payload = '''
   elseif tab == 'CTEH' then 
     return {n=G.UIT.ROOT, config={align = "cm", padding = 0.05, colour = G.C.CLEAR}, nodes={
-      -- TODO following function should change both default_sensitivity and sensitivity and the default should be saved in a file 
-      create_slider({label = 'Sensitivity',w = 4, h = 0.4, ref_table = CURSOR, ref_value = 'sensitivity', min = 0.5, max = 2, decimal_places = 2}),
-      create_option_cycle({w = 4,scale = 0.8, label = 'M1 Cursor',options = {'Four Fingers','Banner','Cloud 9','Arrowhead','Gros Michel','Bootstraps','Ceremonial Dagger','Rocket','Seltzer'}, opt_callback = 'set_m1_image', current_option = CURSOR.image_index or 1}),
-      create_toggle({label = "Hold Cursor", ref_table = CURSOR, ref_value = 'has_hold_m1'}),
-      create_option_cycle({w = 4,scale = 0.8, label = 'Hold Cursor',options = {'Fist','Bean','Egg','Oops','Bull','8 ball','Square','Delayed Grat'}, opt_callback = 'set_m1_hold_image', current_option = CURSOR.image_hold_index or 1}),
+      -- TODO things should be saved in a file 
+      create_slider({label = 'Sensitivity', w = 4, h = 0.4, ref_table = SMODS.Mods['CTEH'].config, ref_value = 'default_sensitivity', callback = 'reset_sensitivity', min = 0.5, max = 2, decimal_places = 2, current_option = SMODS.Mods['CTEH'].config.default_sensitivity or 1}),
+      create_option_cycle({w = 4, scale = 0.8, label = 'M1 Cursor', options = {'Four Fingers','Banner','Cloud 9','Arrowhead','Gros Michel','Bootstraps','Ceremonial Dagger','Rocket','Seltzer'}, opt_callback = 'set_m1_cursor', current_option = SMODS.Mods['CTEH'].config.cursor_index or 1}),
+      create_toggle({label = "Held Cursor", ref_table = SMODS.Mods['CTEH'].config, ref_value = 'is_m1_held', current_option = SMODS.Mods['CTEH'].config.is_m1_held or true}),
+      create_option_cycle({w = 4, scale = 0.8, label = 'Held Cursor', options = {'Fist','Bean','Egg','Oops','Bull','8 ball','Square','Delayed Grat'}, opt_callback = 'set_m1_held_cursor', current_option = SMODS.Mods['CTEH'].config.held_cursor_index or 1}),
     }}
 '''
 match_indent = true
+
+

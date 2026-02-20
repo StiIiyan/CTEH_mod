@@ -1,6 +1,6 @@
-
-CURSOR_IMAGES = {}
-ANCHOR_COORDINATES = {}
+--[]
+local CURSOR_IMAGES = {}
+local ANCHOR_COORDINATES = {}
 local cursor_image_amount = 9
 for i=1,cursor_image_amount do
     local CURSOR_MOD_PATH = SMODS.Mods["CTEH"].path .. "assets/2x/cursors/cursor" .. i .. ".png"
@@ -25,29 +25,28 @@ for i=1,cursor_image_amount do
         ANCHOR_COORDINATES[i] = {x=0,y=0}
     end
 end
-CURSOR_HOLD_IMAGES = {}
-local cursor_hold_image_amount = 8
-for i=1,cursor_hold_image_amount do
-    local CURSOR_MOD_PATH = SMODS.Mods["CTEH"].path .. "assets/2x/cursors/cursor_hold" .. i .. ".png"
+local CURSOR_HELD_IMAGES = {}
+local cursor_held_image_amount = 8
+for i=1,cursor_held_image_amount do
+    local CURSOR_MOD_PATH = SMODS.Mods["CTEH"].path .. "assets/2x/cursors/cursor_held" .. i .. ".png"
     local CURSOR_FIXED_PATH = assert(NFS.newFileData(CURSOR_MOD_PATH),('Failed to collect file data for Atlas %s'):format('cursor'))
-    CURSOR_HOLD_IMAGES[i] = love.graphics.newImage(CURSOR_FIXED_PATH, { mipmaps = true, dpiscale = G.SETTINGS.GRAPHICS.texture_scaling })
+    CURSOR_HELD_IMAGES[i] = love.graphics.newImage(CURSOR_FIXED_PATH, { mipmaps = true, dpiscale = G.SETTINGS.GRAPHICS.texture_scaling })
 end
+--]]
 
 -- not local so the settings patch can access it. Could I instead make it local IN the patch? y not!
-CURSOR = {
+local i1 = SMODS.Mods['CTEH'].config.cursor_index
+local i2 = SMODS.Mods['CTEH'].config.held_cursor_index
+local CURSOR = {
     x = love.graphics.getWidth() / 2,
     y = love.graphics.getHeight() / 2,
     sensitivity = 1,
-    default_sensitivity = 1,
 
-    image_index = 1,
-    image = CURSOR_IMAGES[1],
-    ox = ANCHOR_COORDINATES[1].x,
-    oy = ANCHOR_COORDINATES[1].y,
-    has_hold_m1 = true,
-    image_hold_index = 1,
-    image_hold = CURSOR_HOLD_IMAGES[1],
-    m1_index = 1,
+    image = CURSOR_IMAGES[i1],
+    -- offsets
+    ox = ANCHOR_COORDINATES[i1].x,
+    oy = ANCHOR_COORDINATES[i1].y,
+    image_held = CURSOR_HELD_IMAGES[i2],
     held = false,
 }
 local function keepCursorInBorder()
@@ -59,22 +58,29 @@ local function keepCursorInBorder()
     end
 end
 
-function G.FUNCS.set_m1_image(args)
-    CURSOR.image = CURSOR_IMAGES[args.to_key] or CURSOR_IMAGES[1]
-    CURSOR.ox = ANCHOR_COORDINATES[args.to_key] and ANCHOR_COORDINATES[args.to_key].x or ANCHOR_COORDINATES[1].x
-    CURSOR.oy = ANCHOR_COORDINATES[args.to_key] and ANCHOR_COORDINATES[args.to_key].y or ANCHOR_COORDINATES[1].y
-    CURSOR.image_index = args.to_key < cursor_image_amount and args.to_key or 1
+function G.FUNCS.set_m1_cursor(args)
+    SMODS.Mods['CTEH'].config.cursor_index = args.to_key
+    local i = args.to_key
+
+    CURSOR.image = CURSOR_IMAGES[i] or CURSOR_IMAGES[1]
+    CURSOR.ox = ANCHOR_COORDINATES[i] and ANCHOR_COORDINATES[i].x or ANCHOR_COORDINATES[1].x
+    CURSOR.oy = ANCHOR_COORDINATES[i] and ANCHOR_COORDINATES[i].y or ANCHOR_COORDINATES[1].y
 end
-function G.FUNCS.set_m1_hold_image(args)
-    CURSOR.image_hold = CURSOR_HOLD_IMAGES[args.to_key] or CURSOR_HOLD_IMAGES[1]
-    CURSOR.image_hold_index = args.to_key < cursor_hold_image_amount and args.to_key or 1
+function G.FUNCS.set_m1_held_cursor(args)
+    SMODS.Mods['CTEH'].config.held_cursor_index = args.to_key
+
+    CURSOR.image_held = CURSOR_HELD_IMAGES[args.to_key] or CURSOR_HELD_IMAGES[1]
+    CURSOR.held_cursor_index = args.to_key < cursor_held_image_amount and args.to_key or 1
+end
+function G.FUNCS.reset_sensitivity()
+    resetSensitivity()
 end
 
 function setSensitivity(new_sens)
     CURSOR.sensitivity = new_sens
 end
 function resetSensitivity()
-    setSensitivity(CURSOR.default_sensitivity)
+    setSensitivity(SMODS.Mods['CTEH'].config.default_sensitivity)
 end
 function getCursorPosition()
     return CURSOR.x, CURSOR.y
@@ -100,9 +106,9 @@ local prev_draw = love.draw
 function love.draw()
     prev_draw()
 
-    if CURSOR.held == true and CURSOR.has_hold_m1 then
+    if CURSOR.held == true and SMODS.Mods['CTEH'].config.is_m1_held then
         love.graphics.draw(
-            CURSOR.image_hold,
+            CURSOR.image_held,
             CURSOR.x,
             CURSOR.y
         )
