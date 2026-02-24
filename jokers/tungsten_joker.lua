@@ -36,10 +36,12 @@ SMODS.Joker{
     pos = {x = 0, y = 0},
     
     calculate = function(self, card, context)
-        if card.states.drag.is then
-            setSensitivity(card.ability.lower_sensitivity)
-        else
-            resetSensitivity()
+        if next(SMODS.find_mod("wee_cursors")) then
+            if card.states.drag.is then
+                setSensitivity(card.ability.lower_sensitivity)
+            else
+                resetSensitivity()
+            end
         end
 
         if context.open_booster then
