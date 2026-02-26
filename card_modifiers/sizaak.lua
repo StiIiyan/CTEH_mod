@@ -12,6 +12,9 @@ SMODS.Enhancement {
     replace_base_card = true,
     shatters = true,
     always_scores = true,
+    in_pool = function(self, args)
+        return false
+    end,
     calculate = function(self, card, context)
         if context.destroy_card and context.cardarea == G.play and context.destroy_card == card then
             card.glass_trigger = true

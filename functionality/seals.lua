@@ -12,7 +12,7 @@ function behaveLikeSeal(card,desiredSeal,recursive)
         end
     end
 
-    if card.base and next(SMODS.find_card("j_CTEH_suited_seals")) then
+    if card.playing_card and next(SMODS.find_card("j_CTEH_suited_seals")) then
         if card:is_suit('Spades') and desiredSeal == 'Purple' then return true
         elseif card:is_suit('Hearts') and desiredSeal == 'Red' then return true 
         elseif card:is_suit('Diamonds') and desiredSeal == 'Gold' then return true 
