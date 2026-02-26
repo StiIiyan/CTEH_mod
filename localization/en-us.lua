@@ -99,11 +99,12 @@ return {
                     '{C:inactive}Stones{} are {C:inactive}Stone',
                 }
             },
+            -- description by Discord: theambushingbush
             j_CTEH_suited_seals_2 = {
                 name = 'Suited Seals',
                 text = {
-                    '{C:hearts}Roses{} are {C:red}Red{}, {C:clubs}Violets{} are {C:blue}Blue',
-                    '',
+                    '{C:hearts}Heart{} cards are {C:red}Red{}, {C:clubs}Club{} cards are {C:blue}Blue',
+                    '{C:enhanced}Tarots{} from {C:spades}Spades{}, {C:gold}Gold {C:diamonds}Diamonds{} for you',
                 }
             },
         },

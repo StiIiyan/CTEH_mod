@@ -8,12 +8,17 @@ SMODS.Atlas{
 SMODS.Joker{
     key = 'suited_seals',
     loc_vars = function(self, info_queue, card)
-        -- TODO?
-        -- if SMODS.pseudorandom_probability(card, "secret_text", 1, 2) then
-        --     return { key = 'j_CTEH_suited_seals_2' }
-        -- end
-        return { key = 'j_CTEH_suited_seals_1' }
+        card.ability.description_switch = not card.ability.description_switch
+
+        if card.ability.description_switch then
+            return { key = 'j_CTEH_suited_seals_1' }
+        else
+            return { key = 'j_CTEH_suited_seals_2' }
+        end
     end,
+    config = {
+        description_switch = true
+    },
     rarity = 4,
     cost = 20,
     blueprint_compat=false,
