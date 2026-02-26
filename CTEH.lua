@@ -33,9 +33,10 @@ SMODS.Atlas({
 
 --[[
 enhancement: 
-always scores, always breaks, constant:
 bypasses all the tarots and spectrals changing suit, rank, enhancement, destroying cards, Midas n Vampire, Trading Card
 ]]
+
+
 
 
 
@@ -124,5 +125,7 @@ return
 
 --[[
 Contributions from
-Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574, borb43, evgast
+Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574, borb43, evgast, somethingcom515
+
+revoo_. -> some inscryption stuff
 ]]

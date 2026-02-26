@@ -3,9 +3,9 @@
 function SQUARE_UP()
     local scaled_chips = 0
     local scaling = 0
-    local add_eternal = false
-    local add_rental = false
+    local add_stickers = {eternal = false, rental = false, yolky = false, beaned = false, magic_beaned = false}
     local square_count = 0
+    local first_square
 
     for i = 1, #G.jokers.cards do
         if G.jokers.cards[i].ability.name == 'Square Joker' then
@@ -14,12 +14,18 @@ function SQUARE_UP()
             scaling = scaling + squareJ.ability.extra.chip_mod
             
             if square_count >= 1 then
-                add_rental = add_rental or squareJ.ability.rental
-                add_eternal = add_eternal or squareJ.ability.eternal
+                add_stickers.rental = add_stickers.rental or squareJ.ability.rental
+                add_stickers.eternal = add_stickers.eternal or squareJ.ability.eternal
+                add_stickers.yolky = add_stickers.yolky or squareJ.ability.sticker_yolky
+                add_stickers.beaned = add_stickers.beaned or squareJ.ability.sticker_beaned
+                add_stickers.magic_beaned = add_stickers.magic_beaned or squareJ.ability.sticker_magic_beaned -- resets the count
+
                 squareJ:set_eternal(false)
                 SMODS.destroy_cards(squareJ, nil, nil, true)
+                card_eval_status_text(first_square, 'extra', nil, nil, nil, {message = "Square up!", colour = G.C.CHIPS})
             end
             
+            if square_count == 0 then first_square = squareJ end
             square_count = square_count + 1
         end
     end
@@ -29,13 +35,21 @@ function SQUARE_UP()
             local squareJ = G.jokers.cards[i]
             squareJ.ability.extra.chips = scaled_chips
             squareJ.ability.extra.chip_mod = scaling
-            if add_eternal and not squareJ.ability.eternal then
+            if add_stickers.eternal and not squareJ.ability.eternal then
                 squareJ:set_eternal(true)
             end
-            if add_rental and not G.jokers.cards[i].ability.rental then
+            if add_stickers.rental and not G.jokers.cards[i].ability.rental then
                 squareJ:set_rental(true)
             end
-            card_eval_status_text(squareJ, 'extra', nil, nil, nil, {message = "Square up!", colour = G.C.CHIPS})
+            if add_stickers.yolky and not G.jokers.cards[i].ability.sticker_yolky then
+                squareJ:add_sticker('CTEH_egg', true)
+            end
+            if add_stickers.beaned and not G.jokers.cards[i].ability.sticker_beaned then
+                squareJ:add_sticker('CTEH_bean', true)
+            end
+            if add_stickers.magic_beaned and not G.jokers.cards[i].ability.sticker_magic_beaned then
+                squareJ:add_sticker('CTEH_magic_bean', true)
+            end
         end
     end
 end
