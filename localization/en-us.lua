@@ -90,6 +90,22 @@ return {
                     "Set {C:green}odds{} to previous round's last Misprint trigger"
                 },
             },
+            j_CTEH_suited_seals_1 = {
+                name = 'Suited Seals',
+                text = {
+                    '{C:attention}Suits{} behave like {C:attention}seals{}:',
+                    '{C:spades}Spades{} are {C:enhanced}Purple{}, {C:diamonds}Diamonds{} are {C:gold}Gold',
+                    '{C:hearts}Hearts{} are {C:red}Red{}, {C:clubs}Clubs{} are {C:blue}Blue',
+                    '{C:inactive}Stones{} are {C:inactive}Stone',
+                }
+            },
+            j_CTEH_suited_seals_2 = {
+                name = 'Suited Seals',
+                text = {
+                    '{C:hearts}Roses{} are {C:red}Red{}, {C:clubs}Violets{} are {C:blue}Blue',
+                    '',
+                }
+            },
         },
         Enhanced = {
             m_CTEH_sizaak_enh = {

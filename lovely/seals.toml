@@ -40,6 +40,7 @@ end
 match_indent = true
 
 
+
 ####################################################################################
 # Wild Seals joker
 
@@ -95,6 +96,24 @@ elseif self.seal == 'Gold' and not self.ability.extra_enhancement then
 position = 'at'
 payload = '''
 elseif behaveLikeSeal(self,'Gold') and not self.ability.extra_enhancement then
+'''
+match_indent = true
+
+
+
+####################################################################################
+# Suited Seals joker
+
+## Red and Purple seals
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''
+    if card.seal then
+'''
+position = 'at'
+payload = '''
+   if isConsideredSealed(card) then
 '''
 match_indent = true
 

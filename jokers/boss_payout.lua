@@ -20,7 +20,7 @@ SMODS.Joker{
         text = {
             'When {C:attention}Boss Blind{} is defeated',
             '{C:green}#1# in #2#{} to create any {C:cteh_interest}Interest voucher',
-            'Add {C:green}1/3{} when {C:attention}Shop{} from {C:attention}Small{} or {C:attention}Big Blind',
+            'Add {C:green}1/4{} when {C:attention}Shop{} from {C:attention}Small{} or {C:attention}Big Blind',
             'is {C:attention}exited{} with full {C:cteh_interest}interest',
             '{C:inactive}(Current threshold: {C:gold}$#3#{C:inactive})',
         }
@@ -37,7 +37,7 @@ SMODS.Joker{
     
     config = {
         numerator_odds = 1,
-        odds = 3,
+        odds = 4,
         last_blind = 'Boss'
     },
     loc_vars = function(self, info_queue, card)

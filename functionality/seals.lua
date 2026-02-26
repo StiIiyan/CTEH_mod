@@ -12,11 +12,11 @@ function behaveLikeSeal(card,desiredSeal,recursive)
         end
     end
 
-    if next(SMODS.find_card("j_CTEH_suited_seals")) then
-        if card.is_suit('Spades', false, false) and desiredSeal == 'Purple' then return true
-        elseif card.is_suit('Hearts', false, false) and desiredSeal == 'Red' then return true 
-        elseif card.is_suit('Diamonds', false, false) and desiredSeal == 'Gold' then return true 
-        elseif card.is_suit('Clubs', false, false) and desiredSeal == 'Blue' then return true
+    if card.base and next(SMODS.find_card("j_CTEH_suited_seals")) then
+        if card:is_suit('Spades') and desiredSeal == 'Purple' then return true
+        elseif card:is_suit('Hearts') and desiredSeal == 'Red' then return true 
+        elseif card:is_suit('Diamonds') and desiredSeal == 'Gold' then return true 
+        elseif card:is_suit('Clubs') and desiredSeal == 'Blue' then return true
         elseif SMODS.has_enhancement(card, 'm_stone') and desiredSeal == 'CTEH_stone' then return true
         end
     end
@@ -25,5 +25,5 @@ function behaveLikeSeal(card,desiredSeal,recursive)
 end
 
 function isConsideredSealed(card)
-    return card.seal or next(SMODS.find_card("j_CTEH_suited_seals"))
+    return card.seal or card.playing_card and next(SMODS.find_card("j_CTEH_suited_seals"))
 end
