@@ -25,5 +25,5 @@ function behaveLikeSeal(card,desiredSeal,recursive)
 end
 
 function isConsideredSealed(card)
-    return card.seal or card.playing_card and next(SMODS.find_card("j_CTEH_suited_seals"))
+    return card.seal or next(SMODS.find_card("j_CTEH_suited_seals"))
 end
