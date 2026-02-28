@@ -13,7 +13,7 @@ SMODS.Joker{
             'At end of round earn {C:attention}double{} your {C:cteh_interest}interest cap',
             'with an {C:cteh_interest}interest rate{} of {C:gold}$1{} lower',
             '{C:inactive}(Joker\'s interest rate is {C:gold}$#1#{C:inactive}, cap is {C:gold}$#2#{C:inactive})',
-            '{C:inactive}(Joker\'s total interest caps at {C:gold}$#3#{C:inactive})'
+            '{C:inactive}(Joker\'s interest threshold is at {C:gold}$#3#{C:inactive})'
         }
     },
     rarity = 3,
@@ -28,11 +28,11 @@ SMODS.Joker{
     
     config = {
         interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4,
-        interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
+        interest_cap = (G and G.GAME and 2 * get_interest_capacity()) or 10
     },
     loc_vars = function(self, info_queue, card)
         card.ability.interest_rate = (G and G.GAME and G.GAME.interest_rate - 1) or 4
-        card.ability.interest_cap = (G and G.GAME and 2 * G.GAME.interest_cap) or 10
+        card.ability.interest_cap = (G and G.GAME and 2 * get_interest_capacity()) or 10
         local total_cap = card.ability.interest_cap * card.ability.interest_rate
         return {vars = {card.ability.interest_rate,card.ability.interest_cap,total_cap}}
     end,    

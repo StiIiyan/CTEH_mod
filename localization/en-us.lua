@@ -157,6 +157,14 @@ return {
             }
         },
         Other = {
+            INTEREST = {
+                name = "Default Interest",
+                text = {
+                    'Gain up to {C:gold}$#1#{} of {C:cteh_interest}interest',
+                    '{C:gold}$#2#{} for every {C:gold}$#3#{} you have',
+                    'Interest Threshold: {C:gold}$#4#'
+                }
+            },
             CTEH_egg = {
                 name = 'Yolky',
                 text = {

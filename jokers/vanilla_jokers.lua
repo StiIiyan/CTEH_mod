@@ -287,6 +287,26 @@ SMODS.Joker:take_ownership('mail',
     end
 })
 
+
+-- To the Moon info queue proves to be worthy of taking ownership
+SMODS.Joker:take_ownership('to_the_moon',
+{
+    key = "to_the_moon",
+    blueprint_compat = false,
+    rarity = 2,
+    cost = (G.GAME and G.GAME.interest_rate) or 5,
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = get_interest_info_queue()
+        return { vars = { card.ability.extra, G.GAME.interest_rate or 5 } }
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        G.GAME.interest_amount = G.GAME.interest_amount + card.ability.extra
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.GAME.interest_amount = G.GAME.interest_amount - card.ability.extra
+    end
+})
+
 -- SMODS.Atlas{
 --     key = "j_chads",
 --     path = "chads.png",

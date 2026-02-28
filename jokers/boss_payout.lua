@@ -43,7 +43,7 @@ SMODS.Joker{
     loc_vars = function(self, info_queue, card)
         local numerator, denominator =
             SMODS.get_probability_vars(card, card.ability.numerator_odds, card.ability.odds)
-        local dollar_threshold = G.jokers and get_interest_threshold() or 25
+        local dollar_threshold = G.jokers and get_global_interest_threshold() or 25
         return {vars = {numerator, denominator, dollar_threshold}}
     end,
     calculate = function(self, card, context)     

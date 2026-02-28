@@ -13,7 +13,7 @@ mod = oracle_apply_dollar_cap(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max +
 '''
 position = 'at'
 payload = '''
-mod = oracle_apply_dollar_cap(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + G.GAME.interest_cap * G.GAME.interest_rate)
+mod = oracle_apply_dollar_cap(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + get_interest_capacity() * G.GAME.interest_rate)
 '''
 match_indent = true
 
@@ -26,6 +26,6 @@ if oracle_should_show_max(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + G.G
 '''
 position = 'at'
 payload = '''
-if oracle_should_show_max(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + G.GAME.interest_cap * G.GAME.interest_rate) then
+if oracle_should_show_max(mod, G.GAME.dollars, G.GAME.modifiers.oracle_max + get_interest_capacity() * G.GAME.interest_rate) then
 '''
 match_indent = true

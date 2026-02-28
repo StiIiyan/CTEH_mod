@@ -52,8 +52,8 @@ match_indent = true
 
 # Editing variables related to the vouchers Seed money and Money tree
 
-## we don't need these with the updated voucher description (current implementation not fully correct), but
-## for dynamic UI it would need to check at all times if any voucher is already acquired to decide whether or not to multiply
+## we don't need these with the updated voucher description, but for dynamic UI
+## it would need to check at all times if any voucher is already acquired to decide whether or not to multiply
 
 [[patches]]
 [patches.pattern]
@@ -63,8 +63,6 @@ elseif _c.name == "Seed Money" or _c.name == "Money Tree" then loc_vars = {_c.co
 '''
 position = 'at'
 payload = '''
-elseif _c.name == "Seed Money" then loc_vars = {G.GAME.interest_cap * _c.config.extra}
-elseif _c.name == "Money Tree" then loc_vars = {G.GAME.interest_cap * _c.config.extra * _c.config.extra}
 '''
 match_indent = true
 
@@ -78,12 +76,13 @@ table.insert(left_text,{n=G.UIT.O, config={object = DynaText({string = {" "..loc
 '''
 position = 'at'
 payload = '''
-table.insert(left_text,{n=G.UIT.O, config={object = DynaText({string = {" "..localize{type = 'variable', key = 'interest', vars = {G.GAME.interest_amount, G.GAME.interest_rate, G.GAME.interest_amount * G.GAME.interest_cap}}}, colours = {G.C.UI.TEXT_LIGHT}, shadow = true, pop_in = 0, scale = 0.4*scale, silent = true})}})
+table.insert(left_text,{n=G.UIT.O, config={object = DynaText({string = {" "..localize{type = 'variable', key = 'interest', vars = {G.GAME.interest_amount, G.GAME.interest_rate, G.GAME.interest_amount * get_interest_capacity()}}}, colours = {G.C.UI.TEXT_LIGHT}, shadow = true, pop_in = 0, scale = 0.4*scale, silent = true})}})
 '''
 match_indent = true
 
 
 
+# Now using functionality/interest.lua/get_interest_capacity() to track interest
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -92,7 +91,6 @@ G.GAME.interest_cap = center_table.extra
 '''
 position = 'at'
 payload = '''
-G.GAME.interest_cap = center_table.extra * G.GAME.interest_cap
 '''
 match_indent = true
 
@@ -121,7 +119,7 @@ add_round_eval_row({bonus = true, name='interest', pitch = pitch, dollars = G.GA
 '''
 position = 'at'
 payload = '''
-add_round_eval_row({bonus = true, name='interest', pitch = pitch, dollars = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), G.GAME.interest_cap)})
+add_round_eval_row({bonus = true, name='interest', pitch = pitch, dollars = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), get_interest_capacity())})
 '''
 match_indent = true
 
@@ -135,7 +133,7 @@ end
 '''
 position = 'at'
 payload = '''
-if math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), G.GAME.interest_cap) == G.GAME.interest_cap then
+if math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), get_interest_capacity()) == get_interest_capacity() then
 end
 '''
 match_indent = true
@@ -149,22 +147,6 @@ dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5)
 '''
 position = 'at'
 payload = '''
-dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), G.GAME.interest_cap)
-'''
-match_indent = true
-
-
-
-# Editing around joker To the moon
-## Make interest rate be dynamic UI component
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''
-elseif self.ability.name == 'To the Moon' then loc_vars = {self.ability.extra}
-'''
-position = 'at'
-payload = '''
-elseif self.ability.name == 'To the Moon' then loc_vars = {self.ability.extra,G.GAME.interest_rate}
+dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), get_interest_capacity())
 '''
 match_indent = true

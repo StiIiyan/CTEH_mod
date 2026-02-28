@@ -14,6 +14,7 @@ SMODS.ObjectType({
     cards = {
         j_to_the_moon = true,
         j_CTEH_bank_personal = true,
+        j_CTEH_tree_stump = true,
     }
 })
 SMODS.ObjectType({
@@ -52,10 +53,37 @@ function get_next_interest_voucher_key()
     return Selected_Vouchers[index]
 end
 
+function get_interest_capacity()
+    if G and G.GAME and G.GAME.modifiers.no_interest then return 0 end
+
+    local default_capacity = G and G.GAME and G.GAME.interest_cap or 5
+    if G and G.jokers then
+        for i = 1, #G.jokers.cards do
+            local current_joker = G.jokers.cards[i]
+            if current_joker.ability.additional_interest_cap then
+                default_capacity = default_capacity + current_joker.ability.additional_interest_cap
+            end
+        end
+    end
+
+    if G and G.vouchers then
+        for i = 1, #G.vouchers.cards do
+            local current_voucher = G.vouchers.cards[i]
+            if current_voucher.ability.name == 'Seed Money' or current_voucher.ability.name == 'Money Tree' then
+                default_capacity = current_voucher.ability.extra * default_capacity
+            end
+        end
+    end
+
+    return default_capacity
+end
+
 function get_total_interest()
+    if G and G.GAME and G.GAME.modifiers.no_interest then return 0 end
+
     local total_interest = 0
 
-    local default_interest = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), G.GAME.interest_cap)
+    local default_interest = G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/G.GAME.interest_rate), get_interest_capacity())
 
     total_interest = total_interest + default_interest
 
@@ -74,8 +102,15 @@ function generate_interest()
     ease_dollars(get_total_interest(), true)
 end
 
-function get_interest_threshold()
-    local threshold = G.GAME.interest_cap * G.GAME.interest_rate
+function get_main_interest_threshold()
+    return G and G.GAME and get_interest_capacity() * G.GAME.interest_rate or 25
+end
+
+-- If jokers or other cards have their own interest threshold
+function get_global_interest_threshold()
+    if G and G.GAME and G.GAME.modifiers.no_interest then return 0 end
+
+    local threshold = get_interest_capacity() * G.GAME.interest_rate
 
     for i = 1, #G.jokers.cards do
         local current_joker = G.jokers.cards[i]
@@ -88,5 +123,13 @@ function get_interest_threshold()
 end
 
 function is_interest_full()
-    return G.GAME.dollars >= get_interest_threshold()
+    return G.GAME.dollars >= get_global_interest_threshold()
+end
+
+function get_interest_info_queue()
+    local interest_cap = get_interest_capacity()
+    local interest_mult = G and G.GAME and G.GAME.interest_amount or 1
+    local interest_rate = G and G.GAME and G.GAME.interest_rate or 5
+    local interest_threshold = get_main_interest_threshold()
+    return {key = 'INTEREST', set = 'Other', vars = {interest_cap,interest_mult,interest_rate,interest_threshold}}
 end
