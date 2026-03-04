@@ -307,22 +307,44 @@ SMODS.Joker:take_ownership('to_the_moon',
     end
 })
 
--- SMODS.Atlas{
---     key = "j_chads",
---     path = "chads.png",
---     px = 71,
---     py = 95
--- }
 
--- SMODS.Joker:take_ownership('hanging_chad',
--- {
---     key = "hanging_chad",
---     atlas = 'j_chads',
---     pos = {x = 0, y = 0},
---     config = { extra = { repetitions = 2 }, sprite_pos = 0 },
---     loc_vars = function(self, info_queue, card)
---         card.ability.sprite_pos = (card.ability.sprite_pos + 1) % 3
---         card.children.center:set_sprite_pos({x = card.ability.sprite_pos, y = 0})
---         return { vars = { card.ability.extra.repetitions } }
---     end,
--- })
+-- Add sprites for Hanging Chad retriggers
+SMODS.Atlas{
+    key = "j_chads",
+    path = "chads.png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Joker:take_ownership('hanging_chad',
+{
+    key = "hanging_chad",
+    atlas = 'j_chads',
+    pos = {x = 0, y = 0},
+    config = { extra = 2, sprite_pos = 0 },
+})
+
+
+-- Make Lucky Cat trigger for both lucky procs
+LUCKY_PROCS = 0 -- global
+SMODS.Joker:take_ownership('lucky_cat',
+{
+    key = "lucky_cat",
+    calculate = function(self, card, context)
+        -- gotta change how 'context.other_card.lucky_trigger' behaves
+        if context.individual and context.cardarea == G.play and context.other_card.lucky_trigger and not context.blueprint then
+            card.ability.x_mult = card.ability.x_mult + card.ability.extra * LUCKY_PROCS
+            LUCKY_PROCS = 0
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.MULT,
+                message_card = card
+            }
+        end
+        if context.joker_main then
+            return {
+                xmult = card.ability.x_mult
+            }
+        end
+    end,
+})
