@@ -5,6 +5,9 @@ priority = 0
 
 
 
+####################################################################################
+# Prism Deck
+
 # Make so suit changing tarots change enhancement
 
 ## Make all selected cards get same enhancement
@@ -22,7 +25,7 @@ match_indent = true
 
 
 
-# Apply enhancement
+## Apply enhancement
 [[patches]]
 [patches.pattern]
 target = "card.lua"
