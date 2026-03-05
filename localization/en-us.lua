@@ -214,6 +214,13 @@ return {
                     'Discard to turn into {C:attention}Stone'
                 }
             },
+            cteh_piton_seal = {
+                name = 'Piton Seal',
+                text = {
+                    'Permanently gain {C:attention}+1 {C:green}probability',
+                    'when {C:attention}played{} and {C:attention}scored',
+                }
+            },
             dwarven_planets = {
                 name = 'Dwarven Planets',
                 text = {
@@ -245,6 +252,7 @@ return {
             CTEH_paycheck = 'Paycheck',
             CTEH_shopping = 'Shopping',
             cteh_stone_seal = 'Stone Seal',
+            cteh_piton_seal = 'Piton Seal',
         },
         challenge_names = {
             c_CTEH_turtle = "Magic Bean",
