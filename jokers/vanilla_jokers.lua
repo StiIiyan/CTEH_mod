@@ -136,19 +136,6 @@ SMODS.Joker:take_ownership('invisible',
             "than {E:1,C:attention}4 Jokers{}",
         },
     },
-    loc_vars = function(self, info_queue, card)
-        local main_end
-        if G.jokers and G.jokers.cards then
-            for _, joker in ipairs(G.jokers.cards) do
-                if joker.edition and joker.edition.negative then
-                    main_end = {}
-                    localize { type = 'other', key = 'remove_negative', nodes = main_end, vars = {} }
-                    break
-                end
-            end
-        end
-        return { vars = { card.ability.total_rounds or 2, card.ability.invis_rounds or 0 }, main_end = main_end }
-    end
 })
 
 -- OTHER EFFECTS #########################################
@@ -298,31 +285,25 @@ SMODS.Joker:take_ownership('to_the_moon',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = get_interest_info_queue()
         return { vars = { card.ability.extra, G.GAME.interest_rate or 5 } }
-    end,
-    add_to_deck = function(self, card, from_debuff)
-        G.GAME.interest_amount = G.GAME.interest_amount + card.ability.extra
-    end,
-    remove_from_deck = function(self, card, from_debuff)
-        G.GAME.interest_amount = G.GAME.interest_amount - card.ability.extra
     end
 })
 
 
--- Add sprites for Hanging Chad retriggers
-SMODS.Atlas{
-    key = "j_chads",
-    path = "chads.png",
-    px = 71,
-    py = 95
-}
+-- -- Add sprites for Hanging Chad retriggers
+-- SMODS.Atlas{
+--     key = "j_chads",
+--     path = "chads.png",
+--     px = 71,
+--     py = 95
+-- }
 
-SMODS.Joker:take_ownership('hanging_chad',
-{
-    key = "hanging_chad",
-    atlas = 'j_chads',
-    pos = {x = 0, y = 0},
-    config = { extra = 2, sprite_pos = 0 },
-})
+-- SMODS.Joker:take_ownership('hanging_chad',
+-- {
+--     key = "hanging_chad",
+--     atlas = 'j_chads',
+--     pos = {x = 0, y = 0},
+--     config = { extra = 2, sprite_pos = 0 },
+-- })
 
 
 -- Make Lucky Cat trigger for both lucky procs
@@ -344,6 +325,71 @@ SMODS.Joker:take_ownership('lucky_cat',
         if context.joker_main then
             return {
                 xmult = card.ability.x_mult
+            }
+        end
+    end,
+})
+
+
+-- Ride the Bus special info for a challenge
+JUST_CRASHED = false
+SMODS.Joker:take_ownership('ride_the_bus',
+{
+    key = "ride_the_bus",
+    config = { extra = 1, mult = 0 },
+    loc_vars = function(self, info_queue, card)
+        if G.GAME.modifiers.bus16 then
+            return { vars = {card.ability.mult}, key = 'j_ride_the_bus_challenge'}
+        end
+        return { vars = {card.ability.extra, card.ability.mult}, key = 'j_ride_the_bus' }
+    end,
+    calculate = function(self, card, context)
+        if context.before and not context.blueprint then
+            local faces = false
+            for i = 1, #context.scoring_hand do
+                if context.scoring_hand[i]:is_face() then faces = true end
+            end
+            if faces then
+                if G.GAME.modifiers.bus_debuff_license then
+                    for i = 1, #G.jokers.cards do
+                        if G.jokers.cards[i].ability.name == "Driver's License" then
+                            G.jokers.cards[i].ability.perma_debuff = true
+                        end
+                    end
+                end
+                
+                local last_mult = card.ability.mult
+                card.ability.mult = 0
+                if last_mult == 0 then JUST_CRASHED = false
+                else JUST_CRASHED = true end
+
+                if last_mult > 0 then 
+                    return {
+                        card = card,
+                        message = localize('k_reset')
+                    }
+                end
+            else
+                if card.ability.mult >= 15 and G.GAME.modifiers.bus16 then
+                    for i = 1, #G.jokers.cards do
+                        if G.jokers.cards[i].ability.name == "Driver's License" then
+                            G.jokers.cards[i].ability.perma_debuff = false
+                        end
+                    end
+                end
+
+                SMODS.scale_card(card, {
+                    ref_table = card.ability,
+                    ref_value = "mult",
+                    scalar_value = "extra",
+                    no_message = true
+                })
+                return nil, true
+            end
+        end
+        if context.joker_main then
+            return {
+                mult = card.ability.mult
             }
         end
     end,

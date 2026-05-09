@@ -33,7 +33,8 @@ SMODS.Atlas({
 
 --[[
 enhancement: 
-bypasses all the tarots and spectrals changing suit, rank, enhancement, destroying cards, Midas n Vampire, Trading Card
+bypasses all the tarots and spectrals changing suit, rank, enhancement, destroying cards, Midas n Vampire, Trading Card, 
+also make it not being randomly generated, as prism deck does; also not selected by bell
 ]]
 
 

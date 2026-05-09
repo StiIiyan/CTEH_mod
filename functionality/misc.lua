@@ -56,3 +56,10 @@ SMODS.ObjectType({
         j_CTEH_magic_bean = true,
     }
 })
+
+local game_start_run_ref = Game.start_run
+function Game:start_run(args)
+    game_start_run_ref(self, args)
+
+    G.GAME.win_ante = G.GAME.modifiers.alternate_wincon and 39 or G.GAME.win_ante
+end

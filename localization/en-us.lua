@@ -73,6 +73,25 @@ return {
                     "rank changes every round",
                 },
             },
+            j_ride_the_bus = {
+                name = "Ride the Bus",
+                text = {
+                    "This Joker gains {C:mult}+#1#{} Mult",
+                    "per {C:attention}consecutive{} hand",
+                    "played without a",
+                    "scoring {C:attention}face{} card",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                },
+            },
+            j_ride_the_bus_challenge = {
+                name = "Ride the Bus",
+                text = {
+                    "Reach {C:mult}+16{} Mult",
+                    "to renew your {C:attention}License",
+                    "at the end of round",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)",
+                },
+            },
             j_CTEH_blueprinter_1 = {
                 name = "Blue Printer",
                 text = {
@@ -266,13 +285,13 @@ return {
                 "All Jokers have a {C:attention}Magic Beaned{} sticker",
             },
             ch_c_bus_debuff_license={
-                "Crashing {C:attention}The Bus{} revokes {C:inactive}(debuffs){} your {C:attention}License",
+                "Crashing {C:attention}The Bus{} debuffs your {C:attention}License",
             },
             ch_c_bus16={
                 "Renew {C:inactive}(de-debuff){} your {C:attention}License{} by reaching {C:mult}+16{} on {C:attention}The Bus{}",
             },
             ch_c_sizaak_bus_wincon={
-                "Have your {C:attention}License{} revoked by playing {C:attention}Sizaak{} to win the game",
+                "Get your {C:attention}License{} debuffed and revoked {C:inactive}(3x to 1x){} by {C:attention}Sizaak{} to {C:attention}win",
             },
             ch_c_sizaak_bus_losecon={
                 "Playing {C:attention}Sizaak{} too early {C:red}loses{} the game",

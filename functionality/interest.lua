@@ -127,8 +127,8 @@ function is_interest_full()
 end
 
 function get_interest_info_queue()
-    local interest_cap = get_interest_capacity()
     local interest_mult = G and G.GAME and G.GAME.interest_amount or 1
+    local interest_cap = interest_mult * get_interest_capacity()
     local interest_rate = G and G.GAME and G.GAME.interest_rate or 5
     local interest_threshold = get_main_interest_threshold()
     return {key = 'INTEREST', set = 'Other', vars = {interest_cap,interest_mult,interest_rate,interest_threshold}}
