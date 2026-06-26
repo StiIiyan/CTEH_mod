@@ -132,8 +132,8 @@ return {
                 name = "Sizaak",
                 text = {
                     "{C:attention}Always{} scores, {C:red}Break{} when scored",
-                    "{C:red}Cannot{} change or remove enhancement",
-                    "or be {C:attention}selected by force{}"
+                    "{C:red}Cannot{} be enhanced, destroyed",
+                    "or {C:attention}selected by force{}"
                 },
             },
         },

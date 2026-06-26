@@ -3,12 +3,17 @@ WILD_SEAL_TABLE = {}
 local function set_wild_seal_table()
     WILD_SEAL_TABLE = {}
     
-    for i = 1, #G.hand.cards do
-        local seal = isConsideredSealed(G.hand.cards[i])
-        if (seal and not member(WILD_SEAL_TABLE, seal)) then 
-            table.insert(WILD_SEAL_TABLE, seal)
-        end 
-        i = i + 1
+    -- that is also used for seal pool: G.P_CENTER_POOLS['Seal'] 
+    -- (idk why I've previously commented the following code in thought of it not working)
+    for seal, _ in pairs(G.P_SEALS) do
+        if not member(WILD_SEAL_TABLE, seal) then
+            for i = 1, #G.hand.cards do
+                if behaveLikeSeal(G.hand.cards[i],seal,false) then 
+                    table.insert(WILD_SEAL_TABLE, seal)
+                    break
+                end
+            end
+        end        
     end
 end
 

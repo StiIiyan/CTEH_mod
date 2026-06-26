@@ -39,3 +39,42 @@ if G.GAME.selected_back.effect.center.key == "b_CTEH_prism_deck" then
 end
 '''
 match_indent = true
+
+
+
+####################################################################################
+# Sizaak Bus Deck
+
+
+
+## Add Cerulean Bell selection to all bosses (G.GAME.modifiers.all_cbell logic) and it not be a sizaak card (tested, works)
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''
+function Blind:drawn_to_hand()
+    if not self.disabled then
+'''
+position = 'after'
+payload = '''
+        if G.GAME.modifiers.all_cbell and self.boss then
+            local any_forced = nil
+            for k, v in ipairs(G.hand.cards) do
+                if v.ability.forced_selection and not SMODS.has_enhancement(v,'m_CTEH_sizaak_enh') then
+                    any_forced = true
+                end
+            end
+            if not any_forced then 
+                G.hand:unhighlight_all()
+
+                local forced_card
+                repeat
+                forced_card = pseudorandom_element(G.hand.cards, pseudoseed('cerulean_bell'))
+                until not SMODS.has_enhancement(forced_card,'m_CTEH_sizaak_enh')                
+
+                forced_card.ability.forced_selection = true
+                G.hand:add_to_highlighted(forced_card)
+            end
+        end
+'''
+match_indent = true

@@ -275,7 +275,7 @@ SMODS.Joker:take_ownership('mail',
 })
 
 
--- To the Moon info queue proves to be worthy of taking ownership
+-- To the Moon UI: info queue and interest rate 
 SMODS.Joker:take_ownership('to_the_moon',
 {
     key = "to_the_moon",
@@ -332,7 +332,7 @@ SMODS.Joker:take_ownership('lucky_cat',
 
 
 -- Ride the Bus special info for a challenge
-JUST_CRASHED = false
+BUS_JUST_CRASHED = false
 SMODS.Joker:take_ownership('ride_the_bus',
 {
     key = "ride_the_bus",
@@ -360,8 +360,8 @@ SMODS.Joker:take_ownership('ride_the_bus',
                 
                 local last_mult = card.ability.mult
                 card.ability.mult = 0
-                if last_mult == 0 then JUST_CRASHED = false
-                else JUST_CRASHED = true end
+                if last_mult == 0 then BUS_JUST_CRASHED = false
+                else BUS_JUST_CRASHED = true end
 
                 if last_mult > 0 then 
                     return {
@@ -370,6 +370,7 @@ SMODS.Joker:take_ownership('ride_the_bus',
                     }
                 end
             else
+                BUS_JUST_CRASHED = false
                 if card.ability.mult >= 15 and G.GAME.modifiers.bus16 then
                     for i = 1, #G.jokers.cards do
                         if G.jokers.cards[i].ability.name == "Driver's License" then
