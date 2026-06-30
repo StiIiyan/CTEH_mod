@@ -15,7 +15,7 @@ SMODS.Joker{
             'After 2nd Ante ended',
             'turn into {C:attention}Tree Stump',
             '{C:inactive}(Currently: #1# Rings)',
-            '{C:inactive}(Currently: #2# antes finished)',
+            '{C:inactive}(#2# antes finished)',
         }
     },
     config = {

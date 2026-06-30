@@ -51,8 +51,6 @@ SMODS.Joker{
                 card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Immo", colour = G.C.SECONDARY_SET.Spectral})
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 G.E_MANAGER:add_event(Event({
-                    trigger = 'before',
-                    delay = 0.0,
                     func = (function()
                             local card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, 'c_immolate')
                             card:add_to_deck()
@@ -70,6 +68,40 @@ SMODS.Joker{
                     return true
                 end
             }))
+            --DESTROY_PACKS = DESTROY_PACKS + 1
+        end
+
+        if context.ending_booster then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.FUNCS.draw_from_hand_to_deck();
+                    -- refreshing the run after a successful hit retains the hand, tried to make things work with the Game update
+                    return true
+                end
+            }))
         end
     end  
 }
+
+-- DESTROY_PACKS = 0
+
+-- local prev_uap = Game.update_arcana_pack
+-- function Game:update_arcana_pack(dt)
+--     prev_uap(dt)
+    
+--     if G.STATE_COMPLETE and DESTROY_PACKS > 0 then
+--         DESTROY_PACKS = DESTROY_PACKS - 1
+--         G.STATE = G.STATES.SHOP
+--         G.STATE_COMPLETE = false
+--     end
+-- end
+-- local prev_usp = Game.update_spectral_pack
+-- function Game:update_spectral_pack(dt)
+--     prev_usp(dt)
+    
+--     if G.STATE_COMPLETE and DESTROY_PACKS > 0 then
+--         DESTROY_PACKS = DESTROY_PACKS - 1
+--         G.STATE = G.STATES.SHOP
+--         G.STATE_COMPLETE = false
+--     end
+-- end
