@@ -34,6 +34,12 @@ SMODS.Joker{
                     play_sound('whoosh1', 0.55, 0.62)
                     G.jokers.cards[i + 1]:set_ability("j_square")
                 end
+                -- if it's most right, turn itself in a square joker
+                if G.jokers.cards[i].ability.name == 'j_CTEH_square_hole' and i == #G.jokers.cards and 
+                 not G.jokers.cards[i].ability.eternal then
+                    play_sound('whoosh1', 0.55, 0.62)
+                    G.jokers.cards[i]:set_ability("j_square")
+                end
             end
         end
     end
