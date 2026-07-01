@@ -33,7 +33,6 @@ SMODS.Atlas({
 
 
 
-
 -- Intended BMP compatibilities are not yet compatible
 
 --[[
@@ -118,7 +117,7 @@ return
 
 --[[
 Contributions from
-Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574, borb43, evgast, somethingcom515
+Balatro Discord: eremel_, _breuhh, deathmodereal, metanite64, nh6574, borb43, evgast, somethingcom515, wingedcatgirl
 
 revoo_. -> some inscryption stuff
 ]]

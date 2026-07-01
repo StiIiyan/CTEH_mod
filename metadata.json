@@ -12,7 +12,6 @@
 	"version": "1.0.0",
 	"dependencies": [
 		"Steamodded (>=1.0.0~BETA-1016c)",
-		"Lovely (>=0.8)",
-		"malverk"
+		"Lovely (>=0.8)"
 	]
 }
