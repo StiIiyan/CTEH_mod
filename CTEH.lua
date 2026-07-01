@@ -23,15 +23,6 @@ for _, file in ipairs(modifiers_src) do
     assert(SMODS.load_file("card_modifiers/" .. file))()
 end
 
--- Loading mod icon
-SMODS.Atlas({
-    key = "modicon",
-    path = "icon.png",
-    px = 34,
-    py = 34
-})
-
-
 
 -- Intended BMP compatibilities are not yet compatible
 

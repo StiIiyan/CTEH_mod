@@ -4,10 +4,18 @@ SMODS.Atlas{
     px = 71,
     py = 95
 }
+
+BACK_POS = {}
+if next(SMODS.find_mod("SquareCards")) then 
+    BACK_POS = { x = 1, y = 1 }
+else 
+    BACK_POS = { x = 3, y = 0 }
+end
+
 SMODS.Back {
     key = "square_deck",
     atlas = 'd_square',
-    pos = { x = 3, y = 0 },
+    pos = BACK_POS,
     loc_txt = {
         name = "Square Deck",
         text = {
