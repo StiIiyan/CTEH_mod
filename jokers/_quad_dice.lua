@@ -10,9 +10,9 @@ SMODS.Joker{
     loc_txt = {
         name = Fade_Gradient({HEX("80F1C3"),HEX("469575"),HEX("CBE9F6")},'quad_dice','Quad Dice',3,false),
         text = {
-            '{C:green,E:1,S:1.1}x16 probability {C:attention}base',
-            '{C:attention}5000{} free rerolls',
-            '{C:attention}+2{} slots in Shop',
+            '{C:green,E:1,S:1.1}x+Probability {C:attention}base',
+            '{C:attention}Free rerolls{} after rerolling',
+            '{C:attention}Bonus{} Shop slots, {C:red}+100{}, {C:gold}+$23',
         }
     },
     loc_vars = function(self, info_queue, card)
@@ -32,12 +32,21 @@ SMODS.Joker{
     end,
     add_to_deck = function(self, card, from_debuff)
         single_player:increase_multiplicative_value(16)
-        SMODS.change_free_rerolls(5000)
         change_shop_size(2)
     end,
-    remove_from_deck = function(self, card, from_debuff)
-        single_player:increase_multiplicative_value(0.0625)
-        SMODS.change_free_rerolls(-5000)
-        change_shop_size(-2)
+    calculate = function(self, card, context)
+        if context.reroll_shop and not context.blueprint then
+            single_player:increase_additive_value(1)
+            SMODS.change_free_rerolls(2)
+        end
+        if context.joker_main then
+            return {
+                mult = 100
+            }
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        change_shop_size(2)
+        return 23
     end
 }

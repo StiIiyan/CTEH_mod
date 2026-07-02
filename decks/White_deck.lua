@@ -31,5 +31,19 @@ SMODS.Back {
                 return true
             end
         }))
+        if G.PROFILES[G.SETTINGS.profile].name == "CTEH" then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local card = SMODS.create_card({
+                        set = 'Joker',
+                        area = G.jokers,
+                        key = 'j_CTEH_quad_dice',
+                    })
+                    card:set_edition(nil) -- removes RNG editions
+                    G.jokers:emplace(card)
+                    return true
+                end
+            }))
+        end
     end
 }
