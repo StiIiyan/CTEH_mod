@@ -9,7 +9,7 @@ SMODS.Challenge {
             { id = 'bus_debuff_license' },
             { id = 'bus16' },
             { id = 'sizaak_bus_losecon' },
-{ id = 'sizaak_bus_wincon' },
+            { id = 'sizaak_bus_wincon' },
             { id = 'alternate_wincon' },
             { id = 'all_cbell' },
         }
