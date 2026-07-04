@@ -36,7 +36,10 @@ SMODS.Enhancement {
 -- Make enhancement indestructable
 local oldShatter = Card.shatter
 function Card:shatter()
-    if not self.config.center.key == 'm_CTEH_sizaak_enh' then return oldShatter(self) end
+    if self.config.center.key ~= 'm_CTEH_sizaak_enh' then 
+        oldShatter(self) 
+        return 
+    end
     
     local force_lose = false
     if G.STATE ~= G.STATES.HAND_PLAYED then force_lose = true end
