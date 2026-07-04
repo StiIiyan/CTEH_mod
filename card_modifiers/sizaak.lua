@@ -24,9 +24,6 @@ SMODS.Enhancement {
             card.glass_trigger = true
             return { remove = true }
         end
-        if context.setting_ability then
-            card.ability.immutable = true
-        end
     end,
 }
 
@@ -51,22 +48,22 @@ end
 -- Make enhancement unable to be overridden
 local oldCardSetAbility = Card.set_ability
 function Card:set_ability(center, initial, delay_sprites)
-    if self and self.ability and self.ability.immutable then return nil end
-    return oldCardSetAbility(self, center, initial, delay_sprites)
+    if G.STATE ~= G.STATES.MENU and G.STATE ~= G.STATES.BLIND_SELECT and self.config.center.key == 'm_CTEH_sizaak_enh' then return end
+    oldCardSetAbility(self, center, initial, delay_sprites)
 end
 
 -- Make rank unchangeable
 local oldSetBase = Card.set_base
 function Card:set_base(card, initial)-- some weird signature shi, a whole convo in discord
-    if self and self.ability and self.ability.immutable then return nil end
-    return oldSetBase(self, card, initial)
+    if G.STATE ~= G.STATES.MENU and G.STATE ~= G.STATES.BLIND_SELECT and self.config.center.key == 'm_CTEH_sizaak_enh' then return end
+    oldSetBase(self, card, initial)
 end
 
 -- Make suit unchangeable
 local oldChangeSuit = Card.change_suit
 function Card:change_suit(new_suit)
-    if self and self.ability and self.ability.immutable then return nil end
-    return oldChangeSuit(self, new_suit)
+    if G.STATE ~= G.STATES.MENU and G.STATE ~= G.STATES.BLIND_SELECT and self.config.center.key == 'm_CTEH_sizaak_enh' then return end
+    oldChangeSuit(self, new_suit)
 end
 
 -- TODO globalize: since I am doing a hook, function needs to be in a global space
