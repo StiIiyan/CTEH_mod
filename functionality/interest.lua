@@ -133,3 +133,9 @@ function get_interest_info_queue()
     local interest_threshold = get_main_interest_threshold()
     return {key = 'INTEREST', set = 'Other', vars = {interest_cap,interest_mult,interest_rate,interest_threshold}}
 end
+
+function reduce_interest_rate(rate)
+    if G.GAME.interest_rate > 1 then
+        G.GAME.interest_rate = G.GAME.interest_rate - rate
+    end
+end

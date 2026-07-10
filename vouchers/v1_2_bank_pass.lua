@@ -15,14 +15,12 @@ SMODS.Voucher {
         text = {
             'Lower the {C:cteh_interest}interest',
             '{C:cteh_interest}rate{} by {C:money}$1{}',
-            'Reduce {C:attention}Voucher{} and {C:attention}Joker{} prices',
-            'related to {C:cteh_interest}interest{}',
+            '{C:cteh_interest}Interest {C:attention}Vouchers{} and {C:attention}Jokers{}',
+            'have reduced prices',
         }
     },
     requires = { 'v_CTEH_dividends' },
     redeem = function(self, card)
-        if G.GAME.interest_rate > 1 then
-            G.GAME.interest_rate = G.GAME.interest_rate - 1
-        end
+        reduce_interest_rate(1)
     end
 }
