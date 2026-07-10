@@ -236,8 +236,9 @@ return {
             cteh_piton_seal = {
                 name = 'Piton Seal',
                 text = {
-                    'Permanently gain {C:attention}+1 {C:green}probability',
-                    'when {C:attention}played{} and {C:attention}scored',
+                    'Looks cute'
+                    --'Permanently gain {C:attention}+1 {C:green}probability',
+                    --'when {C:attention}played{} and {C:attention}scored',
                 }
             },
             dwarven_planets = {
