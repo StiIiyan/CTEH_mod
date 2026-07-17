@@ -1,6 +1,6 @@
 SMODS.Atlas{
     key = "j_dwarven_space",
-    path = "dwarven_space.png",
+    path = "dwarven_space_effect.png",
     px = 71,
     py = 95
 }
@@ -36,6 +36,7 @@ SMODS.Joker{
     discovered = true,
     atlas = 'j_dwarven_space',
     pos = {x = 0, y = 0},
+    soul_pos = { x = 1, y = 0 },
     calculate = function(self, card, context)
         if context.using_consumeable then 
             if context.consumeable.ability.name == 'Pluto' or
