@@ -12,7 +12,7 @@ SMODS.Joker{
         text = {
             'Gain a {C:attention}Ring{} for every played',
             'hand type this {C:attention}Ante',
-            'After 2nd Ante ended',
+            'After end of second Ante',
             'turn into {C:attention}Tree Stump',
             '{C:inactive}(Currently: #1# Rings)',
             '{C:inactive}(#2# antes finished)',

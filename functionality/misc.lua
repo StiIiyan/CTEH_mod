@@ -5,7 +5,7 @@ function playing_multiplayer()
 end
 
 function loaded_BMP()
-    return next(SMODS.find_mod("VanillaRemade"))
+    return next(SMODS.find_mod("Multiplayer"))
 end
 
 function life_difference()
