@@ -36,16 +36,12 @@ function member(table,element)
     return contains 
 end
 
-function amount_debuffed_jokers(joker_name)
-    local result = 0;
-    if not G.jokers then return result end
-    for i = 1, #G.jokers.cards do
-        if G.jokers.cards[i].ability.name == joker_name and 
-        (G.jokers.cards[i].ability.debuff or G.jokers.cards[i].ability.perma_debuff) then
-            result = result + 1
-        end
-    end
-    return result
+local tarot_keys = {"c_fool","c_magician","c_high_priestess","c_empress","c_emperor","c_heirophant","c_lovers",
+                    "c_chariot","c_justice","c_hermit","c_wheel_of_fortune","c_strength","c_hanged_man","c_death",
+                    "c_temperance","c_devil","c_tower","c_star","c_moon","c_sun","c_judgement","c_world"}
+
+function is_key_tarot(key)
+    return member(tarot_keys,key)
 end
 
 SMODS.ObjectType({

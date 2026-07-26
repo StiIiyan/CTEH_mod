@@ -1,0 +1,64 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+
+# Emperor and High Priestess add to the consumable/consumeable buffer
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+for i = 1, math.min((self.ability.consumeable.tarots or self.ability.consumeable.planets), G.consumeables.config.card_limit - #G.consumeables.cards) do
+'''
+position = 'after'
+payload = '''
+G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+'''
+match_indent = true
+
+
+
+# Emperor and High Priestess remove from the consumable/consumeable buffer
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+local card = create_card((self.ability.name == 'The Emperor' and 'Tarot') or (self.ability.name == 'The High Priestess' and 'Planet'), G.consumeables, nil, nil, nil, nil, nil, (self.ability.name == 'The Emperor' and 'emp') or (self.ability.name == 'The High Priestess' and 'pri'))
+'''
+position = 'after'
+payload = '''
+G.GAME.consumeable_buffer = 0
+'''
+match_indent = true
+
+
+
+# Fool add to the consumable/consumeable buffer
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+if G.consumeables.config.card_limit > #G.consumeables.cards then
+'''
+position = 'after'
+payload = '''
+G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+'''
+match_indent = true
+
+
+
+# Fool remove from the consumable/consumeable buffer
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+local card = create_card('Tarot_Planet', G.consumeables, nil, nil, nil, nil, G.GAME.last_tarot_planet, 'fool')
+'''
+position = 'after'
+payload = '''
+G.GAME.consumeable_buffer = 0
+'''
+match_indent = true

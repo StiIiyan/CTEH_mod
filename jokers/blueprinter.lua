@@ -73,19 +73,21 @@ SMODS.Joker{
             if SMODS.pseudorandom_probability(card, "blue_printer", card.ability.numerator_value, card.ability.odds) then
                 play_sound('polychrome1', 1.2, 0.7)
                 card:set_ability("j_blueprint")
-            elseif #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+            else
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Miss", colour = G.C.SECONDARY_SET.Joker})
-                G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'before',
-                    delay = 0.0,
-                    func = (function()
-                        local card = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_misprint')
-                        card:add_to_deck()
-                        G.jokers:emplace(card)
-                        G.GAME.joker_buffer = 0
-                        return true
-                    end)}))
+                if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'before',
+                        delay = 0.0,
+                        func = (function()
+                            local card = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_misprint')
+                            card:add_to_deck()
+                            G.jokers:emplace(card)
+                            G.GAME.joker_buffer = 0
+                            return true
+                        end)}))
+                    end
             end            
         end
 
