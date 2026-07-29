@@ -1,4 +1,4 @@
-
+-- For Edzy joker
 local old_play_to_discard = G.FUNCS.draw_from_play_to_discard
 function G.FUNCS.draw_from_play_to_discard(e)
     old_play_to_discard(e)
@@ -6,7 +6,7 @@ function G.FUNCS.draw_from_play_to_discard(e)
 end
 
 
-
+-- Gigachad sprites
 local old_calc_individ_effect = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
     TryChangeChadSprite(effect.card)
@@ -15,7 +15,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 end
 
 
-
+-- Beggar's Attire behaviour
 local old_create_card = create_card
 function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     if next(SMODS.find_card("j_CTEH_beggars_attire")) then
