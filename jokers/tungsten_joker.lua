@@ -82,26 +82,3 @@ SMODS.Joker{
         end
     end  
 }
-
--- DESTROY_PACKS = 0
-
--- local prev_uap = Game.update_arcana_pack
--- function Game:update_arcana_pack(dt)
---     prev_uap(dt)
-    
---     if G.STATE_COMPLETE and DESTROY_PACKS > 0 then
---         DESTROY_PACKS = DESTROY_PACKS - 1
---         G.STATE = G.STATES.SHOP
---         G.STATE_COMPLETE = false
---     end
--- end
--- local prev_usp = Game.update_spectral_pack
--- function Game:update_spectral_pack(dt)
---     prev_usp(dt)
-    
---     if G.STATE_COMPLETE and DESTROY_PACKS > 0 then
---         DESTROY_PACKS = DESTROY_PACKS - 1
---         G.STATE = G.STATES.SHOP
---         G.STATE_COMPLETE = false
---     end
--- end

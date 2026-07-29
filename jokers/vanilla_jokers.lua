@@ -305,13 +305,6 @@ SMODS.Joker:take_ownership('hanging_chad',
     config = { extra = 2, sprite_pos = 0 },
 })
 
-local old_calc_individ_effect = SMODS.calculate_individual_effect
-function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
-    TryChangeChadSprite(effect.card)
-    
-    return old_calc_individ_effect(effect, scored_card, key, amount, from_edition)
-end
-
 function TryChangeChadSprite(joker_card)
     if not joker_card or not joker_card.ability or joker_card.ability.name ~= "Hanging Chad" then return end
     

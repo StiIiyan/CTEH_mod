@@ -3,12 +3,6 @@
 LAST_SAVED_SCORE = 0
 LAST_PLAYED_HAND = ""
 
-local prev_play_to_discard = G.FUNCS.draw_from_play_to_discard
-function G.FUNCS.draw_from_play_to_discard(e)
-    prev_play_to_discard(e)
-    RETURN_PLAYED_CARDS = false
-end
-
 SMODS.Atlas{
     key = "j_edzy",
     path = "balala_edzy.png",
