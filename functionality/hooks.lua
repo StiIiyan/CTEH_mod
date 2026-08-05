@@ -5,16 +5,6 @@ function G.FUNCS.draw_from_play_to_discard(e)
     RETURN_PLAYED_CARDS = false
 end
 
-
--- Gigachad sprites
-local old_calc_individ_effect = SMODS.calculate_individual_effect
-function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
-    TryChangeChadSprite(effect.card)
-    
-    return old_calc_individ_effect(effect, scored_card, key, amount, from_edition)
-end
-
-
 -- Beggar's Attire behaviour
 local old_create_card = create_card
 function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
