@@ -8,11 +8,11 @@ SMODS.Atlas{
 SMODS.Joker{
     key = 'alloy_diffusion',
     loc_txt = {
-        name = 'Alloy diffusion',
+        name = 'Alloy Diffusion',
         text = {
             'After achieving a {X:chips,E:1,C:white}flaming {X:mult,E:1,C:white}score{}',
-            '{C:gold}Gold{} and {C:inactive}Steel{} cards',
-            'liquidate sideways'
+            '{C:gold}Gold{} and {C:inactive}Steel{} cards liquidate',
+            'to left and right {C:attention}unenhanced{} cards'
         }
     },
     rarity = 1,
