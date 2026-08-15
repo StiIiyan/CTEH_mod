@@ -46,7 +46,6 @@ SMODS.Joker{
         end
     end,
     calc_dollar_bonus = function(self, card)
-        change_shop_size(2)
         return 23
     end
 }
