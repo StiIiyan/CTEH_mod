@@ -23,88 +23,17 @@ for _, file in ipairs(modifiers_src) do
     assert(SMODS.load_file("card_modifiers/" .. file))()
 end
 
-
--- Intended BMP compatibilities are not yet compatible
-
 --[[
+Bottom Deck: Challenge, custom wincon: 1 ante
+% side note: make custom ante-based wincon (not just custom wincon setting finishing ante to ante 39)
 
---start game at:
-local function action_start_game(seed, stake_str)
---reset params at:
-MP.GAME = {
---enemy info
-local spent = MP.GAME.enemy.spent_in_shop[MP.GAME.pincher_index]
+Customize deck (Invert colors of Black Deck)
+(55443322) <- //mix up the suits so it's not unnatural, and mix up things so like, not always the same; 
 
 
-
-
---networking/action_handlers.lua
-function MP.ACTIONS.custom_foo(param)
-	Client.send("action:action_name,param:" .. tostring(param))
-end
-
-elseif parsedAction.action == "action_name" then
-    server_side_func(parsedAction.custom_param)
 
 
 ]]
-
-
--- Glass joker shtuff
-
---[[]
--- HANGED MAN
-local shattered_glass = 0
-for k, val in ipairs(G.hand.highlighted) do
-    if val.ability.name == 'Glass Card' then shattered_glass = shattered_glass + 1 end
-end
-if shattered_glass > 0 then
-    self.ability.x_mult = self.ability.x_mult + self.ability.extra*shattered_glass
-    G.E_MANAGER:add_event(Event({
-        func = function() card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_xmult',vars={self.ability.x_mult}}}); return true
-        end}))
-end
-return
-
--- REMOVE PLAYING CARDS
-local glass_cards = 0
-for k, val in ipairs(context.removed) do
-    if val.shattered then glass_cards = glass_cards + 1 end
-end
-if glass_cards > 0 then 
-    G.E_MANAGER:add_event(Event({
-        func = function()
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            self.ability.x_mult = self.ability.x_mult + self.ability.extra*glass_cards
-        return true
-        end
-    }))
-    card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {self.ability.x_mult + self.ability.extra*glass_cards}}})
-    return true
-        end
-    }))
-end
-return
-
-
-local glass_cards = 0
-for k, val in ipairs(context.removed) do
-    if val.shattered then glass_cards = glass_cards + 1 end
-end
-if glass_cards > 0 then 
-    self.ability.x_mult = self.ability.x_mult + self.ability.extra*glass_cards
-    G.E_MANAGER:add_event(Event({
-        func = function() card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type = 'variable', key = 'a_xmult', vars = {self.ability.x_mult}}}); return true
-        end}))
-end
-return
-
-
-]]
-
-
-
 
 --[[
 Contributions from
