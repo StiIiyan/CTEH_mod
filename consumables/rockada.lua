@@ -10,7 +10,7 @@ SMODS.Consumable {
     set = 'Spectral',
     pos = { x = 0, y = 0 },
     atlas = 'consumables',
-    config = { max_highlighted = 1, extra = { seal = 'CTEH_stone' } },
+    config = { max_highlighted = 1, seal = 'CTEH_stone' },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = {key = 'cteh_stone_seal', set = 'Other'}
         return { vars = { card.ability.max_highlighted } }
@@ -37,7 +37,7 @@ SMODS.Consumable {
             trigger = 'after',
             delay = 0.1,
             func = function()
-                conv_card:set_seal(card.ability.extra.seal, nil, true)
+                conv_card:set_seal(card.ability.seal, nil, true)
                 return true
             end
         }))

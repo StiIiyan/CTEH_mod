@@ -233,12 +233,13 @@ return {
                     'Discard to turn into {C:attention}Stone'
                 }
             },
+            -- V unused V
             cteh_piton_seal = {
                 name = 'Piton Seal',
                 text = {
                     'Looks cute'
                     --'Permanently gain {C:attention}+1 {C:green}probability',
-                    --'when {C:attention}played{} and {C:attention}scored',
+                    --'when {C:attention}scored',
                 }
             },
             dwarven_planets = {
@@ -272,11 +273,14 @@ return {
             CTEH_paycheck = 'Paycheck',
             CTEH_shopping = 'Shopping',
             cteh_stone_seal = 'Stone Seal',
+            -- V unused V
             cteh_piton_seal = 'Piton Seal',
         },
         challenge_names = {
             c_CTEH_turtle = "Magic Bean",
             c_CTEH_sizaak_bus = "Sizaak's Bus",
+            -- V unused V
+            c_CTEH_bottom = "Bottom Deck",
         },
         v_text={
             ch_c_empty_deck_lose_condition={

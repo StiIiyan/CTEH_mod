@@ -19,10 +19,3 @@ for i = 1, #G.jokers.cards do
 end
 '''
 match_indent = true
-
-
-
-
-
-
-
